@@ -1,0 +1,44 @@
+{
+  "arc": "arc2_solaris",
+  "title": "Arc 2 — 솔라리스",
+  "subtitle": "사막은 거짓말을 허락하지 않는다",
+  "tone": "생존 + 대가의 법칙. 코미디 비중 낮아지고 사막의 가혹함 + 정령술의 고통이 중심.",
+  "themes": ["생명의 대가", "정령 계약", "첫 타인의 죽음", "장생 열망"],
+  "chapters": [
+    {
+      "id": "ch006",
+      "file": "ch006_people_on_sand.md",
+      "title": "모래 위의 사람들",
+      "summary": "나이라 시점으로 사막 캐러밴을 보여준 뒤, 모래에 파묻힌 지호를 발견. 솔라리스의 다산 문화와 정령술사의 짧은 수명이 드러남.",
+      "status": "writing"
+    },
+    {
+      "id": "ch007",
+      "file": "ch007_those_who_borrow_fire.md",
+      "title": "불을 빌리는 자들",
+      "summary": "오아시스 도착, 정령술의 원리와 대가를 목격. 장로 할리마의 경고.",
+      "status": "coming"
+    },
+    {
+      "id": "ch008",
+      "file": "ch008_contract.md",
+      "title": "계약",
+      "summary": "불의 정령과 계약. 첫 고통의 대가를 체험.",
+      "status": "coming"
+    },
+    {
+      "id": "ch009",
+      "file": "ch009_sandstorm.md",
+      "title": "모래폭풍",
+      "summary": "대규모 폭풍. 나이라의 전투와 한계.",
+      "status": "coming"
+    },
+    {
+      "id": "ch010",
+      "file": "ch010_fire_that_wont_die.md",
+      "title": "꺼지지 않는 불",
+      "summary": "나이라의 죽음. 지호의 두 번째 사망과 카이젤 전이.",
+      "status": "coming"
+    }
+  ]
+}

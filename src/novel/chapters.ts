@@ -7,6 +7,7 @@ import ch002Raw from '../data/novel/arc1_azelia/ch002_palace_night.md?raw';
 import ch003Raw from '../data/novel/arc1_azelia/ch003_hero_training.md?raw';
 import ch004Raw from '../data/novel/arc1_azelia/ch004_no_convenience_store.md?raw';
 import ch005Raw from '../data/novel/arc1_azelia/ch005_first_death.md?raw';
+import ch006Raw from '../data/novel/arc2_solaris/ch006_people_on_sand.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -63,6 +64,15 @@ export const CHAPTERS: ChapterMeta[] = [
     arcLabel: 'Arc 1 — 아젤리아',
     status: 'published',
     raw: ch005Raw,
+  },
+  {
+    id: 'ch006',
+    num: 6,
+    title: '모래 위의 사람들',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    status: 'writing',
+    raw: ch006Raw,
   },
 ];
 
