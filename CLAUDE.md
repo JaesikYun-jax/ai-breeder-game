@@ -448,7 +448,7 @@ import ch006Raw from '../data/novel/arc1_azelia/ch006_new_chapter.md?raw';
   title: '챕터 제목',
   arc: 'arc1_azelia',
   arcLabel: 'Arc 1 — 아젤리아',
-  status: 'published',   // 'published' = 읽기 가능, 'coming' = 목록에만 표시
+  status: 'published',   // 'writing' | 'complete' | 'published' | 'coming'
   raw: ch006Raw,
 },
 ```
@@ -475,10 +475,90 @@ import ch006Raw from '../data/novel/arc1_azelia/ch006_new_chapter.md?raw';
 | `# 제목` | 챕터 타이틀 |
 
 ### 현재 연재 현황
-| 화 | 파일 | 아크 |
-|----|------|------|
-| 1화 | ch001_truck.md | Arc 1 — 아젤리아 |
-| 2화 | ch002_palace_night.md | Arc 1 — 아젤리아 |
-| 3화 | ch003_hero_training.md | Arc 1 — 아젤리아 |
-| 4화 | ch004_no_convenience_store.md | Arc 1 — 아젤리아 |
-| 5화 | ch005_first_death.md | Arc 1 — 아젤리아 |
+| 화 | 파일 | 아크 | 상태 |
+|----|------|------|------|
+| 1화 | ch001_truck.md | Arc 1 — 아젤리아 | published |
+| 2화 | ch002_palace_night.md | Arc 1 — 아젤리아 | published |
+| 3화 | ch003_hero_training.md | Arc 1 — 아젤리아 | published |
+| 4화 | ch004_no_convenience_store.md | Arc 1 — 아젤리아 | published |
+| 5화 | ch005_first_death.md | Arc 1 — 아젤리아 | published |
+
+---
+
+## 5화 배치 작업 워크플로
+
+### 챕터 상태 (4단계)
+
+```
+writing → complete → published → (coming은 미래 예고용)
+```
+
+| 상태 | 의미 | chapters.ts | _arc_meta.json |
+|------|------|-------------|----------------|
+| `writing` | 작성 중, 피드백 수집 단계 | `status: 'writing'` | `status: "writing"` |
+| `complete` | 내용 확정, 설정집 동기화 대기 | `status: 'complete'` | `status: "complete"` |
+| `published` | 배포 완료, 독자 공개 | `status: 'published'` | `status: "published"` |
+| `coming` | 목차에만 표시 (제목 예고) | `status: 'coming'` | `status: "coming"` |
+
+### 배치 사이클 (5화 단위)
+
+```
+[Phase 1: 작성] writing 상태
+  ├── 5화 초안 작성
+  ├── 사용자 코멘트/피드백 수집
+  │   └── story-feedback-log.md에 FB-XXX로 기록
+  ├── 피드백 반영 수정
+  └── 반복 (사용자 만족까지)
+
+[Phase 2: 완성] writing → complete 전환
+  ├── 사용자가 "완성" 선언
+  ├── chapters.ts + _arc_meta.json 상태 변경
+  └── 피드백 로그 상태 → "반영 완료"
+
+[Phase 3: 설정집 동기화] /settings-sync 실행
+  ├── 6개 병렬 에이전트 실행:
+  │   ├── 캐릭터 동기화 (characters.md)
+  │   ├── 세계관 동기화 (worldbuilding.md + magic-systems.md)
+  │   ├── 복선 동기화 (foreshadowing.md)
+  │   ├── 지역연결 동기화 (region-connections.md)
+  │   ├── 챕터 로그 업데이트 (chapter-log.md)
+  │   └── 주인공 바이블 동기화 (protagonist-bible.md)
+  ├── 변경 요약 보고
+  └── story-feedback-log.md에 SYNC 기록
+
+[Phase 4: 배포] complete → published 전환
+  ├── 사용자 확인 후 상태 변경
+  ├── 연재 현황 테이블 업데이트
+  └── 빌드 & 배포
+```
+
+### 피드백 기록 규칙
+
+작성 중(writing) 챕터에 대한 사용자 피드백은 `docs/story/story-feedback-log.md`에 기록:
+
+```markdown
+### FB-XXX — YYYY-MM-DD
+
+**피드백 원문**: (원문 그대로)
+**요약**: 한 줄 요약
+**대상 챕터**: N화~M화
+**영향 받은 챕터**: 구체적 변경 내역
+**설정 변경**: 해당 시 기록
+**파급 효과**: 향후 영향
+**상태**: 반영 완료 / 부분 반영 / 미반영
+```
+
+### 설정집 동기화 스킬
+
+`/settings-sync` 명령으로 실행. 상세 절차는 `.claude/skills/settings-sync.md` 참조.
+
+**동기화 대상 설정 문서**:
+| 문서 | 에이전트 | 체크 포인트 |
+|------|---------|------------|
+| `characters.md` | 캐릭터 | 새 캐릭터, 관계 변화, 호칭/말투 |
+| `worldbuilding.md` | 세계관 | 지역, 역사, 종족, 세력 |
+| `magic-systems.md` | 세계관 | 마법 체계, 새 술식/능력 |
+| `foreshadowing.md` | 복선 | 새 복선 배치, 기존 복선 회수 |
+| `region-connections.md` | 지역연결 | 지정학, 교역, 정치 변화 |
+| `chapter-log.md` | 챕터 로그 | 화별 요약, 등장인물, 감정 아크 |
+| `protagonist-bible.md` | 주인공 | 성장, 능력, 사망, 관계 변화 |

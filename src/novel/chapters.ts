@@ -14,7 +14,7 @@ export interface ChapterMeta {
   title: string;
   arc: string;
   arcLabel: string;
-  status: 'published' | 'coming';
+  status: 'writing' | 'complete' | 'published' | 'coming';
   raw?: string;
 }
 

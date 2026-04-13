@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat .github/workflows/*.yml)",
+      "WebFetch(domain:jaesikyun-jax.github.io)",
+      "Bash(curl -sL https://jaesikyun-jax.github.io/ai-breeder-game/)",
+      "Bash(curl -sI https://jaesikyun-jax.github.io/ai-breeder-game/assets/index-CcLWDT1c.js)",
+      "Bash(curl -sI https://jaesikyun-jax.github.io/ai-breeder-game/assets/index-CgNaYWjw.css)",
+      "Bash(gh workflow:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git commit -m 'feat: 2~5화 챕터 추가 및 Cloudflare 배포 대응:*)",
+      "Bash(git commit -m 'fix: base path를 /로 변경 \\(Cloudflare Pages 대응\\):*)"
+    ]
+  }
+}
