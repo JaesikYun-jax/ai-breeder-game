@@ -405,3 +405,80 @@ QA → 분기 전수 검증
 - `(괄호 내면 독백)` → JSON의 `DialogueLine.style: "monologue"`
 - 플래그 조건 → JSON의 `Choice.condition` 또는 `Choice.metaCondition`
 - 지역 해금 단서 → JSON의 `GameEventDef { type: "unlockRegion", region: "...", hint: "..." }`
+
+---
+
+## 웹소설 챕터 등록 방법
+
+### 1. 마크다운 파일 작성
+```
+src/data/novel/arc{N}_{region}/ch{NNN}_{slug}.md
+```
+예: `src/data/novel/arc1_azelia/ch006_new_chapter.md`
+
+**마크다운 포맷**:
+```markdown
+# N화. 챕터 제목
+
+---
+
+첫 번째 씬 본문.
+
+'내면 독백은 작은따옴표로 감싼다.'
+
+---
+
+두 번째 씬 본문. `---`로 씬 구분.
+
+*N화 끝. 다음 화: 다음 챕터 제목.*
+```
+
+### 2. 챕터 레지스트리 등록 (`src/novel/chapters.ts`)
+
+**Step 1** — 파일 상단에 raw import 추가:
+```typescript
+import ch006Raw from '../data/novel/arc1_azelia/ch006_new_chapter.md?raw';
+```
+
+**Step 2** — `CHAPTERS` 배열에 항목 추가:
+```typescript
+{
+  id: 'ch006',
+  num: 6,
+  title: '챕터 제목',
+  arc: 'arc1_azelia',
+  arcLabel: 'Arc 1 — 아젤리아',
+  status: 'published',   // 'published' = 읽기 가능, 'coming' = 목록에만 표시
+  raw: ch006Raw,
+},
+```
+
+### 3. 아크 메타데이터 업데이트 (`_arc_meta.json`)
+해당 아크의 `chapters` 배열에 추가:
+```json
+{
+  "id": "ch006",
+  "file": "ch006_new_chapter.md",
+  "title": "챕터 제목",
+  "summary": "한 줄 요약",
+  "status": "draft"
+}
+```
+
+### 마크다운 스타일 규칙
+| 문법 | 렌더링 |
+|------|--------|
+| `'텍스트'` | 내면 독백 (파란색) |
+| `"텍스트"` | 대사 (볼드) |
+| `*텍스트*` | 강조/이탤릭 |
+| `---` | 씬 구분선 (· · ·) |
+| `# 제목` | 챕터 타이틀 |
+
+### 현재 연재 현황
+| 화 | 파일 | 아크 |
+|----|------|------|
+| 1화 | ch001_truck.md | Arc 1 — 아젤리아 |
+| 2화 | ch002_palace_night.md | Arc 1 — 아젤리아 |
+| 3화 | ch003_hero_training.md | Arc 1 — 아젤리아 |
+| 4화 | ch004_no_convenience_store.md | Arc 1 — 아젤리아 |
+| 5화 | ch005_first_death.md | Arc 1 — 아젤리아 |

@@ -7,6 +7,18 @@
 
 import * as Phaser from 'phaser';
 import ch001Raw from '../data/novel/arc1_azelia/ch001_truck.md?raw';
+import ch002Raw from '../data/novel/arc1_azelia/ch002_palace_night.md?raw';
+import ch003Raw from '../data/novel/arc1_azelia/ch003_hero_training.md?raw';
+import ch004Raw from '../data/novel/arc1_azelia/ch004_no_convenience_store.md?raw';
+import ch005Raw from '../data/novel/arc1_azelia/ch005_first_death.md?raw';
+
+const CHAPTERS = [
+  { raw: ch001Raw, title: '1화. 트럭이 오는 건 알고 있었다' },
+  { raw: ch002Raw, title: '2화. 아젤리아 왕궁의 밤은 길다' },
+  { raw: ch003Raw, title: '3화. 용사라는 직업의 현실' },
+  { raw: ch004Raw, title: '4화. 이 세계에도 편의점은 없다' },
+  { raw: ch005Raw, title: '5화. 축복이라 쓰고 제물이라 읽는다' },
+];
 
 const READER_STYLE_ID = 'novel-reader-styles';
 
@@ -106,37 +118,51 @@ const READER_CSS = `
   font-style: italic;
 }
 
-.reader-footer {
-  text-align: center;
-  color: #444466;
-  font-size: 14px;
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 40px 0 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+  margin-top: 20px;
   border-top: 1px solid #222244;
+  gap: 16px;
+}
+
+.chapter-nav button {
+  background: none;
+  border: 1px solid #444466;
+  color: #8888aa;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+  max-width: 45%;
+  text-align: center;
+  line-height: 1.4;
+}
+.chapter-nav button:hover {
+  color: #ccccee;
+  border-color: #6666aa;
 }
 `;
 
 export class ReaderScene extends Phaser.Scene {
   private readerDom?: Phaser.GameObjects.DOMElement;
+  private currentChapter = 0;
 
   constructor() {
     super({ key: 'ReaderScene' });
   }
 
+  init(data?: { chapter?: number }) {
+    this.currentChapter = data?.chapter ?? 0;
+  }
+
   create() {
     this.cameras.main.setBackgroundColor('#0d0d1a');
-
     this.injectStyles();
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'novel-reader';
-    wrapper.innerHTML = this.buildReaderHTML(ch001Raw);
-
-    this.readerDom = this.add.dom(640, 360, wrapper);
-
-    // Back button handler
-    const backBtn = wrapper.querySelector('.back-btn');
-    backBtn?.addEventListener('click', () => this.goToMenu());
+    this.showChapter(this.currentChapter);
 
     // ESC to menu
     this.input.keyboard?.addKey('ESC').on('down', () => this.goToMenu());
@@ -145,6 +171,30 @@ export class ReaderScene extends Phaser.Scene {
   shutdown() {
     this.readerDom?.destroy();
     this.readerDom = undefined;
+  }
+
+  private showChapter(index: number) {
+    this.readerDom?.destroy();
+
+    const ch = CHAPTERS[index];
+    const wrapper = document.createElement('div');
+    wrapper.className = 'novel-reader';
+    wrapper.innerHTML = this.buildReaderHTML(ch.raw, index);
+
+    this.readerDom = this.add.dom(640, 360, wrapper);
+
+    // Back button
+    wrapper.querySelector('.back-btn')?.addEventListener('click', () => this.goToMenu());
+
+    // Prev / Next chapter buttons
+    wrapper.querySelector('.nav-prev')?.addEventListener('click', () => {
+      this.currentChapter--;
+      this.showChapter(this.currentChapter);
+    });
+    wrapper.querySelector('.nav-next')?.addEventListener('click', () => {
+      this.currentChapter++;
+      this.showChapter(this.currentChapter);
+    });
   }
 
   private goToMenu() {
@@ -160,7 +210,7 @@ export class ReaderScene extends Phaser.Scene {
     document.head.appendChild(style);
   }
 
-  private buildReaderHTML(raw: string): string {
+  private buildReaderHTML(raw: string, chapterIndex: number): string {
     const sections = raw.split(/\n---\n/);
 
     let contentHTML = '';
@@ -191,14 +241,25 @@ export class ReaderScene extends Phaser.Scene {
       }
     }
 
+    // Navigation buttons
+    const hasPrev = chapterIndex > 0;
+    const hasNext = chapterIndex < CHAPTERS.length - 1;
+    const prevTitle = hasPrev ? CHAPTERS[chapterIndex - 1].title : '';
+    const nextTitle = hasNext ? CHAPTERS[chapterIndex + 1].title : '';
+
+    const navHTML = `<div class="chapter-nav">
+      ${hasPrev ? `<button class="nav-prev">\u2190 ${this.escape(prevTitle)}</button>` : '<span></span>'}
+      ${hasNext ? `<button class="nav-next">${this.escape(nextTitle)} \u2192</button>` : '<span></span>'}
+    </div>`;
+
     return `
       <div class="reader-header">
         <button class="back-btn">\u2190 \ubaa9\ucc28</button>
-        <span class="header-title">Arc 1 \u2014 \uc544\uc824\ub9ac\uc544</span>
+        <span class="header-title">Arc 1 \u2014 \uc544\uc824\ub9ac\uc544 (${chapterIndex + 1}/${CHAPTERS.length})</span>
       </div>
       <div class="reader-content">
         ${contentHTML}
-        <div class="reader-footer">\ub2e4\uc74c \ud654: \uc544\uc824\ub9ac\uc544 \uc655\uada9\uc758 \ubc24\uc740 \uae38\ub2e4</div>
+        ${navHTML}
       </div>
     `;
   }
