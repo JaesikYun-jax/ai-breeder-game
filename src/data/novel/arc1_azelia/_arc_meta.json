@@ -1,0 +1,18 @@
+{
+  "arc": 1,
+  "region": "azelia",
+  "title": "이세계 개꿀인 줄 알았는데",
+  "subtitle": "아젤리아 왕국편",
+  "tone": "코미디 80% → 공포 급전환",
+  "themes": ["이세계 트로프 패러디", "첫 죽음의 공포", "현실 자각"],
+  "chapters": [
+    {
+      "id": "ch001",
+      "file": "ch001_truck.md",
+      "title": "트럭이 오는 건 알고 있었다",
+      "summary": "강지호의 일상, 트럭 사망, 사이 공간, 소환",
+      "wordCount": null,
+      "status": "draft"
+    }
+  ]
+}

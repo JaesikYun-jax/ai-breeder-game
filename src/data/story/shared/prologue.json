@@ -1,0 +1,215 @@
+{
+  "region": "shared",
+  "chapter": 0,
+  "title": "프롤로그 — 평범한 화요일",
+  "startNodeId": "prologue_001",
+  "nodes": {
+    "prologue_001": {
+      "id": "prologue_001",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_modern_crosswalk",
+      "bgm": "bgm_modern_daily",
+      "characters": [],
+      "dialogue": [
+        { "text": "평범한 화요일이었다.", "speed": "slow", "style": "narration" },
+        { "text": "수업이 끝나고 횡단보도 앞에 서 있었다." },
+        { "text": "신호가 바뀌었고, 나는 발을 내딛었다." }
+      ],
+      "next": "prologue_002",
+      "tags": ["prologue", "modern"]
+    },
+
+    "prologue_002": {
+      "id": "prologue_002",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_modern_crosswalk",
+      "sfx": "sfx_car_horn",
+      "characters": [],
+      "dialogue": [
+        { "text": "옆에서 비명이 들렸다.", "effect": "shake" },
+        { "text": "고개를 돌렸을 때, 이미 늦었다.", "speed": "slow" }
+      ],
+      "next": "prologue_003",
+      "onExit": [
+        { "type": "screenEffect", "effect": "flash", "duration": 1000 },
+        { "type": "playSound", "sound": "sfx_crash" }
+      ],
+      "tags": ["prologue", "death"]
+    },
+
+    "prologue_002_loop5": {
+      "id": "prologue_002_loop5",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_modern_crosswalk",
+      "sfx": "sfx_car_horn",
+      "characters": [],
+      "dialogue": [
+        { "text": "옆에서 비명이 들렸다.", "effect": "shake" },
+        { "text": "고개를 돌렸을 때, 이미 늦었다.", "speed": "slow" },
+        { "text": "(...이번에도.)", "style": "monologue", "speed": "slow" }
+      ],
+      "next": "prologue_003",
+      "condition": { "type": "loop", "minLoop": 5 },
+      "tags": ["prologue", "loop_variant"]
+    },
+
+    "prologue_003": {
+      "id": "prologue_003",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_void",
+      "bgm": "bgm_between",
+      "characters": [],
+      "dialogue": [
+        { "text": "...", "speed": "slow", "style": "narration", "autoDelay": 2000 },
+        { "text": "아프지는 않았다.", "speed": "slow", "style": "narration" },
+        { "text": "다만 차가웠다.", "speed": "slow", "style": "narration" },
+        { "text": "무언가가 나를 끌어당기고 있었다.", "speed": "slow", "style": "narration" }
+      ],
+      "next": "prologue_004",
+      "tags": ["prologue", "between"]
+    },
+
+    "prologue_003_loop10": {
+      "id": "prologue_003_loop10",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_void",
+      "bgm": "bgm_between",
+      "characters": [],
+      "dialogue": [
+        { "text": "다시, 여기.", "speed": "slow", "style": "narration" },
+        { "text": "...이 감각은 처음이 아닌 것 같다.", "speed": "slow", "style": "narration" }
+      ],
+      "choices": [
+        {
+          "text": "\"또야...\"",
+          "next": "prologue_004",
+          "effects": [{ "type": "setFlag", "flag": "loop_weary", "value": true }]
+        },
+        {
+          "text": "\"...이번에는 다르게.\"",
+          "next": "prologue_004",
+          "effects": [{ "type": "setFlag", "flag": "loop_determined", "value": true }]
+        },
+        {
+          "text": "[침묵]",
+          "next": "prologue_004",
+          "effects": [{ "type": "setFlag", "flag": "loop_numb", "value": true }]
+        }
+      ],
+      "condition": { "type": "loop", "minLoop": 10 },
+      "tags": ["prologue", "loop_variant", "choice"]
+    },
+
+    "prologue_004": {
+      "id": "prologue_004",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_light",
+      "characters": [],
+      "dialogue": [
+        { "text": "목소리가 들렸다. 아니, 목소리라기보다는 — 울림.", "style": "narration" },
+        { "text": "\"네가 필요하다.\"", "style": "whisper", "effect": "glitch" },
+        { "text": "누구의 목소리인지 모르겠지만, 거부할 수 없었다.", "style": "narration" }
+      ],
+      "next": "prologue_005",
+      "tags": ["prologue", "between", "foreshadow_worldtree"]
+    },
+
+    "prologue_004_loop20": {
+      "id": "prologue_004_loop20",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_worldtree",
+      "characters": [],
+      "dialogue": [
+        { "text": "목소리가 들렸다.", "style": "narration" },
+        { "text": "\"...미안하다.\"", "style": "whisper", "effect": "glitch" },
+        { "text": "이번에는 그 목소리가 떨리고 있었다.", "style": "narration", "speed": "slow" }
+      ],
+      "next": "prologue_005",
+      "condition": { "type": "loop", "minLoop": 20 },
+      "tags": ["prologue", "loop_variant", "foreshadow_worldtree_guilt"]
+    },
+
+    "prologue_005": {
+      "id": "prologue_005",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_burst",
+      "characters": [],
+      "dialogue": [],
+      "next": "azelia_ch1_001",
+      "onEnter": [
+        { "type": "screenEffect", "effect": "flash", "duration": 3000 },
+        { "type": "playSound", "sound": "bgm_arcadia_intro" }
+      ],
+      "tags": ["prologue", "transition_to_azelia"]
+    },
+
+    "between_region_select": {
+      "id": "between_region_select",
+      "region": "shared",
+      "chapter": 0,
+      "background": "bg_between_worldtree",
+      "bgm": "bgm_between",
+      "characters": [],
+      "dialogue": [
+        { "text": "다시, 여기.", "style": "narration", "speed": "slow" },
+        { "text": "기억의 파편들이 떠오른다. 어디로 향할 것인가.", "style": "narration" }
+      ],
+      "choices": [
+        {
+          "text": "빛의 왕국으로 돌아간다 (아젤리아)",
+          "next": "azelia_ch1_001"
+        },
+        {
+          "text": "동쪽 제국의 소문을 따라간다 (카이젤)",
+          "next": "kaizer_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "kaizer" }
+        },
+        {
+          "text": "남쪽 사막의 정령을 찾는다 (솔라리스)",
+          "next": "solaris_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "solaris" }
+        },
+        {
+          "text": "북쪽 설원의 봉인을 확인한다 (프로스트헬)",
+          "next": "frosthel_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "frosthel" }
+        },
+        {
+          "text": "동방 산맥 너머로 향한다 (용화국)",
+          "next": "yonghwa_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "yonghwa" }
+        },
+        {
+          "text": "바다 건너 군도로 떠난다 (리베르타)",
+          "next": "liberta_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "liberta" }
+        },
+        {
+          "text": "하늘 위 천인의 땅으로 오른다 (셀레스티아)",
+          "next": "celestia_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "celestia" }
+        },
+        {
+          "text": "지하 드워프 도시로 내려간다 (카즈모르)",
+          "next": "kazmor_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "kazmor" }
+        },
+        {
+          "text": "심해의 부름을 따른다 (아비살)",
+          "next": "abyssal_ch1_001",
+          "condition": { "type": "regionUnlocked", "region": "abyssal" }
+        }
+      ],
+      "condition": { "type": "loop", "minLoop": 1 },
+      "tags": ["between", "region_select", "loop_only"]
+    }
+  }
+}

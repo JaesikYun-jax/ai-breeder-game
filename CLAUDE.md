@@ -6,6 +6,30 @@
 
 ---
 
+## 핵심 설계 원칙
+
+### 진입 & 지역 시스템 (퀴즈/능력치 없음)
+- **1회차**: 프롤로그(현대 사망) → 아젤리아 왕국 직행 (클래식 이세계 도입부)
+- **2회차+**: 사이 공간에서 해금된 지역 중 직접 선택
+- **지역 해금**: 스토리 내 단서 획득 시 `unlockRegion` 이벤트로 해금
+- **능력치 없음**: 분기는 플래그/메타 플래그/호감도/루프 횟수로만 결정
+- **이유**: 비주얼노벨 장르에서 숫자 빌드는 스토리 몰입을 방해하고, 루프 메커닉(경험과 기억으로 성장)과 충돌
+
+### 지역 해금 구조
+| 지역 | 해금 방법 |
+|------|----------|
+| 아젤리아 | 기본 (1회차 자동) |
+| 카이젤 | 아젤리아 내 제국 언급 플래그 or 아젤리아 진실 해금 |
+| 솔라리스 | 정령 관련 플래그 or 마르코 관계 해금 |
+| 프로스트헬 | 봉인 관련 플래그 or 카이젤 진실 해금 |
+| 용화국 | 천명 관련 플래그 or 검은 로브 관계 해금 |
+| 리베르타 | 해적왕 관련 플래그 or 솔라리스 진실 해금 |
+| 셀레스티아 | 천인 관련 플래그 or 5회차 이상 |
+| 카즈모르 | 드워프 관련 플래그 or 프로스트헬 진실 해금 |
+| 아비살 | 심해 여왕 플래그 or 리베르타 진실 or 10회차 |
+
+---
+
 ## 에이전트 팀 구성
 
 ### 📋 기획자 (Planner) Agent
@@ -165,10 +189,22 @@
 
 ```
 src/
-├── config/         # GameConfig, 분기 상수, 루프 설정
-├── scenes/         # BootScene, MenuScene, StoryScene, UIScene
-├── systems/        # StoryEngine, FlagManager, LoopManager
-├── entities/       # 스토리 데이터 타입 정의
+├── config/         # GameConfig, RegionConfig, MetaFlagConfig, Constants
+├── scenes/         # BootScene, MenuScene, GameScene, UIScene
+├── systems/        # StoryEngine, FlagManager, LoopManager, SaveManager
+├── entities/       # 스토리/게임/캐릭터/세이브 타입 정의
+├── data/
+│   └── story/      # JSON 스토리 데이터
+│       ├── shared/     # 프롤로그, 사이 공간
+│       ├── azelia/     # 아젤리아 챕터별
+│       ├── kaizer/     # 카이젤
+│       ├── solaris/    # 솔라리스
+│       ├── frosthel/   # 프로스트헬
+│       ├── yonghwa/    # 용화국
+│       ├── liberta/    # 리베르타
+│       ├── celestia/   # 셀레스티아
+│       ├── kazmor/     # 카즈모르
+│       └── abyssal/    # 아비살
 public/
 └── assets/         # 배경, 캐릭터CG, UI, BGM
 docs/
@@ -219,13 +255,37 @@ QA → 분기 전수 검증
 
 ---
 
-## 기획 문서 현황 (총 ~19,000줄)
+## 게임 플로우
+
+```
+[1회차]
+  프롤로그(현대 사망 → 사이 공간 → "네가 필요하다")
+    → 아젤리아 왕국 직행
+    → 스토리 진행 (플래그/호감도 기반 분기)
+    → 사망 or 엔딩
+    → 회귀
+
+[2회차+]
+  프롤로그(루프 변형: 3/5/10/20회차별 변화)
+    → 사이 공간: 해금된 지역 선택
+    → 선택한 지역 스토리 진행
+    → 사망 or 엔딩
+    → 회귀
+
+[지역 해금]
+  스토리 내 단서 획득 → unlockRegion 이벤트
+    → 다음 회귀 시 사이 공간에서 선택 가능
+```
+
+---
+
+## 기획 문서 현황
 
 ### GDD (docs/gdd/) — 11개 ✅ 완료
 | # | 파일 | 핵심 내용 |
 |---|------|----------|
-| 01 | 01-game-overview.md | 장르, 핵심 루프, 회귀 메커닉, 능력치 5종(STR/INT/CHA/PER/FAT) |
-| 02 | 02-character-creation.md | 성격 퀴즈 5문항 → 9개 진입점 매핑 공식 |
+| 01 | 01-game-overview.md | 장르, 핵심 루프, 회귀 메커닉 |
+| 02 | 02-character-creation.md | ~~퀴즈 시스템~~ **폐기** — 1회차 아젤리아 직행으로 변경 |
 | 03 | 03-meta-flag-system.md | 메타 플래그 4분류 (진실/관계/멜로디/루프) |
 | 04 | 04-story-data-spec.md | **JSON 노드 그래프 구조** (StoryNode, Choice, Condition, GameEvent 인터페이스) |
 | 05 | 05-prologue-and-loop.md | 사망→되감기→재시작 시퀀스, 루프별 프롤로그 변화 |
@@ -233,8 +293,10 @@ QA → 분기 전수 검증
 | 07 | 07-ui-ux-design.md | 화면 레이아웃, 선택지 UI, 세이브/로드 |
 | 08 | 08-sound-design.md | 지역별 BGM, 멜로디 복선, SFX 목록 |
 | 09 | 09-milestones.md | Phase 0~3 개발 단계 |
-| 10 | 10-multiloop-mechanics.md | **스탯체크 3단계**, 영혼귀속(스탯+아이템), 수확체감, 루프 오버라이드 |
+| 10 | 10-multiloop-mechanics.md | 영혼귀속, 수확체감, 루프 오버라이드 |
 | 11 | 11-cross-region-dependencies.md | **9×9 의존 매트릭스**, 트루엔딩 크리티컬 패스, 영혼아이템 18종 |
+
+> **⚠ GDD 01, 02번 내용은 코드와 불일치**: 능력치(STR/INT 등), 퀴즈 시스템은 기획 변경으로 **삭제됨**. 분기는 플래그/메타 플래그/호감도/루프 횟수로만 결정. GDD 문서 자체는 미수정 상태이므로 코드(`src/entities/`, `src/config/`)를 정본으로 참조할 것.
 
 ### 설계 문서 (docs/design/)
 | 파일 | 내용 |
@@ -270,37 +332,51 @@ QA → 분기 전수 검증
 
 ## 구현 현황 (src/)
 
-### 완료된 코드
+### 타입 시스템 (`src/entities/`)
+| 파일 | 내용 |
+|------|------|
+| `StoryTypes.ts` | StoryNode, Choice, DialogueLine, CharacterDisplay, ChapterData, RegionId |
+| `GameTypes.ts` | ConditionDef (7종 조건 + and/or/not), GameEventDef (12종 이벤트), SessionFlags, AffinityMap, MetaFlags, LoopState, GameSession |
+| `CharacterTypes.ts` | CharacterProfile, RegionDef (해금 시스템 포함), EndingDef, TradeItem |
+| `SaveTypes.ts` | SaveSlot, SaveData, MetaSaveData, GameSettings, localStorage 키 |
+
+### 설정 (`src/config/`)
+| 파일 | 내용 |
+|------|------|
+| `GameConfig.ts` | Phaser 설정 (1280×720, Arcade, FIT) |
+| `RegionConfig.ts` | 9개 지역 정의 (해금 조건, 힌트, BGM, NPC 등) |
+| `MetaFlagConfig.ts` | 진실9/관계11/멜로디9 플래그 + 33개 엔딩 + 루프 임계값 |
+| `Constants.ts` | UI 레이아웃, 텍스트 속도, 사망 연출 타이밍, 호감도, 메타 선택지 스타일 |
+
+### 게임 시스템 (`src/systems/`)
+| 파일 | 내용 |
+|------|------|
+| `StoryEngine.ts` | **핵심 엔진** — 노드 그래프 처리, 조건 평가(7종+복합), 이벤트 실행(12종), 선택지 필터링(일반/메타 분리) |
+| `FlagManager.ts` | 세션 플래그(루프 리셋) + 메타 플래그(localStorage 영구) 이중 레이어 |
+| `LoopManager.ts` | 회귀 횟수, 방문 지역, **지역 해금**, 기둥 각성, 사망 통계, 엔딩 기록 |
+| `SaveManager.ts` | 자동 3슬롯 + 수동 20슬롯, 메타 세이브, 설정 저장 |
+
+### 씬 (`src/scenes/`)
 | 파일 | 상태 | 내용 |
 |------|------|------|
-| `config/GameConfig.ts` | ✅ | Phaser 설정 (1280×720, Arcade, FIT) |
-| `config/Constants.ts` | ✅ | UI 레이아웃, 텍스트 속도, 메타 선택지 스타일 |
-| `config/MetaFlagConfig.ts` | ✅ | 메타 플래그 키 상수 |
-| `config/RegionConfig.ts` | ✅ | 9개 지역 ID/이름 매핑 |
-| `entities/GameTypes.ts` | ✅ | GameSession, PlayerStats, DeathType 등 |
-| `entities/StoryTypes.ts` | ✅ | StoryNode, Choice, Condition, ChapterData 등 |
-| `entities/SaveTypes.ts` | ✅ | SaveSlot, MetaSaveData 구조 |
-| `entities/CharacterTypes.ts` | ✅ | NPC 메타데이터 타입 |
-| `scenes/BootScene.ts` | ✅ | 에셋 로딩 + 프로그레스바 |
-| `scenes/MenuScene.ts` | ✅ | 타이틀, 시작 버튼, 루프 카운트 |
-| `scenes/GameScene.ts` | ✅ | **StoryEngine ↔ Phaser 연결** (타이핑, 선택지 UI, 사망 연출) |
-| `scenes/UIScene.ts` | ✅ | HUD 오버레이 (루프 카운트, ESC 힌트) |
-| `systems/StoryEngine.ts` | ✅ | **핵심 엔진** (노드 처리, 조건 평가, 이벤트 실행, 선택지 필터링) |
-| `systems/FlagManager.ts` | ✅ | 세션 플래그 + 메타 플래그 (localStorage) |
-| `systems/LoopManager.ts` | ✅ | 회귀 횟수, 방문 지역, 기둥 각성 레벨 |
-| `systems/SaveManager.ts` | ✅ | localStorage 세이브/로드 |
-| `data/story/shared/prologue.json` | ✅ | 프롤로그 스토리 데이터 |
+| `BootScene.ts` | ✅ | 에셋 로딩 + 프로그레스바 |
+| `MenuScene.ts` | ✅ | 타이틀, 시작 버튼 |
+| `GameScene.ts` | 스켈레톤 | StoryEngine ↔ Phaser 연결 (구현 필요) |
+| `UIScene.ts` | 스켈레톤 | HUD 오버레이 (구현 필요) |
+
+### 스토리 데이터 (`src/data/story/`)
+| 파일 | 내용 |
+|------|------|
+| `shared/prologue.json` | ✅ 프롤로그 + 사이 공간 지역 선택 (루프 변형 포함) |
+| `azelia/` ~ `abyssal/` | 📁 디렉토리 생성됨, 데이터 미작성 |
 
 ### 미구현 (다음 단계)
-| 항목 | 우선순위 | 의존 문서 |
-|------|---------|----------|
-| `SoulManager.ts` | 높음 | GDD 10 (영혼귀속 시스템) |
-| `DiminishingManager.ts` | 높음 | GDD 10 (수확체감) |
-| `StoryEngine` 스탯체크 확장 | 높음 | GDD 10 (3단계 스탯체크) |
-| `StoryEngine` 루프 오버라이드 | 높음 | GDD 10 (JSON 오버라이드) |
+| 항목 | 우선순위 | 의존 |
+|------|---------|------|
 | 아젤리아 Ch1 JSON 데이터 변환 | 높음 | script_azelia_*.md → JSON |
-| 성격 퀴즈 씬 | 중간 | GDD 02 |
-| 사망→회귀 시퀀스 연출 | 중간 | GDD 05 |
+| GameScene 스토리 렌더러 | 높음 | StoryEngine + Phaser 연결 |
+| 사망→회귀 시퀀스 연출 | 높음 | GDD 05 |
+| UIScene HUD 구현 | 중간 | GDD 07 |
 | 기억의 서재 메뉴 | 낮음 | GDD 07 |
 | 엔딩 갤러리 | 낮음 | GDD 06 |
 
@@ -309,22 +385,23 @@ QA → 분기 전수 검증
 ## 개발자를 위한 핵심 레퍼런스
 
 ### "이 시스템 어떻게 동작하지?" 궁금할 때
-| 질문 | 읽을 문서 |
-|------|----------|
-| 스탯 체크가 어떻게 분기하는가? | `docs/gdd/10-multiloop-mechanics.md` §A |
-| 영혼 스탯/아이템이 루프 간 어떻게 전달되는가? | `docs/gdd/10-multiloop-mechanics.md` §B |
-| 같은 이벤트 반복 시 보상이 줄어드는 공식은? | `docs/gdd/10-multiloop-mechanics.md` §C |
-| 다른 지역에서 온 플래그가 여기서 뭘 여는가? | `docs/gdd/11-cross-region-dependencies.md` |
-| JSON 스토리 노드 구조는? | `docs/gdd/04-story-data-spec.md` |
-| 아젤리아 1회차에서 어떤 선택지가 어디로 연결되는가? | `docs/design/azelia-ch1-flowchart.md` |
-| 아젤리아가 루프 2/3/5에서 어떻게 달라지는가? | `docs/design/azelia-ch1-multiloop.md` |
+| 질문 | 읽을 곳 |
+|------|---------|
+| 분기 조건 시스템은? | `src/entities/GameTypes.ts` — ConditionDef (flag/meta/loop/visited/affinity/regionUnlocked + and/or/not) |
+| 이벤트 시스템은? | `src/entities/GameTypes.ts` — GameEventDef (setFlag/setMeta/setAffinity/unlockRegion/death/ending 등 12종) |
+| 지역 해금 조건은? | `src/config/RegionConfig.ts` — 각 RegionDef.unlockCondition |
+| 메타 플래그 목록은? | `src/config/MetaFlagConfig.ts` — TRUTH_FLAGS, BOND_FLAGS, MELODY_FLAGS |
+| 엔딩 33개 조건은? | `src/config/MetaFlagConfig.ts` — ENDINGS 배열 |
+| JSON 스토리 노드 구조는? | `src/entities/StoryTypes.ts` — StoryNode, ChapterData |
+| 프롤로그 & 지역 선택 플로우는? | `src/data/story/shared/prologue.json` |
+| 아젤리아 1회차 대사와 연출은? | `docs/story/blue/script_azelia_*.md` (3파일, 5,010줄) |
 | 플래그 X의 설정 조건과 사용처는? | `docs/story/red/flag_registry.md` |
-| 아젤리아 1회차 실제 대사와 연출은? | `docs/story/blue/script_azelia_*.md` (3파일, 5,010줄) |
 
 ### 스크립트 → JSON 변환 규칙
 - `script_azelia_*.md`의 `[씬 ID: AZL_XXX]` → JSON의 `StoryNode.id`
-- `[선택지] 1. "텍스트" → AZL_XXXa (CHA+1)` → JSON의 `Choice.text`, `Choice.next`, `Choice.effects`
+- `[선택지] 1. "텍스트" → AZL_XXXa` → JSON의 `Choice.text`, `Choice.next`, `Choice.effects`
 - `[배경: bg_xxx]` → JSON의 `StoryNode.background`
 - `[BGM: bgm_xxx]` → JSON의 `StoryNode.bgm`
-- `(괄호 내면 독백)` → JSON의 `DialogueLine.speaker = null` (나레이션 처리)
-- `[스탯 체크: STR >= 5]` → JSON의 `Choice.statCheck` (GDD 10 참조)
+- `(괄호 내면 독백)` → JSON의 `DialogueLine.style: "monologue"`
+- 플래그 조건 → JSON의 `Choice.condition` 또는 `Choice.metaCondition`
+- 지역 해금 단서 → JSON의 `GameEventDef { type: "unlockRegion", region: "...", hint: "..." }`
