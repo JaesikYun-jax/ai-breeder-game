@@ -1,12 +1,23 @@
 ---
 name: settings-sync
-description: 완성된 챕터 배치를 기반으로 설정집 문서들을 비교·검증·업데이트하는 에이전트 팀 실행
+description: 완성된 챕터 배치를 기반으로 설정집 문서들을 비교·검증·업데이트하는 에이전트 팀 실행. '/settings-sync', '/settings-sync dclass-hero', '/settings-sync dclass-hero 6-10' 으로 실행.
 user_invocable: true
 ---
 
 # 설정집 동기화 에이전트 팀
 
 완성된 챕터 배치(5화 단위)를 읽고, 각 설정 문서와 비교하여 누락·불일치·추가 필요 사항을 찾아 업데이트한다.
+
+**프로젝트 독립적**: `novel-config.md`를 읽어 설정문서 경로를 자동 결정한다.
+
+## 인자 파싱
+
+```
+/settings-sync                        → 프로젝트 자동 감지, complete 상태 챕터 자동 탐지
+/settings-sync dclass-hero            → dclass-hero 프로젝트, complete 챕터 자동 탐지
+/settings-sync dclass-hero 6-10       → dclass-hero 프로젝트, 6~10화 지정
+/settings-sync 6-10                   → 프로젝트 자동 감지, 6~10화 지정
+```
 
 ## 실행 조건
 
@@ -15,14 +26,28 @@ user_invocable: true
 
 ## 실행 절차
 
+### Step 0: 프로젝트 설정 로드
+
+1. **프로젝트 결정**:
+   - $ARGUMENTS에서 프로젝트명 추출 (예: "dclass-hero")
+   - 프로젝트명 지정 없으면: `projects/` 디렉토리에서 `novel-config.md`가 있는 하위 디렉토리 탐색
+   - `novel-config.md`가 여러 개면: 사용자에게 선택 요청
+   - `status: "completed"` 프로젝트는 제외 (예: british-food)
+
+2. **novel-config.md 로드**:
+   - `projects/{project}/novel-config.md` 읽기
+   - 설정문서 매핑 추출 → 에이전트별 경로 결정
+   - `chapter_dir` 추출 → 챕터 파일 위치 결정
+
 ### Step 1: 대상 챕터 파악
 
 사용자가 지정한 챕터 범위 (예: "6-10화", "ch006~ch010")를 파악한다.
 지정하지 않으면, `complete` 상태이면서 아직 설정집 동기화가 안 된 챕터를 자동 탐지한다.
 
+novel-config.md의 아크 범위 테이블에서 해당 챕터의 아크 디렉토리를 확인하고,
 해당 챕터의 마크다운 파일들을 모두 읽는다:
 ```
-src/data/novel/arc{N}_{region}/ch{NNN}_*.md
+{chapter_dir}/{arc_dir}/{num}_{title}.md
 ```
 
 ### Step 2: 병렬 에이전트 팀 실행
@@ -130,11 +155,14 @@ src/data/novel/arc{N}_{region}/ch{NNN}_*.md
 ## 임무
 아래 완성된 챕터들을 읽고, [담당 설정 문서]와 비교하여 누락·불일치·추가 필요 사항을 찾아 직접 업데이트하세요.
 
+## 프로젝트
+[프로젝트명] (novel-config.md 경로: projects/{project}/novel-config.md)
+
 ## 대상 챕터
-[챕터 파일 경로 목록]
+[챕터 파일 경로 목록 — novel-config.md의 chapter_dir + 아크 디렉토리 기반]
 
 ## 담당 설정 문서
-[설정 문서 경로]
+[설정 문서 경로 — novel-config.md의 설정문서 매핑 기반]
 
 ## 작업 규칙
 1. 챕터 전문을 먼저 읽으세요
@@ -149,3 +177,10 @@ src/data/novel/arc{N}_{region}/ch{NNN}_*.md
 - 기존 설정과 충돌 시: 챕터 내용이 정본, 설정 문서를 수정
 - 소설 톤 유지: 설정집도 같은 세계관 용어 사용
 ```
+
+### Step 5: alive-tracker 갱신 (선택)
+
+`projects/{project}/revision/alive-tracker.md`가 존재하면, 동기화된 챕터의 캐릭터 관계 변화를 반영한다.
+- 새로운 관계 이벤트 추가
+- 호칭 변화 기록
+- 20화 윈도우 초과 항목은 아카이브로 이동

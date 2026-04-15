@@ -8,35 +8,35 @@
   "chapters": [
     {
       "id": "ch001",
-      "file": "ch001_truck.md",
+      "file": "1_트럭이 오는 건 알고있었다.md",
       "title": "트럭이 오는 건 알고 있었다",
       "summary": "강지호의 일상, 트럭 사망, 사이 공간, 소환",
       "status": "draft"
     },
     {
       "id": "ch002",
-      "file": "ch002_palace_night.md",
+      "file": "2_아젤리아 왕궁의 밤은 길다.md",
       "title": "아젤리아 왕궁의 밤은 길다",
       "summary": "왕궁 적응, 에리나 첫 만남, 밤의 금빛 공명",
       "status": "draft"
     },
     {
       "id": "ch003",
-      "file": "ch003_hero_training.md",
+      "file": "3_용사라는 직업의 현실.md",
       "title": "용사라는 직업의 현실",
       "summary": "전투/마법 테스트 전멸, 모르데우스의 축복의 의식 제안",
       "status": "draft"
     },
     {
       "id": "ch004",
-      "file": "ch004_no_convenience_store.md",
+      "file": "4_이 세계에도 편의점은 없다.md",
       "title": "이 세계에도 편의점은 없다",
       "summary": "시장 탐색, 마르코와 깨진 모래시계, 에리나의 진실 경고",
       "status": "draft"
     },
     {
       "id": "ch005",
-      "file": "ch005_first_death.md",
+      "file": "5_축복이라 쓰고 제물이라 읽는다.md",
       "title": "축복이라 쓰고 제물이라 읽는다",
       "summary": "의식 강행, 극한 고통, 기둥 속 진실, 첫 번째 죽음, 솔라리스 각성",
       "status": "draft"

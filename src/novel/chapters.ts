@@ -2,12 +2,21 @@
  * Chapter registry — 소설 챕터 메타데이터 및 raw import
  */
 
-import ch001Raw from '../data/novel/arc1_azelia/ch001_truck.md?raw';
-import ch002Raw from '../data/novel/arc1_azelia/ch002_palace_night.md?raw';
-import ch003Raw from '../data/novel/arc1_azelia/ch003_hero_training.md?raw';
-import ch004Raw from '../data/novel/arc1_azelia/ch004_no_convenience_store.md?raw';
-import ch005Raw from '../data/novel/arc1_azelia/ch005_first_death.md?raw';
-import ch006Raw from '../data/novel/arc2_solaris/ch006_people_on_sand.md?raw';
+import ch001Raw from '../data/novel/arc1_azelia/1_트럭이 오는 건 알고있었다.md?raw';
+import ch002Raw from '../data/novel/arc1_azelia/2_아젤리아 왕궁의 밤은 길다.md?raw';
+import ch003Raw from '../data/novel/arc1_azelia/3_용사라는 직업의 현실.md?raw';
+import ch004Raw from '../data/novel/arc1_azelia/4_이 세계에도 편의점은 없다.md?raw';
+import ch005Raw from '../data/novel/arc1_azelia/5_축복이라 쓰고 제물이라 읽는다.md?raw';
+import ch006Raw from '../data/novel/arc2_solaris/6_모래 위의 사람들.md?raw';
+import ch007Raw from '../data/novel/arc2_solaris/7_불을 빌리는 자들.md?raw';
+import ch008Raw from '../data/novel/arc2_solaris/8_계약.md?raw';
+import ch009Raw from '../data/novel/arc2_solaris/9_모래폭풍.md?raw';
+import ch010Raw from '../data/novel/arc2_solaris/10_꺼지지 않는 불.md?raw';
+import ch011Raw from '../data/novel/arc2_solaris/11_명예로운 노예들.md?raw';
+import ch012Raw from '../data/novel/arc2_solaris/12_최적화.md?raw';
+import ch013Raw from '../data/novel/arc2_solaris/13_열사병은 걸리지 않는다.md?raw';
+import ch014Raw from '../data/novel/arc3_kaizer/14_도망치지 않겠다.md?raw';
+import ch015Raw from '../data/novel/arc3_kaizer/15_세 번째 죽음.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -15,6 +24,7 @@ export interface ChapterMeta {
   title: string;
   arc: string;
   arcLabel: string;
+  projectId: string;
   status: 'writing' | 'complete' | 'published' | 'coming';
   raw?: string;
 }
@@ -26,6 +36,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '트럭이 오는 건 알고 있었다',
     arc: 'arc1_azelia',
     arcLabel: 'Arc 1 — 아젤리아',
+    projectId: 'dclass-hero',
     status: 'published',
     raw: ch001Raw,
   },
@@ -35,6 +46,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '아젤리아 왕궁의 밤은 길다',
     arc: 'arc1_azelia',
     arcLabel: 'Arc 1 — 아젤리아',
+    projectId: 'dclass-hero',
     status: 'published',
     raw: ch002Raw,
   },
@@ -44,6 +56,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '용사라는 직업의 현실',
     arc: 'arc1_azelia',
     arcLabel: 'Arc 1 — 아젤리아',
+    projectId: 'dclass-hero',
     status: 'published',
     raw: ch003Raw,
   },
@@ -53,6 +66,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '이 세계에도 편의점은 없다',
     arc: 'arc1_azelia',
     arcLabel: 'Arc 1 — 아젤리아',
+    projectId: 'dclass-hero',
     status: 'published',
     raw: ch004Raw,
   },
@@ -62,6 +76,7 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '축복이라 쓰고 제물이라 읽는다',
     arc: 'arc1_azelia',
     arcLabel: 'Arc 1 — 아젤리아',
+    projectId: 'dclass-hero',
     status: 'published',
     raw: ch005Raw,
   },
@@ -71,11 +86,107 @@ export const CHAPTERS: ChapterMeta[] = [
     title: '모래 위의 사람들',
     arc: 'arc2_solaris',
     arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
     status: 'writing',
     raw: ch006Raw,
   },
+  {
+    id: 'ch007',
+    num: 7,
+    title: '불을 빌리는 자들',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch007Raw,
+  },
+  {
+    id: 'ch008',
+    num: 8,
+    title: '계약',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch008Raw,
+  },
+  {
+    id: 'ch009',
+    num: 9,
+    title: '모래폭풍',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch009Raw,
+  },
+  {
+    id: 'ch010',
+    num: 10,
+    title: '꺼지지 않는 불',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch010Raw,
+  },
+  {
+    id: 'ch011',
+    num: 11,
+    title: '명예로운 노예들',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch011Raw,
+  },
+  {
+    id: 'ch012',
+    num: 12,
+    title: '최적화',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch012Raw,
+  },
+  {
+    id: 'ch013',
+    num: 13,
+    title: '열사병은 걸리지 않는다',
+    arc: 'arc2_solaris',
+    arcLabel: 'Arc 2 — 솔라리스',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch013Raw,
+  },
+  {
+    id: 'ch014',
+    num: 14,
+    title: '도망치지 않겠다',
+    arc: 'arc3_kaizer',
+    arcLabel: 'Arc 3 — 카이젤',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch014Raw,
+  },
+  {
+    id: 'ch015',
+    num: 15,
+    title: '세 번째 죽음',
+    arc: 'arc3_kaizer',
+    arcLabel: 'Arc 3 — 카이젤',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch015Raw,
+  },
 ];
 
+// ── British Food novel (431 chapters via glob) ──
+import { BRITISH_FOOD_CHAPTERS } from './chapters-british-food';
+
+export const ALL_CHAPTERS: ChapterMeta[] = [...CHAPTERS, ...BRITISH_FOOD_CHAPTERS];
+
 export function getChapter(id: string): ChapterMeta | undefined {
-  return CHAPTERS.find((c) => c.id === id);
+  return ALL_CHAPTERS.find((c) => c.id === id);
 }
