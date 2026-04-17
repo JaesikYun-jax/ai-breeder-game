@@ -1,7 +1,7 @@
 ---
 name: create
 description: "웹소설 챕터 창작 오케스트레이터. 설정문서(캐릭터·플롯·세계관)에 따라 챕터를 순차 창작한다. '/create', '/create dclass-hero', '/create ch016', '/create dclass-hero ch016', '/create dclass-hero ch016-ch020' 으로 실행. novel-config.md의 설정문서 매핑과 가드레일을 적용하여 연속성, 캐릭터 보이스, 톤 일관성을 보장한다."
-user_invocable: true
+user-invocable: true
 ---
 
 # 챕터 창작 오케스트레이터
@@ -86,8 +86,8 @@ create 스킬을 실행하려면 위 필드를 채워주세요.
 
 기본값 (`create` 섹션 없을 때):
 ```yaml
-draft_chars: 12000-18000
-final_chars: 10000-16000
+draft_chars: 6000-8000
+final_chars: 5000-7000
 dialogue_ratio: 35-55%
 max_scenes: 5
 continuity_lookback: 2
@@ -95,6 +95,9 @@ hook_targets:
   opening_intensity: 3
   ending_intensity: 4
 ```
+
+> **분량 기준**: 한 화 완성본 기준 5,000~7,000자 (공백 포함).
+> 초안은 6,000~8,000자로 넘치게 쓰고, 트리밍으로 5,000~7,000자에 맞춘다.
 
 #### 0.4 챕터 범위 & 아크 결정
 
@@ -195,15 +198,15 @@ Phase 1 완료 후 chapter-creator 실행.
 
 ### Step 2.5: 트리밍 게이트 (오케스트레이터 직접 수행)
 
-**전략: "넘치게 쓰고 줄이기"** — 초안은 12,000-18,000자로 작성 → 10,000-16,000자로 트리밍.
+**전략: "넘치게 쓰고 줄이기"** — 초안은 {draft_chars}자로 작성 → {final_chars}자로 트리밍.
 
-1. **측정**: `wc -m {챕터파일}` → 글자수 확인
-2. **판정**:
-   - 상한 초과 (16,000자 초과): chapter-creator를 트리밍 모드로 재호출
+1. **측정**: `wc -m {챕터파일}` → 글자수 확인 (공백 포함)
+2. **판정** (기본값 기준, novel-config.md `create` 섹션으로 오버라이드 가능):
+   - 상한 초과 (7,000자 초과): chapter-creator를 트리밍 모드로 재호출
      - 삭제 우선순위: 메타서술 → 감정 반복 → 비핵심 배경 → 내면 재확인
      - 트리밍 후 재측정 (1회 재시도)
-   - 범위 내 (10,000-16,000자): Phase 3으로 진행
-   - 하한 미달 (10,000자 미만): chapter-creator 재호출 (장면 밀도 보강, 새 비트 추가 금지)
+   - 범위 내 (5,000-7,000자): Phase 3으로 진행
+   - 하한 미달 (5,000자 미만): chapter-creator 재호출 (장면 밀도 보강, 새 비트 추가 금지)
 
 ---
 

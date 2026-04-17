@@ -1,12 +1,12 @@
 ---
 name: polish
-description: "웹소설 챕터 윤문 오케스트레이터. 19축 진단(규칙 5축 + 서사 10축 + ALIVE 4축)으로 문체, 정합성, 캐릭터 생동감을 교정한다. '/polish', '/polish dclass-hero', '/polish ch006', '/polish dclass-hero ch006-ch012' 로 실행."
-user_invocable: true
+description: "웹소설 챕터 윤문 오케스트레이터. 17축 진단(규칙 4축 + 서사 9축 + ALIVE 4축)으로 문체, 정합성, 캐릭터 생동감을 교정한다. AITONE 30+패턴 탐지 + 2패스 자기검증으로 AI글투를 근절한다. '/polish', '/polish dclass-hero', '/polish ch006', '/polish dclass-hero ch006-ch012' 로 실행."
+user-invocable: true
 ---
 
 # 챕터 윤문 오케스트레이터
 
-3개 진단 에이전트(병렬) → 교정 실행 → 교정 검증의 5-에이전트 파이프라인.
+3개 진단 에이전트(병렬) → 교정 실행(2패스 AITONE 자기검증 포함) → 교정 검증의 5-에이전트 파이프라인.
 
 ## 아키텍처
 
@@ -14,11 +14,11 @@ user_invocable: true
 Phase 1 (병렬 진단)              Phase 2 (순차 교정)     Phase 3 (순차 검증)
 ┌──────────────────┐
 │  rule-checker    │──┐
-│  (5축 규칙 위반)   │  │         ┌──────────────┐    ┌──────────────┐
+│  (4축 규칙 위반)   │  │         ┌──────────────┐    ┌──────────────┐
 └──────────────────┘  │         │  revision-   │    │  revision-   │
 ┌──────────────────┐  ├────────▶│  executor    │───▶│  reviewer    │
-│  story-analyst   │──┤         │  (15단계 교정) │    │  (7항 검증)   │
-│  (10축 서사 분석)  │  │         └──────────────┘    └──────┬───────┘
+│  story-analyst   │──┤         │  (15단계 교정) │    │  (4항 검증)   │
+│  (9축 서사 분석)   │  │         └──────────────┘    └──────┬───────┘
 └──────────────────┘  │                 ◀── REVISE (max 1) ─┘
 ┌──────────────────┐  │                        │
 │  alive-enhancer  │──┘                  PASS ───▶ fix_plan.md 갱신
@@ -26,10 +26,10 @@ Phase 1 (병렬 진단)              Phase 2 (순차 교정)     Phase 3 (순차
 └──────────────────┘
 ```
 
-**축 구성 (19축)**:
-- Part A — 위반 (rule-checker): BANNED, VOICE, TITLE, SILENCE, TRANS(MORPH/AITONE/SEMANTIC)
-- Part B — 서사 (story-analyst): SCENE, LOGIC(TIMELINE/NUMBER/PLAUSIBILITY), UNIFORM, HOOK, OPENING, PACING, TONEDROP + Custom(REGRESSION, FORESHADOW, MODERN_REF)
-- ALIVE (alive-enhancer): ALIVE-1(메아리), ALIVE-2(침묵), ALIVE-3(조연 긴장), ALIVE-4(관계 곡선)
+**축 구성 (17축)**:
+- Part A — 위반 (rule-checker 4축): BANNED, VOICE, TITLE, TRANS(MORPH/AITONE 30+패턴/SEMANTIC)
+- Part B — 서사 (story-analyst 9축): SCENE, LOGIC(TIMELINE/NUMBER/PLAUSIBILITY), HOOK, OPENING, PACING, TONEDROP + Custom(REGRESSION, FORESHADOW, MODERN_REF)
+- ALIVE (alive-enhancer 4축): ALIVE-1(메아리), ALIVE-2(침묵→비언어 전담), ALIVE-3(조연 긴장), ALIVE-4(관계 곡선)
 
 ## 전제 조건
 

@@ -1,7 +1,7 @@
 ---
 name: apply-feedback
 description: 인라인 피드백 분석 및 적용 — pending 코멘트를 분석하고 원문 수정. '/apply-feedback', '/apply-feedback dclass-hero' 으로 실행.
-user_invocable: true
+user-invocable: true
 ---
 
 # /apply-feedback — 인라인 피드백 분석 및 적용

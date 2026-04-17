@@ -48,14 +48,8 @@ project:
 | 아크 | 챕터 범위 | 레이블 | 챕터 디렉토리 | 플롯 가이드 | 세부 플롯 (선택) | 세부 캐릭터 (선택) | 상태 |
 |------|----------|--------|-------------|------------|-----------------|-------------------|------|
 | arc1_azelia | ch001~ch005 | Arc 1 — 아젤리아 | src/data/novel/arc1_azelia/ | docs/story/story-framework-6-30.md | — | — | published |
-| arc2_solaris | ch006~ch030 | Arc 2 — 솔라리스 | src/data/novel/arc2_solaris/ | docs/story/story-framework-6-30.md | — | — | writing (ch006~ch012) |
-| arc3_kaizer | ch031~ch055 | Arc 3 — 카이젤 | src/data/novel/arc3_kaizer/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc4_frosthel | ch056~ch080 | Arc 4 — 프로스트헬 | src/data/novel/arc4_frosthel/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc5_yonghwa | ch081~ch105 | Arc 5 — 용화국 | src/data/novel/arc5_yonghwa/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc6_liberta | ch106~ch130 | Arc 6 — 리베르타 | src/data/novel/arc6_liberta/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc7_celestia | ch131~ch155 | Arc 7 — 셀레스티아 | src/data/novel/arc7_celestia/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc8_kazmor | ch156~ch180 | Arc 8 — 카즈모르 | src/data/novel/arc8_kazmor/ | docs/story/story-framework-6-30.md | — | — | planned |
-| arc9_abyssal | ch181~ch205 | Arc 9 — 아비살 | src/data/novel/arc9_abyssal/ | docs/story/story-framework-6-30.md | — | — | planned |
+| arc2_solaris | ch006~ch013 | Arc 2 — 솔라리스 | src/data/novel/arc2_solaris/ | docs/story/story-framework-6-30.md | — | — | writing |
+| arc3_awakening | ch014~ch020 | Arc 3 — 각성과 귀환 | src/data/novel/arc3_awakening/ | docs/story/story-framework-6-30.md | — | — | planned |
 
 > **파싱 규칙**:
 > - 대상 챕터의 글로벌 번호(ch001, ch016 등)가 어느 아크 범위에 속하는지 확인
@@ -349,9 +343,11 @@ PASS 판정 후 오케스트레이터가 수행하는 자동 등록 절차:
 | ch004 | arc1_azelia | 4_이 세계에도 편의점은 없다.md | published |
 | ch005 | arc1_azelia | 5_축복이라 쓰고 제물이라 읽는다.md | published |
 | ch006 | arc2_solaris | 6_모래 위의 사람들.md | writing |
-| ch007 | arc2_solaris | 7_정령은 계약서를 안 읽는다.md | writing |
-| ch008 | arc2_solaris | 8_나이라의 별.md | writing |
-| ch009 | arc2_solaris | 9_불은 기억한다.md | writing |
-| ch010 | arc2_solaris | 10_쌍둥이 태양 아래서.md | writing |
-| ch011 | arc2_solaris | 11_말라가는 사람들.md | writing |
-| ch012 | arc2_solaris | 12_오아시스의 조건.md | writing |
+| ch007 | arc2_solaris | 7_불을 빌리는 자들.md | writing |
+| ch008 | arc2_solaris | 8_계약.md | writing |
+| ch009 | arc2_solaris | 9_모래폭풍.md | writing |
+| ch010 | arc2_solaris | 10_꺼지지 않는 불.md | writing |
+| ch011 | arc2_solaris | 11_명예로운 노예들.md | writing |
+| ch012 | arc2_solaris | 12_최적화.md | writing |
+| ch013 | arc2_solaris | 13_열사병은 걸리지 않는다.md | writing |
+| ch014 | arc3_awakening | 14_이를 갈다.md | writing |

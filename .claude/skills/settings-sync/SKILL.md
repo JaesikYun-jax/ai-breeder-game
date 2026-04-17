@@ -1,7 +1,7 @@
 ---
 name: settings-sync
 description: 완성된 챕터 배치를 기반으로 설정집 문서들을 비교·검증·업데이트하는 에이전트 팀 실행. '/settings-sync', '/settings-sync dclass-hero', '/settings-sync dclass-hero 6-10' 으로 실행.
-user_invocable: true
+user-invocable: true
 ---
 
 # 설정집 동기화 에이전트 팀
