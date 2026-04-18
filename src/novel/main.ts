@@ -57,6 +57,17 @@ function renderReader(chapterId: string) {
 
   const contentHTML = renderChapterHTML(ch.raw);
 
+  const navHTML = (position: 'top' | 'bottom') => `
+    <div class="reader-nav reader-nav--${position}">
+      <button class="reader-nav-btn ${!prev || !prev.raw ? 'disabled' : ''}" ${prev && prev.raw ? `data-action="read" data-chapter="${prev.id}"` : ''}>
+        &larr; 이전 화
+      </button>
+      <button class="reader-nav-btn ${!next || !next.raw ? 'disabled' : ''}" ${next && next.raw ? `data-action="read" data-chapter="${next.id}"` : ''}>
+        다음 화 &rarr;
+      </button>
+    </div>
+  `;
+
   app.innerHTML = `
     <nav class="nav">
       <div class="nav-inner">
@@ -81,20 +92,24 @@ function renderReader(chapterId: string) {
         </div>
       </div>
 
+      ${navHTML('top')}
+
       <div class="reader-body">
         <h1 class="r-title">${displayTitle}</h1>
+        <div class="r-actions">
+          <button class="r-copy-btn" data-action="copy-body" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="r-copy-label">본문 복사</span>
+          </button>
+        </div>
         <p class="r-arc">${ch.arcLabel}</p>
         ${contentHTML}
       </div>
 
-      <div class="reader-nav">
-        <button class="reader-nav-btn ${!prev || !prev.raw ? 'disabled' : ''}" ${prev && prev.raw ? `data-action="read" data-chapter="${prev.id}"` : ''}>
-          &larr; 이전 화
-        </button>
-        <button class="reader-nav-btn ${!next || !next.raw ? 'disabled' : ''}" ${next && next.raw ? `data-action="read" data-chapter="${next.id}"` : ''}>
-          다음 화 &rarr;
-        </button>
-      </div>
+      ${navHTML('bottom')}
     </div>
 
     <button class="scroll-top" id="scroll-top" title="맨 위로">&uarr;</button>
@@ -102,6 +117,46 @@ function renderReader(chapterId: string) {
 
   bindReaderEvents();
   initFeedback(chapterId, ch.num, ch.title);
+}
+
+function chapterBodyToPlainText(raw: string): string {
+  const sections = raw
+    .split(/\n---\n/)
+    .map((s) => s.replace(/^# .+\n*/m, '').trim())
+    .map((s) => s.replace(/^\*[^*\n]*끝[^*\n]*\*\s*$/m, '').trim())
+    .filter((s) => s.length > 0);
+  return sections.join('\n\n* * *\n\n');
+}
+
+async function copyChapterBody(btn: HTMLElement) {
+  const chapterId = getChapterId();
+  if (!chapterId) return;
+  const ch = getChapter(chapterId);
+  if (!ch || !ch.raw) return;
+
+  const text = chapterBodyToPlainText(ch.raw);
+  const label = btn.querySelector<HTMLElement>('.r-copy-label');
+  const original = label?.textContent ?? '본문 복사';
+
+  try {
+    await navigator.clipboard.writeText(text);
+    if (label) label.textContent = '복사됨!';
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    if (label) label.textContent = ok ? '복사됨!' : '복사 실패';
+  }
+  btn.classList.add('copied');
+  setTimeout(() => {
+    if (label) label.textContent = original;
+    btn.classList.remove('copied');
+  }, 1500);
 }
 
 function bindReaderEvents() {
@@ -128,6 +183,8 @@ function bindReaderEvents() {
     } else if (action === 'read') {
       const chId = target.dataset.chapter;
       if (chId) navigate(`/p/${projectId}/read/${chId}`);
+    } else if (action === 'copy-body') {
+      copyChapterBody(target);
     }
   });
 

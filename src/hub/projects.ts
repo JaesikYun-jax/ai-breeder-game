@@ -24,6 +24,12 @@ export const PROJECTS: StoryProject[] = [
     emoji: '⛓️',
   },
   {
+    id: 'magitech-fire',
+    title: '마도공학 프로그래머로 영생해보자',
+    description: '가난에 찌들어 췌장암으로 자살한 삼류 프로그래머가, 이세계의 유통기한 1년짜리 호문클루스 몸에 빙의한다. 돈만 있으면 안 죽는다는 것을 깨닫는 순간, 영생 프로젝트가 시작된다.',
+    emoji: '\uD83D\uDCB0',
+  },
+  {
     id: 'british-food',
     title: '내 대영제국에 괴식은 없다',
     description: '현대 한국인 요리사가 19세기 영국에 빙의. 상태창과 요리로 대영제국을 바꿔나간다. (낑깡깽 작, 431화 완결)',

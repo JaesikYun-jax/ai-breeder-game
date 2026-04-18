@@ -467,7 +467,7 @@ body::before {
 .reader-body {
   max-width: var(--reader-width);
   margin: 0 auto;
-  padding: 80px 24px 120px;
+  padding: 32px 24px 120px;
 }
 
 .reader-body .r-title {
@@ -485,6 +485,39 @@ body::before {
   color: var(--text-muted);
   margin-bottom: 56px;
   letter-spacing: 1px;
+}
+
+.reader-body .r-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.reader-body .r-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.reader-body .r-copy-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+}
+
+.reader-body .r-copy-btn.copied {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-soft);
 }
 
 .reader-body .r-divider {
@@ -540,6 +573,10 @@ body::before {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+}
+
+.reader-nav--top {
+  padding: 80px 24px 0;
 }
 
 .reader-nav-btn {
@@ -1038,7 +1075,11 @@ body::before {
   }
 
   .reader-body {
-    padding: 60px 16px 100px;
+    padding: 24px 16px 100px;
+  }
+
+  .reader-nav--top {
+    padding: 68px 16px 0;
   }
 
   .reader-body p {

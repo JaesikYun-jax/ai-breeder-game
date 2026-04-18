@@ -1,0 +1,15 @@
+{
+  "id": "cm_arc2_confront",
+  "label": "Arc 2 — 대면",
+  "range": "ch011~ch020",
+  "status": "writing",
+  "chapters": [
+    {
+      "id": "cm011",
+      "file": "11_입성.md",
+      "title": "입성",
+      "summary": "담양 철수 → L타워 120층 정식 입주. 서연의 등기 카타르시스. 1화 펜트하우스 루프 봉합. 설경 태블릿 알림으로 삼파 전조.",
+      "status": "writing"
+    }
+  ]
+}

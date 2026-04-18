@@ -22,6 +22,14 @@ import ch017Raw from '../data/novel/arc3_awakening/17_코드를 새기다.md?raw
 import ch018Raw from '../data/novel/arc3_awakening/18_빛의 왕국으로.md?raw';
 import ch019Raw from '../data/novel/arc3_awakening/19_심판.md?raw';
 import ch020Raw from '../data/novel/arc3_awakening/20_용사의 길.md?raw';
+import ch021Raw from '../data/novel/arc4_internal/21_부왕은 부왕이 아니다.md?raw';
+
+// ── 마도 공학 프로그래머의 영생 프로젝트 (magitech-fire) ──
+import mf001Raw from '../data/novel/mf_part1_survival/1_어디지, 이건.md?raw';
+import mf002Raw from '../data/novel/mf_part1_survival/2_위장.md?raw';
+import mf003Raw from '../data/novel/mf_part1_survival/3_폐기동.md?raw';
+import mf004Raw from '../data/novel/mf_part1_survival/4_591호.md?raw';
+import mf005Raw from '../data/novel/mf_part1_survival/5_어떤 남자.md?raw';
 
 // ── 천년묵은 통조림 (canned-master) ──
 import cm001Raw from '../data/novel/cm_arc1_opening/1_야경.md?raw';
@@ -29,6 +37,12 @@ import cm002Raw from '../data/novel/cm_arc1_opening/2_발굴.md?raw';
 import cm003Raw from '../data/novel/cm_arc1_opening/3_물을 가까이 하지 말 것.md?raw';
 import cm004Raw from '../data/novel/cm_arc1_opening/4_천 년의 간극.md?raw';
 import cm005Raw from '../data/novel/cm_arc1_opening/5_봉인은 하나가 아니었다.md?raw';
+import cm006Raw from '../data/novel/cm_arc1_opening/6_남쪽으로.md?raw';
+import cm007Raw from '../data/novel/cm_arc1_opening/7_계곡에서.md?raw';
+import cm008Raw from '../data/novel/cm_arc1_opening/8_응급실.md?raw';
+import cm009Raw from '../data/novel/cm_arc1_opening/9_소문.md?raw';
+import cm010Raw from '../data/novel/cm_arc1_opening/10_왕자님.md?raw';
+import cm011Raw from '../data/novel/cm_arc2_confront/11_입성.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -242,6 +256,16 @@ export const CHAPTERS: ChapterMeta[] = [
     status: 'writing',
     raw: ch020Raw,
   },
+  {
+    id: 'ch021',
+    num: 21,
+    title: '부왕은 부왕이 아니다',
+    arc: 'arc4_internal',
+    arcLabel: 'Arc 4 — 내정의 해',
+    projectId: 'dclass-hero',
+    status: 'writing',
+    raw: ch021Raw,
+  },
 ];
 
 // ── Canned Master (천년묵은 통조림) ──
@@ -249,7 +273,7 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
   {
     id: 'cm001',
     num: 1,
-    title: '야경',
+    title: '손님',
     arc: 'cm_arc1_opening',
     arcLabel: 'Arc 1 — 개봉',
     projectId: 'canned-master',
@@ -259,7 +283,7 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
   {
     id: 'cm002',
     num: 2,
-    title: '발굴',
+    title: '석관',
     arc: 'cm_arc1_opening',
     arcLabel: 'Arc 1 — 개봉',
     projectId: 'canned-master',
@@ -269,7 +293,7 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
   {
     id: 'cm003',
     num: 3,
-    title: '물을 가까이 하지 말 것',
+    title: '조수석',
     arc: 'cm_arc1_opening',
     arcLabel: 'Arc 1 — 개봉',
     projectId: 'canned-master',
@@ -279,7 +303,7 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
   {
     id: 'cm004',
     num: 4,
-    title: '천 년의 간극',
+    title: '아리수',
     arc: 'cm_arc1_opening',
     arcLabel: 'Arc 1 — 개봉',
     projectId: 'canned-master',
@@ -289,19 +313,133 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
   {
     id: 'cm005',
     num: 5,
-    title: '봉인은 하나가 아니었다',
+    title: '부교주',
     arc: 'cm_arc1_opening',
     arcLabel: 'Arc 1 — 개봉',
     projectId: 'canned-master',
     status: 'writing',
     raw: cm005Raw,
   },
+  {
+    id: 'cm006',
+    num: 6,
+    title: '남행',
+    arc: 'cm_arc1_opening',
+    arcLabel: 'Arc 1 — 개봉',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm006Raw,
+  },
+  {
+    id: 'cm007',
+    num: 7,
+    title: '계곡',
+    arc: 'cm_arc1_opening',
+    arcLabel: 'Arc 1 — 개봉',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm007Raw,
+  },
+  {
+    id: 'cm008',
+    num: 8,
+    title: '응급실',
+    arc: 'cm_arc1_opening',
+    arcLabel: 'Arc 1 — 개봉',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm008Raw,
+  },
+  {
+    id: 'cm009',
+    num: 9,
+    title: '기적',
+    arc: 'cm_arc1_opening',
+    arcLabel: 'Arc 1 — 개봉',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm009Raw,
+  },
+  {
+    id: 'cm010',
+    num: 10,
+    title: '서연',
+    arc: 'cm_arc1_opening',
+    arcLabel: 'Arc 1 — 개봉',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm010Raw,
+  },
+  {
+    id: 'cm011',
+    num: 11,
+    title: '입성',
+    arc: 'cm_arc2_confront',
+    arcLabel: 'Arc 2 — 대면',
+    projectId: 'canned-master',
+    status: 'writing',
+    raw: cm011Raw,
+  },
+];
+
+// ── Magitech Fire (마도 공학 프로그래머의 영생 프로젝트) ──
+export const MAGITECH_FIRE_CHAPTERS: ChapterMeta[] = [
+  {
+    id: 'mf001',
+    num: 1,
+    title: '어디지, 이건',
+    arc: 'mf_part1_survival',
+    arcLabel: 'Part 1 — 연명',
+    projectId: 'magitech-fire',
+    status: 'writing',
+    raw: mf001Raw,
+  },
+  {
+    id: 'mf002',
+    num: 2,
+    title: '위장',
+    arc: 'mf_part1_survival',
+    arcLabel: 'Part 1 — 연명',
+    projectId: 'magitech-fire',
+    status: 'writing',
+    raw: mf002Raw,
+  },
+  {
+    id: 'mf003',
+    num: 3,
+    title: '폐기동',
+    arc: 'mf_part1_survival',
+    arcLabel: 'Part 1 — 연명',
+    projectId: 'magitech-fire',
+    status: 'writing',
+    raw: mf003Raw,
+  },
+  {
+    id: 'mf004',
+    num: 4,
+    title: '591호',
+    arc: 'mf_part1_survival',
+    arcLabel: 'Part 1 — 연명',
+    projectId: 'magitech-fire',
+    status: 'writing',
+    raw: mf004Raw,
+  },
+  {
+    id: 'mf005',
+    num: 5,
+    title: '어떤 남자',
+    arc: 'mf_part1_survival',
+    arcLabel: 'Part 1 — 연명',
+    projectId: 'magitech-fire',
+    status: 'writing',
+    raw: mf005Raw,
+  },
 ];
 
 // ── British Food novel (431 chapters via glob) ──
 import { BRITISH_FOOD_CHAPTERS } from './chapters-british-food';
 
-export const ALL_CHAPTERS: ChapterMeta[] = [...CHAPTERS, ...CANNED_MASTER_CHAPTERS, ...BRITISH_FOOD_CHAPTERS];
+export const ALL_CHAPTERS: ChapterMeta[] = [...CHAPTERS, ...CANNED_MASTER_CHAPTERS, ...MAGITECH_FIRE_CHAPTERS, ...BRITISH_FOOD_CHAPTERS];
 
 export function getChapter(id: string): ChapterMeta | undefined {
   return ALL_CHAPTERS.find((c) => c.id === id);

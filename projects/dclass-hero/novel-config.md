@@ -37,7 +37,8 @@ project:
 | timeline | docs/story/timeline.md | 작중 시간선 정리 |
 | glossary | docs/story/glossary.md | 용어 사전 |
 | region_connections | docs/story/region-connections.md | 지정학 관계, 마르코 네트워크, 교역 |
-| plot_framework | docs/story/story-framework-6-30.md | 전체 스토리 프레임워크 (9 아크 구조) |
+| plot_framework | docs/story/story-framework-6-30.md | Part 1 프레임워크 (ch006~030) |
+| plot_framework_p2 | docs/story/story-framework-21-70.md | **Part 2 프레임워크 (ch021~070)** — 리트콘·새 가드레일·아크 구조 |
 | chapter_log | docs/story/chapter-log.md | 화별 요약 (등장인물, 설정, 감정 아크, 훅) |
 | feedback_log | docs/story/story-feedback-log.md | 피드백 및 설정 동기화 기록 |
 
@@ -49,7 +50,14 @@ project:
 |------|----------|--------|-------------|------------|-----------------|-------------------|------|
 | arc1_azelia | ch001~ch005 | Arc 1 — 아젤리아 | src/data/novel/arc1_azelia/ | docs/story/story-framework-6-30.md | — | — | published |
 | arc2_solaris | ch006~ch013 | Arc 2 — 솔라리스 | src/data/novel/arc2_solaris/ | docs/story/story-framework-6-30.md | — | — | writing |
-| arc3_awakening | ch014~ch020 | Arc 3 — 각성과 귀환 | src/data/novel/arc3_awakening/ | docs/story/story-framework-6-30.md | — | — | planned |
+| arc3_awakening | ch014~ch020 | Arc 3 — 각성과 귀환 | src/data/novel/arc3_awakening/ | docs/story/story-framework-6-30.md | — | — | writing |
+| arc4_internal | ch021~ch028 | Arc 4 — 내정의 해 | src/data/novel/arc4_internal/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc5_caravan | ch029~ch034 | Arc 5 — 사막의 캐러밴 | src/data/novel/arc5_caravan/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc6_kaizer | ch035~ch042 | Arc 6 — 강철의 궁정 | src/data/novel/arc6_kaizer/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc7_frosthel | ch043~ch050 | Arc 7 — 얼어붙은 경계 | src/data/novel/arc7_frosthel/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc8_dragon | ch051~ch058 | Arc 8 — 천명 너머 | src/data/novel/arc8_dragon/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc9_liberta | ch059~ch064 | Arc 9 — 파도의 맹세 | src/data/novel/arc9_liberta/ | docs/story/story-framework-21-70.md | — | — | planned |
+| arc10_return | ch065~ch070 | Arc 10 — 돌아온 자 | src/data/novel/arc10_return/ | docs/story/story-framework-21-70.md | — | — | planned |
 
 > **파싱 규칙**:
 > - 대상 챕터의 글로벌 번호(ch001, ch016 등)가 어느 아크 범위에 속하는지 확인
@@ -184,6 +192,28 @@ project:
 
 10. **대사 교환 불가성**: 각 캐릭터의 대사는 다른 캐릭터와 교환할 수 없어야 한다.
     voice-guide.md의 보이스표와 1:1 대조 필수.
+
+11. **모래시계 = 세계 카운트다운** (Part 2~): 지호의 도구가 아니다.
+    잔량 감소 = 세계의 시간이 줄어드는 것. 지호가 발동시키는 묘사 금지.
+    ch005에서의 0.3초 정지는 일회성 동기화 현상으로 재해석. 마르코가 ch022에서 진실 공개.
+
+12. **정령 수명 대가의 비대칭** (Part 2~): 일반인은 머리색 탈색·수명 단축 큼.
+    지호는 D급 재생 + 무재능 체질 덕에 미미. 다중 정령 계약 가능.
+    노화 신호: Arc 7부터 흰머리 1가닥, Arc 10에서 명백히 보이지 X (Part 3에서 가속).
+    챕터당 머리색 변화 묘사 1줄 이내.
+
+13. **아젤리아 혁신은 프로그래머 가능 범위만** (Part 2~):
+    가능: 행정 DB, 복식부기, 카드 색인, 공정 분업, 위생 가이드라인, 표음문자.
+    불가: 증기기관, 화약, 금속 야금, 전기 — 시연 절대 금지.
+
+14. **영웅적 결의 대사 금지** (Part 2~): 행동은 영웅이어도 1인칭 독백은 자조·돈미새·여미새 톤 유지.
+    "이 세계를 구하겠다" 류 대사 절대 금지. 책임감은 행동으로만 보여줌.
+
+15. **챕터 분량** (Part 2~): 5,000~7,000자 (구 10,000~16,000자에서 변경).
+
+16. **단문 적용 범위 제한** (Part 2~): 한 줄 단락은 챕터당 5~7회 이내.
+    전투·사망·펀치라인에만 단문. 일상·정서는 2~3문장을 쉼표/접속사로 묶음.
+    1인칭 내면독백 비중 60% 이하 (Part 1은 ~70%).
 ```
 
 ---
@@ -248,16 +278,17 @@ custom_axis:
 
 ```yaml
 create:
-  draft_chars: 12000-18000        # 초안 목표 (넉넉하게 작성)
-  final_chars: 10000-16000        # 트리밍 후 최종 목표
-  dialogue_ratio: 35-55%          # 1인칭 내면 독백이 많으므로 대화 비율 낮음
-  max_scenes: 5                   # 아크 기반 장편 챕터
+  # Part 2(ch021~) 분량 룰. Part 1은 이전 룰(10000-16000자)로 유지.
+  draft_chars: 6000-8500          # 초안 목표 (Part 2)
+  final_chars: 5000-7000          # 트리밍 후 최종 목표 (Part 2, 유저 지정)
+  dialogue_ratio: 40-55%          # 대화 비율 소폭 상승(내면독백 경감)
+  max_scenes: 3-4                 # 짧아진 챕터에 맞춰 축소
   continuity_lookback: 2          # 이전 참조 화수
   hook_targets:
     opening_intensity: 3          # 오프닝 훅 (1-5)
     ending_intensity: 4           # 엔딩 클리프행어 (1-5)
-  point_scenes_per_chapter: 2-3   # 포인트 장면 수
-  dead_zone_threshold: 4000       # 포인트 장면 없는 최대 허용 글자수
+  point_scenes_per_chapter: 2     # 포인트 장면 수
+  dead_zone_threshold: 2500       # 포인트 장면 없는 최대 허용 글자수
 ```
 
 ### create 가드레일 (보존 가드레일에 추가)
@@ -351,3 +382,10 @@ PASS 판정 후 오케스트레이터가 수행하는 자동 등록 절차:
 | ch012 | arc2_solaris | 12_최적화.md | writing |
 | ch013 | arc2_solaris | 13_열사병은 걸리지 않는다.md | writing |
 | ch014 | arc3_awakening | 14_이를 갈다.md | writing |
+| ch015 | arc3_awakening | 15_번개를 맞는 자.md | writing |
+| ch016 | arc3_awakening | 16_과부하.md | writing |
+| ch017 | arc3_awakening | 17_코드를 새기다.md | writing |
+| ch018 | arc3_awakening | 18_빛의 왕국으로.md | writing |
+| ch019 | arc3_awakening | 19_심판.md | writing |
+| ch020 | arc3_awakening | 20_용사의 길.md | writing |
+| ch021 | arc4_internal | 21_부왕은 부왕이 아니다.md | writing |
