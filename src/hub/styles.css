@@ -520,7 +520,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .log-entry {
   display: grid;
-  grid-template-columns: 60px 1fr 110px 32px 120px;
+  grid-template-columns: 60px 1fr 110px 48px 120px;
   gap: 18px;
   padding: 18px 0;
   align-items: center;
@@ -533,19 +533,35 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .log-copy {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 22px;
   line-height: 1;
   color: var(--ink-soft);
   background: none;
-  border: none;
-  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  padding: 8px 10px;
   cursor: pointer;
-  transition: color 0.15s, transform 0.15s;
+  transition: color 0.15s, border-color 0.15s, transform 0.15s, background 0.15s;
   text-align: center;
+  min-width: 44px;
 }
-.log-copy:hover { color: var(--parchment); transform: translateY(-1px); }
-.log-copy.copied { color: var(--accent); }
-.log-copy.locked { cursor: default; opacity: 0.4; padding: 4px 6px; display: inline-block; text-align: center; }
+.log-copy:hover {
+  color: var(--parchment);
+  border-color: var(--parchment);
+  background: rgba(212, 168, 83, 0.06);
+  transform: translateY(-1px);
+}
+.log-copy.copied {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.log-copy.locked {
+  cursor: default;
+  opacity: 0.35;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .log-num {
   font-family: var(--font-mono);
   font-size: 22px;
@@ -718,6 +734,40 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   letter-spacing: 8px;
   opacity: 0.5;
 }
+
+.reader-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+.reader-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.reader-copy-btn:hover {
+  color: var(--parchment);
+  border-color: var(--parchment);
+  background: rgba(212, 168, 83, 0.06);
+  transform: translateY(-1px);
+}
+.reader-copy-btn.copied {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.reader-copy-icon { font-size: 16px; line-height: 1; }
+.reader-copy-label { font-weight: 500; }
 
 .reader-end {
   margin-top: 80px;

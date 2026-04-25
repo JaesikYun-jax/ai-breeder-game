@@ -117,6 +117,12 @@ function renderReader(chapterId: string) {
               <span>━━━━</span>
             </div>
             <div class="reader-chapter-meta">${formatThousands(charCount)} 자 · ${escapeHtml(ch.arcLabel)}</div>
+            <div class="reader-actions">
+              <button class="reader-copy-btn" type="button" data-action="copy-body">
+                <span class="reader-copy-icon">⎘</span>
+                <span class="reader-copy-label">본문 복사</span>
+              </button>
+            </div>
           </div>
 
           <div class="reader-body">${contentHTML}</div>
@@ -124,6 +130,12 @@ function renderReader(chapterId: string) {
           <div class="reader-end">
             <div class="reader-end-label">— End of fragment —</div>
             <div class="reader-end-note">${next ? '다음 항해: ' + escapeHtml(next.title) : '다음 항해는 곧 작성됩니다.'}</div>
+            <div class="reader-actions">
+              <button class="reader-copy-btn" type="button" data-action="copy-body">
+                <span class="reader-copy-icon">⎘</span>
+                <span class="reader-copy-label">본문 복사</span>
+              </button>
+            </div>
           </div>
 
           ${navHTML('bottom')}
@@ -194,12 +206,16 @@ async function copyChapterBody(btn: HTMLElement) {
   if (!ch || !ch.raw) return;
 
   const text = chapterBodyToPlainText(ch.raw);
-  const label = document.getElementById('copy-label');
-  const original = label?.textContent ?? 'COPY';
+  // Each copy button has its own label slot — find it inside the clicked button.
+  const label =
+    btn.querySelector<HTMLElement>('.reader-copy-label') ??
+    btn.querySelector<HTMLElement>('#copy-label');
+  const original = label?.textContent ?? '';
+  const successText = label?.classList.contains('reader-copy-label') ? '복사됨' : 'COPIED!';
 
+  let ok = true;
   try {
     await navigator.clipboard.writeText(text);
-    if (label) label.textContent = 'COPIED!';
   } catch {
     const ta = document.createElement('textarea');
     ta.value = text;
@@ -207,10 +223,10 @@ async function copyChapterBody(btn: HTMLElement) {
     ta.style.opacity = '0';
     document.body.appendChild(ta);
     ta.select();
-    const ok = document.execCommand('copy');
+    ok = document.execCommand('copy');
     document.body.removeChild(ta);
-    if (label) label.textContent = ok ? 'COPIED!' : 'FAILED';
   }
+  if (label) label.textContent = ok ? successText : 'FAILED';
   btn.classList.add('copied');
   setTimeout(() => {
     if (label) label.textContent = original;

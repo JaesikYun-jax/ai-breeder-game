@@ -74,6 +74,9 @@ import ast000Raw from '../data/novel/ast_prologue/0_프롤로그.md?raw';
 import ast001Raw from '../data/novel/arc1_village/1_구덩이.md?raw';
 import ast002Raw from '../data/novel/arc1_village/2_신의 은총.md?raw';
 import ast003Raw from '../data/novel/arc1_village/3_현자의 재림.md?raw';
+import ast004Raw from '../data/novel/arc1_village/4_마당의 끝.md?raw';
+import ast005Raw from '../data/novel/arc1_village/5_사라진 마을.md?raw';
+import ast006Raw from '../data/novel/arc1_village/6_마차 위에서.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -758,15 +761,36 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
     status: 'writing',
     raw: ast003Raw,
   },
-  ...Array.from({ length: 9 }, (_, i) => ({
-    id: `ast${String(i + 4).padStart(3, '0')}`,
-    num: i + 4,
-    title: `${i + 4}화 (예정)`,
+  {
+    id: 'ast004',
+    num: 4,
+    title: '마당의 끝',
     arc: 'arc1_village',
     arcLabel: 'Arc 1 — 양부모 마을',
     projectId: 'asteropos',
-    status: 'coming' as const,
-  })),
+    status: 'writing',
+    raw: ast004Raw,
+  },
+  {
+    id: 'ast005',
+    num: 5,
+    title: '사라진 마을',
+    arc: 'arc1_village',
+    arcLabel: 'Arc 1 — 양부모 마을',
+    projectId: 'asteropos',
+    status: 'writing',
+    raw: ast005Raw,
+  },
+  {
+    id: 'ast006',
+    num: 6,
+    title: '마차 위에서',
+    arc: 'arc1_village',
+    arcLabel: 'Arc 1 — 양부모 마을',
+    projectId: 'asteropos',
+    status: 'writing',
+    raw: ast006Raw,
+  },
   ...Array.from({ length: 12 }, (_, i) => ({
     id: `ast${String(i + 13).padStart(3, '0')}`,
     num: i + 13,
