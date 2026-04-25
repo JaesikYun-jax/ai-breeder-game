@@ -124,45 +124,42 @@ fix_plan.md가 없으면 생성:
 > "아래 명시된 파일 경로만 읽어라. 디렉토리를 Glob으로 탐색하거나,
 > 명시되지 않은 파일을 스스로 찾아 읽으려 시도하지 마라."
 
+## 컨텍스트 효율화 원칙 (2026-04-19~)
+
+**필수 읽기 (모든 진단 에이전트 공통)**: `docs/story/canon-quickref.md` — 정본 12개 압축본
+**선택 읽기**: 챕터 본문 + 직전 1화 본문만 (직후 화는 chapter-log.md 줄 요약으로 대체)
+**금지**: characters.md, voice-guide.md, worldbuilding.md, foreshadowing.md, magic-systems.md, death-and-regression.md 등 원본 정본 풀 로딩
+
 **Agent 1: rule-checker** (`run_in_background: true`)
 - 에이전트 정의: `.claude/agents/rule-checker.md` 읽으라고 지시
-- 프롬프트에 포함:
-  - 챕터 파일 경로
-  - character_detail: `{CONFIG.character_detail}`
-  - novel-config.md 경로 (가드레일, 침묵 예외 캐릭터)
-  - 경로 제한 지시 + 허용 경로 화이트리스트
-- 출력: `{WORKSPACE_DIR}/07_rule-checker_report_ch{NNN}.md`
+- 읽기: **canon-quickref.md** (보이스·금지표현·가드레일 §11~16) + 챕터 파일만
+- 출력: `{WORKSPACE_DIR}/07_rule-checker_report_ch{NNN}.md` (간결 모드, 200~400자 요약 + 위반 라인 표)
 
 **Agent 2: story-analyst** (`run_in_background: true`)
 - 에이전트 정의: `.claude/agents/story-analyst.md` 읽으라고 지시
-- 프롬프트에 포함:
-  - 챕터 파일 경로
-  - 인접 챕터 경로 (직전 1화, 가능하면 직후 1화)
-  - bootstrap: `{CONFIG.bootstrap}`
-  - timeline: `{CONFIG.timeline}`
-  - death_regression: `{CONFIG.death_regression}`
-  - foreshadowing: `{CONFIG.foreshadowing}`
-  - protagonist_bible: `{CONFIG.protagonist_bible}`
-  - tone_style: `{CONFIG.tone_style}`
-  - chapter_log: `{CONFIG.chapter_log}`
-  - novel-config.md 경로 (가드레일, 커스텀 축, 수치 우선순위, create 설정)
-  - 경로 제한 지시
-- 출력: `{WORKSPACE_DIR}/07_story-analyst_report_ch{NNN}.md`
+- 읽기: **canon-quickref.md** + 챕터 파일 + 직전 1화 본문 + 설계도(blueprint, 있으면)
+- 출력: `{WORKSPACE_DIR}/07_story-analyst_report_ch{NNN}.md` (간결 모드)
 
 **Agent 3: alive-enhancer** (`run_in_background: true`)
 - 에이전트 정의: `.claude/agents/alive-enhancer.md` 읽으라고 지시
-- 프롬프트에 포함:
-  - 챕터 파일 경로
-  - 인접 2화 경로
-  - character_detail: `{CONFIG.character_detail}`
-  - character_core: `{CONFIG.character_core}`
-  - alive-tracker: `{WORK_DIR}/alive-tracker.md`
-  - novel-config.md 경로 (침묵 예외 캐릭터)
-  - 경로 제한 지시
-- 출력: `{WORKSPACE_DIR}/07_alive-enhancer_report_ch{NNN}.md`
-- 부수 작업: `{WORK_DIR}/alive-tracker.md` 업데이트
+- 읽기: **canon-quickref.md** (캐릭터 보이스·시그니처 비언어) + 챕터 파일 + 직전 1화 + alive-tracker.md
+- 출력: `{WORKSPACE_DIR}/07_alive-enhancer_report_ch{NNN}.md` + alive-tracker.md 갱신
 
-**Phase 1 대기**: 배경 에이전트 완료 시 시스템이 자동 알림. sleep/polling 금지.
+**Phase 1 대기**: 배경 에이전트 완료 알림. sleep/polling 금지.
+
+### 🚨 조기 종료 게이트 (2026-04-19~)
+
+3개 진단 보고서 모두 다음 조건 충족 시 **executor·reviewer 풀 사이클 스킵**:
+- CRITICAL = 0
+- MAJOR = 0
+- 분량 가드레일 (5,000~7,000자) 위반 없음
+- 금지 표현 상한 위반 없음
+
+→ 오케스트레이터가 직접 fix_plan에 PASS 기록, 다음 챕터로 이동.
+→ 토큰 절감: executor 70~95k + reviewer 85k = **155~180k/챕터 절약** (~30~35%)
+
+WARN/MINOR만 있는 경우도 조기 종료 가능 (사용자 선호에 따라 운영).
+CRITICAL ≥ 1 OR MAJOR ≥ 1 → Phase 2/3 풀 사이클로 진행.
 
 ---
 

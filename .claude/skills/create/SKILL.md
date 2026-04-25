@@ -4,23 +4,31 @@ description: "웹소설 챕터 창작 오케스트레이터. 설정문서(캐릭
 user-invocable: true
 ---
 
-# 챕터 창작 오케스트레이터
+# 챕터 창작 오케스트레이터 (통합 모드 — /create 호출 시 polish까지 자동 진행)
 
-설정문서(캐릭터·플롯·세계관)에 따라 챕터를 순차 창작하는 4-에이전트 파이프라인.
+설정문서에 따라 챕터를 순차 창작하고 **PASS 판정 후 자동으로 /polish 사이클까지 실행**한다.
 
 ## 아키텍처
 
 ```
-Phase 1 (병렬)              Phase 2 (순차)          Phase 3 (순차)
-┌──────────────────┐       ┌──────────────┐       ┌──────────────┐
-│ chapter-architect│──┐    │  chapter-    │       │  quality-    │
-│ (설계도 추출)      │  ├──▶│  creator     │──────▶│  verifier    │
-└──────────────────┘  │    │  (본문 집필)   │       │  (8축 검증)   │
-┌──────────────────┐  │    └──────────────┘       └──────┬───────┘
-│ continuity-bridge│──┘          ◀── REWRITE (max 2) ───┘
-│ (연속성 수집)      │                     │
-└──────────────────┘             PASS ───▶ 챕터 등록
+[CREATE]                                              [POLISH 자동 연계]
+Phase 1 (병렬)        Phase 2 (순차)    Phase 3       Phase 4 (병렬 진단)        Phase 5 (조건부)
+┌──────────┐         ┌──────────┐     ┌──────────┐   ┌──────────────┐         ┌──────────┐
+│ architect│         │  creator │     │ verifier │   │ rule-checker │         │ executor │
+│ (설계도)  │──┐      │  (본문)  │────▶│  (8축)   │──▶│ story-analyst│──CRIT───▶│  (교정)   │
+└──────────┘  │      └──────────┘     └────┬─────┘   │alive-enhancer│   or    └────┬─────┘
+┌──────────┐  ├─────▶                      │         └──────────────┘   조기종료     │
+│ bridge   │──┘            ◀── REWRITE ────┘                              │       reviewer
+│ (연속성)  │                                                              │
+└──────────┘                                                          최종 fix_plan + 등록
 ```
+
+## 컨텍스트 효율화 원칙 (2026-04-19~)
+
+**필수 읽기 (모든 에이전트 공통)**: `docs/story/canon-quickref.md` — 정본 12개를 압축한 단일 매뉴얼
+**선택 읽기**: 챕터 특수 디테일이 필요할 때만 원본 정본 1~2개 추가
+**금지**: Glob 디렉토리 탐색, 명시되지 않은 파일 자발적 탐색
+**기대 효과**: 에이전트당 토큰 -50%, 챕터당 토큰 -40%
 
 ## 전제 조건
 
@@ -136,35 +144,21 @@ hook_targets:
 
 **Agent 1: chapter-architect** (`run_in_background: true`)
 - 에이전트 정의: `.claude/agents/chapter-architect.md` 읽으라고 지시
-- 프롬프트에 포함:
-  - 챕터 번호, 아크 정보
-  - 읽을 설정문서 경로 (novel-config.md 매핑 기반):
-    - bootstrap: `{CONFIG.bootstrap}`
-    - plot_framework: `{CONFIG.plot_framework}`
-    - character_core: `{CONFIG.character_core}`
-    - character_detail: `{CHAR_DETAIL_ARC}`
-    - protagonist_bible: `{CONFIG.protagonist_bible}`
-    - death_regression: `{CONFIG.death_regression}`
-    - tone_style: `{CONFIG.tone_style}`
-  - 가드레일, 커스텀 축
-  - **목표 분량**: `{CREATE_CFG.draft_chars}자`
-  - 경로 제한 지시 + 허용 경로 화이트리스트
-- 출력: `{WORKSPACE_DIR}/01_chapter-architect_blueprint_ch{NNN}.md`
+- **읽을 문서 (슬림화)**:
+  - **`docs/story/canon-quickref.md` (필수, 1순위)** — 캐릭터 보이스·세계관·메커닉·가드레일·복선 모두 포함
+  - 챕터 특수 디테일 1~2개만 추가 (예: Arc 4 시점이면 `arc4_plan_ch022-025.md` 중 해당 챕터 섹션)
+  - **금지**: characters.md, voice-guide.md, worldbuilding.md, magic-systems.md 등 원본 정본 풀 로딩
+- 프롬프트에 포함: 챕터 번호, 아크 정보, 분량 목표, 경로 화이트리스트
+- 출력: `{WORKSPACE_DIR}/01_chapter-architect_blueprint_ch{NNN}.md` (간결 모드, 핵심 비트 + 씬 구성 + 가드레일 체크리스트만)
 
 **Agent 2: continuity-bridge** (`run_in_background: true`)
 - 에이전트 정의: `.claude/agents/continuity-bridge.md` 읽으라고 지시
-- 프롬프트에 포함:
-  - 챕터 번호, 아크 정보
-  - 읽을 문서:
-    - 이전 2화 (아크 경계를 넘을 수 있음 — 이전 아크 디렉토리 포함)
-    - alive-tracker: `{WORK_DIR}/alive-tracker.md` (존재 시)
-    - foreshadowing: `{CONFIG.foreshadowing}`
-    - timeline: `{CONFIG.timeline}`
-    - death_regression: `{CONFIG.death_regression}` (모래시계 잔량 추적)
-    - chapter_log: `{CONFIG.chapter_log}`
-  - ch001 창작 시: 이전 챕터 대신 bootstrap 초기 상태 요약 지시
-  - 경로 제한 지시
-- 출력: `{WORKSPACE_DIR}/02_continuity-bridge_report_ch{NNN}.md`
+- **읽을 문서 (슬림화)**:
+  - **`docs/story/canon-quickref.md` (필수)**
+  - **직전 1화 본문만** (이전-2화는 canon-quickref §8 활성 복선 + chapter-log.md 직전 줄 요약으로 대체)
+  - alive-tracker.md (존재 시, 비언어 메모리 변주용)
+  - **금지**: 12개 정본 문서 풀 로딩
+- 출력: `{WORKSPACE_DIR}/02_continuity-bridge_report_ch{NNN}.md` (간결 모드, 5~7섹션 이내)
 
 **Phase 1 대기**: 배경 에이전트 완료 시 시스템이 자동 알림. sleep/polling 금지.
 
@@ -297,24 +291,37 @@ ANS에 없는 단계. PASS 판정 후 챕터를 리더앱에 등록한다.
 
 ---
 
-### Step 6: 자기 루프
+### Step 6: 자동 폴리시 연계 (통합 모드, 2026-04-19~)
 
-대상 범위의 모든 챕터가 처리될 때까지 Step 1~5를 반복한다.
+**Step 5 챕터 등록 직후, 같은 챕터에 대해 /polish 사이클을 자동 실행한다.** 사용자 추가 호출 불필요.
 
-완료 시:
-1. create-plan.md 최종 갱신
+```
+1. polish skill 정의 로드 (/Users/j6/AI_Breeder/.claude/skills/polish/SKILL.md)
+2. Phase 4: rule-checker + story-analyst + alive-enhancer 병렬 진단
+   - 각 에이전트는 canon-quickref.md + 챕터 본문만 읽음
+3. **조기 종료 게이트**:
+   - 3개 보고서 모두 CRITICAL 0 + MAJOR 0 → executor·reviewer 스킵, 직접 PASS 처리
+   - 그 외 → Phase 5: revision-executor → revision-reviewer 풀 사이클
+4. fix_plan.md 갱신
+```
+
+조기 종료 시 토큰 절감 ~40% (executor 70~95k + reviewer 85k = 155~180k 절약).
+
+### Step 7: 자기 루프 + 최종 요약
+
+대상 범위 챕터마다 Step 1~6 반복. 완료 시:
+
+1. create-plan.md + fix_plan.md 최종 갱신
 2. 결과 요약 출력:
    ```
-   ## 창작 완료 요약
+   ## 창작 + 폴리시 완료 요약
    - 총 챕터: N화
-   - PASS: X화
-   - 부분통과(△): Y화
-   - REWRITE 발생: Z회
+   - 창작 PASS: X화 / 폴리시 조기종료: Y화 / 풀폴리시: Z화
+   - 챕터당 평균 토큰: ~600k (목표)
 
    ### 다음 단계
-   - 문장 품질 향상: `/polish` — 다축 진단으로 문체·훅·캐릭터 생동감 교정
-   - 설정집 동기화: `/settings-sync` — 새 챕터의 설정 변경 반영
-   - 피드백 수집: `npm run dev`로 리더에서 읽고 인라인 코멘트 남기기
+   - 설정집 동기화: `/settings-sync` — 새 챕터의 활성 복선·캐릭터 변화 정본 반영
+   - 피드백: 리더 인라인 코멘트
    ```
 
 ---

@@ -1,14 +1,12 @@
 /**
- * Vite Plugin — Inline Feedback API (multi-project)
+ * Vite Plugin — Inline Feedback API
  *
  * Dev-only middleware that exposes:
- *   GET  /__feedback[?project=storyboard]    → feedback list
- *   POST /__feedback[?project=storyboard]    → add feedback
- *   PATCH /__feedback/:id[?project=storyboard] → update status
+ *   GET   /__feedback         → feedback list
+ *   POST  /__feedback         → add feedback
+ *   PATCH /__feedback/:id     → update status
  *
- * Storage:
- *   default (novel):     docs/story/inline-feedback.json
- *   project=storyboard:  docs/storyboard-feedback.json
+ * Storage: docs/story/inline-feedback.json
  */
 
 import { Plugin } from 'vite';
@@ -18,35 +16,15 @@ import path from 'node:path';
 export interface InlineFeedback {
   id: string;
   timestamp: string;
-  // Novel fields
-  chapterId?: string;
-  chapterNum?: number;
-  chapterTitle?: string;
-  // Storyboard fields
-  episodeId?: string;
-  episodeNum?: number;
-  episodeTitle?: string;
-  cutTimeRange?: string;
-  // Common
+  chapterId: string;
+  chapterNum: number;
+  chapterTitle: string;
   quotedText: string;
   comment: string;
   status: 'pending' | 'applied' | 'rejected' | 'wontfix';
 }
 
-const FEEDBACK_FILES: Record<string, string> = {
-  novel: 'docs/story/inline-feedback.json',
-  storyboard: 'docs/storyboard-feedback.json',
-};
-
-function getProject(url: string): string {
-  const u = new URL(url, 'http://localhost');
-  return u.searchParams.get('project') || 'novel';
-}
-
-function getFeedbackFile(root: string, project: string): string {
-  const rel = FEEDBACK_FILES[project] || FEEDBACK_FILES.novel;
-  return path.resolve(root, rel);
-}
+const FEEDBACK_FILE = 'docs/story/inline-feedback.json';
 
 function ensureFile(filePath: string): void {
   const dir = path.dirname(filePath);
@@ -79,10 +57,7 @@ export default function feedbackPlugin(): Plugin {
 
     configResolved(config) {
       root = config.root;
-      // Ensure both files exist
-      for (const rel of Object.values(FEEDBACK_FILES)) {
-        ensureFile(path.resolve(root, rel));
-      }
+      ensureFile(path.resolve(root, FEEDBACK_FILE));
     },
 
     configureServer(server) {
@@ -98,8 +73,7 @@ export default function feedbackPlugin(): Plugin {
           return res.end();
         }
 
-        const project = getProject(req.url);
-        const filePath = getFeedbackFile(root, project);
+        const filePath = path.resolve(root, FEEDBACK_FILE);
         ensureFile(filePath);
 
         // Strip query string and extract path

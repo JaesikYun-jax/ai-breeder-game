@@ -1,20 +1,24 @@
 # 챕터 창작 계획
 
-> Arc 3: 각성과 귀환 (14~20화). 2026-04-16 세션.
+> Arc 5: 사막의 캐러밴 (ch029~034). 2026-04-23 세션 시작.
+> arc5_plan_ch029-034.md 참조. 작업 순서: ch029 단독 → ch030~031 → ch032 → ch033 → ch034.
 
-## 현황
+## 현황 (Arc 3·4 완료)
 
-| 상태 | 화수 |
-|------|------|
-| 완료 | 7 |
-| 미완료 | 0 |
+- [x] ch014~020 Arc 3 PASS
+- [x] ch021~028 Arc 4 PASS
 
-## 대상: ch014~ch020
+## 대상: ch029~ch034 (Arc 5)
 
-- [x] ch014 — PASS (CRITICAL 0, MAJOR 0, MINOR 4)
-- [x] ch015 — PASS (CRITICAL 0, MAJOR 0, MINOR 4)
-- [x] ch016 — PASS (CRITICAL 0, MAJOR 0, MINOR 3)
-- [x] ch017 — PASS (CRITICAL 0, MAJOR 0, MINOR 2)
-- [x] ch018 — PASS (CRITICAL 0, MAJOR 0, MINOR 3)
-- [x] ch019 — PASS (CRITICAL 0, MAJOR 0, MINOR 2) [1회 REWRITE 후 PASS]
-- [x] ch020 — PASS (CRITICAL 0, MAJOR 0, MINOR 3) ★ 최종화 완료
+- [x] ch029 — 사막의 새 호흡 PASS (1회 REWRITE 후 폴리시 조기종료, 최종 6,862자)
+- [x] ch030 — 일곱 번째 오아시스 PASS (조기종료, 모래시계 0회 신규 룰 첫 적용, 6,834자)
+- [x] ch031 — 정령석 작업장 PASS (조기종료, 모래시계 0 + 표식 명사구 1회만, 친서 §14 0회, 6,792자)
+- [x] ch032 — 두 태양의 길 PASS (조기종료, 모래시계 세 번째 감소 계획 복귀, 마르코 4차, 6,719자)
+- [x] ch033 — 모래 너머 PASS (조기종료, 검은 로브 본대 협곡 충돌 + FS-A11 기후 프로그래밍 씨앗 파종, 6,795자)
+- [x] ch034 — 북쪽으로 PASS (조기종료, Arc 5 피날레 + Arc 6 브릿지, FS-A11 강화 마르코 1줄, 5,505자) ★ Arc 5 완결
+
+## Arc 6 진입 (ch035~037) — 강철의 궁정
+
+- [x] ch035 — 강철의 첫날 PASS (Arc 6 1/8, 글로벌 서술체 v2 첫 적용, FS-A09 보강, 5,825자)
+- [x] ch036 — 강철의 식탁 PASS (Arc 6 2/8, 황제 원경+다마르 사적 경고+마르코 6회차, 클러스터링 1패스, ~6,150자)
+- [x] ch037 — 변경의 침묵 PASS (Arc 6 3/8, 변경 마을 잠입+검은 로브 카이젤 분파+풍 정령 시선 발견, 클러스터링+보강 1패스, 5,732자)
