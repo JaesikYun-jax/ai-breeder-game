@@ -87,6 +87,16 @@ import ast003 from '../../projects/asteropos/episode/EP003.md?raw';
 import ast004 from '../../projects/asteropos/episode/EP004.md?raw';
 import ast005 from '../../projects/asteropos/episode/EP005.md?raw';
 import ast006 from '../../projects/asteropos/episode/EP006.md?raw';
+import ast007 from '../../projects/asteropos/episode/EP007.md?raw';
+import ast008 from '../../projects/asteropos/episode/EP008.md?raw';
+import ast009 from '../../projects/asteropos/episode/EP009.md?raw';
+import ast010 from '../../projects/asteropos/episode/EP010.md?raw';
+import ast011 from '../../projects/asteropos/episode/EP011.md?raw';
+import ast012 from '../../projects/asteropos/episode/EP012.md?raw';
+import ast013 from '../../projects/asteropos/episode/EP013.md?raw';
+import ast014 from '../../projects/asteropos/episode/EP014.md?raw';
+import ast015 from '../../projects/asteropos/episode/EP015.md?raw';
+import ast016 from '../../projects/asteropos/episode/EP016.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -233,12 +243,22 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
   { id: 'EP004', num: 4, title: '마당의 끝', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast004 },
   { id: 'EP005', num: 5, title: '사라진 마을', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast005 },
   { id: 'EP006', num: 6, title: '마차 위에서', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast006 },
-  ...Array.from({ length: 12 }, (_, i) => ({
-    id: epId(i + 13),
-    num: i + 13,
-    title: `${i + 13}화 (예정)`,
-    arc: 'arc2_academy',
-    arcLabel: 'Arc 2 — 한자 마법학원',
+  { id: 'EP007', num: 7, title: '라이덴 마법학원 도착', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast007 },
+  { id: 'EP008', num: 8, title: '룬 기초', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast008 },
+  { id: 'EP009', num: 9, title: '도서관 일상', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast009 },
+  { id: 'EP010', num: 10, title: '룬 결투', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast010 },
+  { id: 'EP011', num: 11, title: '자각의 화', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast011 },
+  { id: 'EP012', num: 12, title: '제국 장학생 통보', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast012 },
+  { id: 'EP013', num: 13, title: '제국 수도 도착', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast013 },
+  { id: 'EP014', num: 14, title: '검술 아카데미 지원', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast014 },
+  { id: 'EP015', num: 15, title: '입학·귀족 라이벌', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast015 },
+  { id: 'EP016', num: 16, title: '첫 합동 훈련', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast016 },
+  ...Array.from({ length: 4 }, (_, i) => ({
+    id: epId(i + 17),
+    num: i + 17,
+    title: `${i + 17}화 (예정)`,
+    arc: 'arc2b_imperial',
+    arcLabel: 'Arc 2-b — 제국 검술 아카데미',
     projectId: 'asteropos',
     status: 'coming' as const,
   })),
