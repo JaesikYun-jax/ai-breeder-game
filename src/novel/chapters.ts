@@ -44,6 +44,11 @@ import dh034 from '../../projects/dclass-hero/episode/EP034.md?raw';
 import dh035 from '../../projects/dclass-hero/episode/EP035.md?raw';
 import dh036 from '../../projects/dclass-hero/episode/EP036.md?raw';
 import dh037 from '../../projects/dclass-hero/episode/EP037.md?raw';
+import dh038 from '../../projects/dclass-hero/episode/EP038.md?raw';
+import dh039 from '../../projects/dclass-hero/episode/EP039.md?raw';
+import dh040 from '../../projects/dclass-hero/episode/EP040.md?raw';
+import dh041 from '../../projects/dclass-hero/episode/EP041.md?raw';
+import dh042 from '../../projects/dclass-hero/episode/EP042.md?raw';
 
 // ── 마도 공학 프로그래머의 영생 프로젝트 (magitech-fire) ──
 import mf001 from '../../projects/magitech-fire/episode/EP001.md?raw';
@@ -135,13 +140,19 @@ const DCLASS_TITLES: Array<[number, string, string, string]> = [
   [35, '강철의 첫날', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
   [36, '강철의 식탁', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
   [37, '변경의 침묵', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [38, '같은 결의 사람', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [39, '강철의 정원', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [40, '두 결의 충돌', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [41, '강철의 안쪽', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [42, '강철을 풀다', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
 ];
 
 const DCLASS_RAWS = [
   dh001, dh002, dh003, dh004, dh005, dh006, dh007, dh008, dh009, dh010,
   dh011, dh012, dh013, dh014, dh015, dh016, dh017, dh018, dh019, dh020,
   dh021, dh022, dh023, dh024, dh025, dh026, dh027, dh028, dh029, dh030,
-  dh031, dh032, dh033, dh034, dh035, dh036, dh037,
+  dh031, dh032, dh033, dh034, dh035, dh036, dh037, dh038, dh039, dh040,
+  dh041, dh042,
 ];
 
 export const CHAPTERS: ChapterMeta[] = DCLASS_TITLES.map(([num, title, arc, arcLabel], i) => ({
