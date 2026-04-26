@@ -1,24 +1,42 @@
-# AI Breeder — D급 스킬 이세계 용사
+# AI Breeder — D급 스킬 이세계 용사 (외 4 프로젝트)
 
-**장르**: 이세계 선형 멸망 저지물 (회귀·루프 없음, 9개 기둥 차례로 치유)
 **스택**: Vite + TypeScript (웹소설 리더 SPA)
-**정식 제목**: 「D급 스킬 이세계 용사」
-**주인공**: 강지호 (28세, 삼류 프로그래머 → 이세계 용사 → Part 2부터 아젤리아 부왕)
+**파이프라인**: [awesome-novel-studio](https://github.com/MJbae/awesome-novel-studio) (2026-04-26 마이그레이션)
+**대표작**: 「D급 스킬 이세계 용사」 (이세계 선형 멸망 저지물 / 9개 기둥 차례 치유 / 회귀·루프 X)
 
 ---
 
 ## 프로젝트 개요
 
-이세계 선형 웹소설을 집필하고, 자체 제작 웹 리더앱으로 배포하는 1인 프로젝트.
-2026-04-13 게임(Phaser 3 비주얼노벨) → 선형 웹소설로 피봇.
-2026-04-18 Part 2 설계 확정 — 회귀 루프 컨셉 폐기, 70화 골격 + 노화·희생 엔딩 비전.
+5개 프로젝트가 동시 진행되는 웹소설 스튜디오. 각 프로젝트는 `projects/{name}/novel-config.md`로 독립 운영.
 
-**핵심 컨셉**:
-- Part 1 (ch001~020, 완결): 코미디→고통 낙차. D급 재생 + 무재능 = 다중 체계 흡수 가능. 결혼으로 마무리.
-- Part 2 (ch021~070, 진행 예정): 변두리 부강화 + 멸망 저지의 전모 노출 + 첫 아들 탄생까지.
-- Part 3 (ch071~, 미설계): 아들 성장 + 모든 기둥 치유 + 지호의 노화·죽음 (해피&새드 엔딩).
+| 프로젝트 | 장르 | 플랫폼 | 상태 |
+|---|---|---|---|
+| **dclass-hero** (D급 스킬 이세계 용사) | 이세계 멸망 저지물 | 문피아 | EP001~EP037 진행 중 |
+| canned-master (천년묵은 통조림) | 천마 빙의 현대물 | 문피아 | EP020 진행 중 |
+| magitech-fire (마도공학 영생) | 이세계 호문클루스 빙의물 | 문피아 | EP005 진행 중 |
+| asteropos (아스테로포스) | (신규) | 문피아 | 1 아크 진행 |
+| british-food (내 대영제국에 괴식은 없다) | 음식 빙의물 | (별도) | 431화 완결 |
 
-**세계관**: 9대 지역, 9기둥 = 이계 차단 배리어. 기둥 소멸 시 → 배리어 off → 이계 괴물 침략 → 세계 병합. 빌런(천인 평의회 등)은 의도적으로 기둥 약화 가속화.
+**dclass-hero 핵심 컨셉**:
+- Part 1 (EP001~020, 완결): 코미디→고통 낙차. D급 재생 + 무재능 = 다중 체계 흡수. 결혼 마무리.
+- Part 2 (EP021~070, 진행 중): 변두리 부강화 + 멸망 저지 전모 노출 + 첫 아들 탄생.
+- Part 3 (EP071~, 미설계): 아들 성장 + 모든 기둥 치유 + 노화·죽음.
+- 9대 지역, 9기둥 = 이계 차단 배리어. 빌런(천인 평의회) 의도적 약화.
+
+---
+
+## 마이그레이션 상태 (2026-04-26)
+
+자체 진화 파이프라인 → **MJbae/awesome-novel-studio** 정식판 전환:
+- ch{N} → **EP{NNN}** 합성키 통일
+- 9 에이전트 → **18 에이전트**
+- 4 스킬 → **10 스킬**
+- target_platform: self-published → **문피아**
+- chapter_dir → `episode_dir` (`projects/{name}/episode/`)
+- legacy 보존: `_legacy_novel-config.md`
+
+**현재 main 브랜치 디스크 상태**: 일부 마이그레이션 미반영 가능. 워크트리 `unruffled-grothendieck-6dc360`에 정식 산출물. 세션 활성 스킬은 신 파이프라인.
 
 ---
 
@@ -26,358 +44,270 @@
 
 ```
 src/
-├── novel/              # 웹소설 리더 앱
-│   ├── main.ts         # 엔트리포인트
-│   ├── chapters.ts     # 챕터 레지스트리 (raw import + 메타데이터)
+├── novel/              # 웹소설 리더 앱 (Vite + TS)
+│   ├── chapters.ts     # EP 레지스트리 (raw import + 메타데이터)
 │   ├── renderer.ts     # 마크다운 → HTML 렌더러
-│   ├── feedback.ts     # 인라인 피드백 UI
-│   └── styles.css      # 리더 스타일
-├── data/novel/         # 챕터 원본 마크다운 (Vite 번들 대상)
-│   ├── arc1_azelia/    # 1~5화
-│   ├── arc2_solaris/   # 6~13화 (연재 중)
-│   ├── arc3_kaizer/    # (피봇 전 잔존 파일, 미사용)
-│   └── british_food/   # 별도 프로젝트
-│
-projects/                          # 집필 파이프라인 워크스페이스
+│   └── ...
+├── data/novel/         # 챕터 원본 마크다운 (Vite 번들)
+│   ├── arc1_azelia/   ~ arc6_kaizer/   # dclass-hero
+│   ├── cm_*/                            # canned-master
+│   ├── mf_*/                            # magitech-fire
+│   └── ast_*/                           # asteropos
+
+projects/                          # 5개 프로젝트 워크스페이스
 ├── dclass-hero/
-│   ├── novel-config.md            # 중앙 설정 (가드레일, 아크 매핑, 에이전트 설정)
+│   ├── novel-config.md            # 중앙 설정 (target_platform·episode_dir·매핑·가드레일)
+│   ├── _legacy_novel-config.md    # 마이그레이션 보존본
+│   ├── episode/                   # EP001.md ~ EP{NNN}.md (신 파이프라인)
 │   ├── revision/                  # 진행 추적
-│   │   ├── create-plan.md
-│   │   ├── fix_plan.md
-│   │   ├── learnings.md
-│   │   └── alive-tracker.md
+│   │   ├── create-plan.md / fix_plan.md / alive-tracker.md
 │   └── _workspace/                # 에이전트 중간 산출물
-│       ├── 01_chapter-architect_blueprint_chXXX.md
-│       ├── 02_continuity-bridge_report_chXXX.md
-│       └── ...
-├── british-food/
-│   └── novel-config.md
-│
-docs/story/                        # 설정 바이블 (novel-config.md가 참조)
-│   ├── characters.md              # 캐릭터 프로필
-│   ├── worldbuilding.md           # 세계관
-│   ├── magic-systems.md           # 마법 체계
-│   ├── foreshadowing.md           # 복선 배치/회수
-│   ├── protagonist-bible.md       # 주인공 성장 추적
-│   ├── death-and-regression.md    # 사망·회귀 메커닉
-│   ├── voice-guide.md             # 캐릭터별 보이스 가이드
-│   ├── tone-and-style.md          # 톤/스타일 규칙
-│   ├── story-framework-6-30.md    # 6~30화 플롯 프레임워크
-│   ├── chapter-log.md             # 화별 요약 로그
-│   ├── timeline.md                # 작중 시간선
-│   ├── glossary.md                # 용어집
-│   ├── region-connections.md      # 지정학·교역
-│   ├── story-feedback-log.md      # 피드백 기록
-│   ├── inline-feedback.json       # 인라인 피드백 데이터
-│   ├── red/                       # Story Architect 산출물 (게임 시절)
-│   └── blue/                      # Script Writer 산출물 (게임 시절)
-│
+├── canned-master/  magitech-fire/  asteropos/  british-food/
+
+docs/
+├── story/                         # dclass-hero 설정 바이블
+│   ├── canon-quickref.md          # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
+│   ├── characters.md  voice-guide.md
+│   ├── worldbuilding.md  magic-systems.md
+│   ├── foreshadowing.md           # 복선 25+개 (S/A/B/C 등급)
+│   ├── protagonist-bible.md       # 강지호 성장 추적
+│   ├── death-and-regression.md    # 모래시계·재생 메커닉
+│   ├── tone-and-style.md          # 톤 / 금지 표현
+│   ├── story-framework-6-30.md  story-framework-21-70.md
+│   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
+│   └── story-feedback-log.md  inline-feedback.json
+├── narrative-style.md             # ★ 글로벌 서술체 v2 (모든 작품 적용 — tone-and-style보다 우선)
+
 .claude/
-├── agents/                        # 파이프라인 에이전트 정의
-│   ├── chapter-architect.md       # 설계도 추출
-│   ├── continuity-bridge.md       # 연속성 수집
-│   ├── chapter-creator.md         # 본문 집필
-│   ├── quality-verifier.md        # 8축 품질 검증 (create용)
-│   ├── rule-checker.md            # 4축 규칙 위반 진단 (AITONE 30+패턴)
-│   ├── story-analyst.md           # 9축 서사 분석
-│   ├── alive-enhancer.md          # ALIVE 4축 캐릭터 생동감 (침묵 전담)
-│   ├── revision-executor.md       # 15계층 우선순위 교정 + 2패스 AITONE 자기검증
-│   └── revision-reviewer.md       # 4항 diff 기반 교정 검증
-└── skills/
-    ├── create.md                  # /create — 챕터 집필 파이프라인
-    ├── polish.md                  # /polish — 챕터 윤문 파이프라인
-    ├── settings-sync.md           # /settings-sync — 설정집 동기화
-    └── apply-feedback.md          # /apply-feedback — 인라인 피드백 적용
-```
-
-## 개발 명령어
-
-```bash
-npm run dev      # 개발 서버 (HMR) — 리더앱에서 챕터 읽기
-npm run build    # 프로덕션 빌드
-npm run preview  # 빌드 결과 미리보기
+├── agents/                        # 18 에이전트 (awesome-novel-studio)
+└── skills/                        # 10 스킬
 ```
 
 ---
 
-## 집필 파이프라인 (통합 모드, 2026-04-19~)
+## 신 파이프라인 (awesome-novel-studio)
 
-**핵심 변경**: `/create` 호출 한 번으로 **창작 → 검증 → 폴리시**까지 자동 진행.
-컨텍스트 효율화로 챕터당 토큰 ~600k (이전 ~1M에서 -40%).
+### 스킬 계층 (10개)
 
-### 통합 흐름 (/create 한 번 호출)
+| 스킬 | 역할 | 하위 호출 / 비고 |
+|---|---|---|
+| **propose** | 컨셉/타겟 입력 → 3개 설계안 제안 | 신규 프로젝트 시작 시 |
+| **design** | 통합 설계 라우터 (큰+작은) | 모호 요청은 여기로 |
+| **design-big** | 큰 설계 (전체 소설) | bootstrap + character + plot-hook |
+| **design-small** | 작은 설계 (25화 단위 세부) | 큰 설계 전제 조건 |
+| **bootstrap** | 부트스트랩(컨셉·세계관·플랫폼) 단독 | |
+| **character** | 캐릭터 시트 단독 | 큰/작은 양쪽 가능 |
+| **plot-hook** | 플롯 구조·훅 가이드 단독 | 큰/작은 양쪽 가능 |
+| **create** | 에피소드 창작 오케스트레이터 (4 에이전트) | `/create EP051` |
+| **polish** | 윤문 (6 에이전트 병렬+순차) | `/polish EP051` |
+| **rewrite** | 설정 변경에 따른 에피소드 재작성 | `/rewrite EP051` |
+
+### 에이전트 계층 (18개)
+
+**설계(Design)**
+- `concept-builder` — 부트스트랩 핵심
+- `character-architect` — 큰 설계 캐릭터 시트
+- `character-sculptor` — 작은 설계 캐릭터 변화
+- `plot-hook-engineer` — 플롯/훅 구조
+- `domain-researcher` — 자동 리서치(전문 분야 자료)
+- `proposal-generator` — 제안서 작성
+- `platform-optimizer` — 플랫폼별 최적화 (HOOK/OPENING)
+
+**창작(Create)**
+- `episode-architect` — 설계도 추출
+- `continuity-bridge` — 직전 EP + 활성 복선
+- `episode-creator` — 본문 집필
+- `quality-verifier` — 7축 검증
+
+**윤문(Polish)**
+- `rule-checker` — VOICE/TITLE/BANNED/TRANS 4축
+- `story-analyst` — TIMELINE/NUMBER/PLAUSIBILITY/FORESHADOW 등 9축
+- `alive-enhancer` — 메아리·침묵·관계 곡선 4축
+- `revision-analyst` — 우선순위 분석
+- `revision-executor` — 15계층 우선순위 교정
+- `revision-reviewer` — 4항 diff 검증
+
+**재작성(Rewrite)**
+- `episode-rewriter` — 설정 변경 반영 재작성
+
+### create 흐름 (단일 EP)
 
 ```
-[CREATE]                                              [POLISH 자동 연계]
-Phase 1 (병렬)        Phase 2 (순차)    Phase 3       Phase 4 (병렬 진단)        Phase 5 (조건부)
-┌──────────┐         ┌──────────┐     ┌──────────┐   ┌──────────────┐         ┌──────────┐
-│ architect│         │  creator │     │ verifier │   │ rule-checker │         │ executor │
-│ (설계도)  │──┐      │  (본문)  │────▶│  (8축)   │──▶│ story-analyst│──CRIT───▶│  (교정)   │
-└──────────┘  │      └──────────┘     └────┬─────┘   │alive-enhancer│   or    └────┬─────┘
-┌──────────┐  ├─────▶                      │         └──────────────┘   조기종료     │
-│ bridge   │──┘            ◀── REWRITE ────┘                              │       reviewer
-│ (연속성)  │                                                              │
-└──────────┘                                                          최종 fix_plan + 등록
+Phase 1 (병렬)              Phase 2 (순차)          Phase 3 (순차)
+┌──────────────────┐       ┌──────────────┐       ┌──────────────┐
+│ episode-architect│──┐    │  episode-    │       │  quality-    │
+│ (설계도 추출)      │  ├──▶│  creator     │──────▶│  verifier    │
+└──────────────────┘  │    │  (본문)        │       │  (7축)       │
+┌──────────────────┐  │    └──────────────┘       └──────┬───────┘
+│ continuity-bridge│──┘          ◀── REWRITE (max 2) ───┘
+│ (연속성)          │                     │
+└──────────────────┘             PASS ───▶ 다음 EP
 ```
 
-### 컨텍스트 효율화 원칙
+### polish 흐름
 
-**필수 읽기 (모든 에이전트 공통)**: `docs/story/canon-quickref.md` — 정본 12개를 압축한 단일 매뉴얼 (~7k tokens)
-**선택 읽기**: 챕터 특수 디테일이 필요할 때만 원본 정본 1~2개 추가
-**금지**: Glob 디렉토리 탐색, 명시되지 않은 파일 자발적 탐색, 12개 정본 풀 로딩
-
-**조기 종료 게이트 (Polish Phase 4 후)**:
-- 3개 진단 모두 CRITICAL=0 + MAJOR=0 + 분량/금지표현 상한 위반 0 → **executor·reviewer 스킵 직접 PASS**
-- 그 외 → Phase 5 풀 사이클
-
-### 에이전트 역할
-
-| 에이전트 | 역할 | 1차 참조 |
-|---------|------|---------|
-| chapter-architect | 설계도 추출 (플롯 비트, 씬 구성, 가드레일 체크리스트) | canon-quickref + plot framework 해당 챕터 |
-| continuity-bridge | 직전 1화 상태 + 활성 복선 + 비언어 메모리 변주 | canon-quickref + 직전 1화 + alive-tracker |
-| chapter-creator | 본문 집필 (1인칭, Part 2 톤, 분량 5~7천자) | 설계도 + 연속성 보고서 + canon-quickref |
-| quality-verifier | 8축 검증 (PLOT_BEAT, TIMELINE, REGRESSION, GUARDRAIL, CONTINUITY, HOOK, CHAR_VOICE, CUSTOM) | 챕터 + 설계도 + canon-quickref |
-| rule-checker | 4축 (BANNED, VOICE, TITLE, TRANS) + Part 2 §11~16 | canon-quickref + 챕터 |
-| story-analyst | 9축 (SCENE/LOGIC/HOOK/OPENING/PACING/TONEDROP + REGRESSION/FORESHADOW/MODERN_REF) | canon-quickref + 챕터 + 직전 1화 |
-| alive-enhancer | 4축 (메아리, 침묵→비언어, 조연 긴장, 관계 곡선) | canon-quickref + 챕터 + alive-tracker |
-| revision-executor | 15계층 우선순위 교정 + 2패스 AITONE 자기검증 | 진단 보고서 3개 + 챕터 |
-| revision-reviewer | 4항 diff 기반 검증 → PASS/REVISE | 수정본 + changelog + 진단 |
-
-### 챕터 등록 자동화 (Step 5)
-
-PASS 후 자동 수행:
-1. `_arc_meta.json`에 챕터 추가
-2. `chapters.ts`에 import + CHAPTERS 배열 등록
-3. `novel-config.md` §10 status 표 갱신
-4. **자동 폴리시 연계** (Step 6 → Phase 4 진단 → 조기종료 또는 Phase 5)
-5. `npm run dev` 리더에서 즉시 확인
-
-### /polish 단독 호출
-
-`/polish dclass-hero ch022` 같이 단독 호출 시에도 동일한 조기종료 게이트 적용. 이미 PASS인 화 재폴리시 시 토큰 효율.
+조기 종료 게이트: rule-checker / story-analyst / alive-enhancer 3개 진단이 모두 CRITICAL=0 + MAJOR=0 + 분량/금지표현 상한 위반 0이면 → executor·reviewer 스킵 직접 PASS.
 
 ---
 
-## 웹소설 챕터 등록 방법
+## EP 등록 (신 파이프라인)
 
-### 1. 마크다운 파일 작성
-```
-src/data/novel/arc{N}_{region}/{num}_{한글제목}.md
-```
-예: `src/data/novel/arc2_solaris/13_열사병은 걸리지 않는다.md`
+### 1. 마크다운 작성
+`projects/{project}/episode/EP{NNN}.md`
 
-**마크다운 포맷**:
 ```markdown
-# N화. 챕터 제목
+# EP{NNN}. 챕터 제목
 
 ---
 
-첫 번째 씬 본문.
-
-'내면 독백은 작은따옴표로 감싼다.'
+씬 본문 (글로벌 서술체 v2 — 작은따옴표 생각풍선 ❌, 평서문 융합 ✅)
 
 ---
 
-두 번째 씬 본문. `---`로 씬 구분.
+다음 씬...
 
-*N화 끝. 다음 화: 다음 챕터 제목.*
+*EP{NNN} 끝. 다음: EP{NNN+1} 제목.*
 ```
 
-### 2. 챕터 레지스트리 등록 (`src/novel/chapters.ts`)
+### 2. 리더 등록 (`src/novel/chapters.ts`)
+- raw import + CHAPTERS 배열 항목 (id: `EPxxx` 또는 프로젝트별 prefix)
+- 마이그레이션 메모: `ch/cm/mf/ast prefix → EP{NNN} 통일`
 
-**Step 1** — 파일 상단에 raw import 추가:
-```typescript
-import ch013Raw from '../data/novel/arc2_solaris/13_열사병은 걸리지 않는다.md?raw';
-```
-
-**Step 2** — `CHAPTERS` 배열에 항목 추가:
-```typescript
-{
-  id: 'ch013',
-  num: 13,
-  title: '열사병은 걸리지 않는다',
-  arc: 'arc2_solaris',
-  arcLabel: 'Arc 2 — 솔라리스',
-  projectId: 'dclass-hero',
-  status: 'writing',
-  raw: ch013Raw,
-},
-```
-
-### 3. 아크 메타데이터 업데이트 (`_arc_meta.json`)
-해당 아크의 `chapters` 배열에 추가:
-```json
-{
-  "id": "ch013",
-  "file": "13_열사병은 걸리지 않는다.md",
-  "title": "열사병은 걸리지 않는다",
-  "summary": "한 줄 요약",
-  "status": "writing"
-}
-```
-
-### 마크다운 스타일 규칙
-| 문법 | 렌더링 |
-|------|--------|
-| `'텍스트'` | 내면 독백 (파란색) |
-| `"텍스트"` | 대사 (볼드) |
-| `*텍스트*` | 강조/이탤릭 |
-| `---` | 씬 구분선 (· · ·) |
-| `# 제목` | 챕터 타이틀 |
+### 3. 메타 (`projects/{project}/episode/_episode_meta.json` 또는 동등 구조)
+프로젝트별 합성키 ID + summary + status
 
 ---
 
-## 현재 연재 현황 (2026-04-20 기준)
+## 보존 가드레일 (16개)
+
+**원칙 1~10 (전 시기)**:
+1. 재생 D급 — 1인칭 시점이 아닌 제3자 언급에서만 등급 노출
+2. 모래시계 = 9기둥 잔여 시간 카운트다운 (지호 도구 X)
+3. 기둥 치유 순서: 빛(EP019) → 태양(EP021) → 강철(Arc 6) → 빙(Arc 7) → ... 엄수
+4. 1인칭 시점 (강지호)
+5. IT/프로그래머 비유 EP당 최대 3회
+6. **Part 2 톤 공식 코미디 2 : 비장 5 : 반전 3** (Part 1 = 3:5:2)
+7. 마르코 **아크당 0~1회** (2026-04-25 빈도 축소). 안 나와도 됨
+8. 사망 묘사 감각 중심 (시각적 고어 X)
+9. 현대 지식은 canon-quickref §3 부강 에피소드 범위만
+10. 정령 계약 수명 대가 — 일반 술사는 머리색 탈색·수명 단축 / 지호는 D급 재생으로 미미
+
+**원칙 11~16 (Part 2~)**:
+11. **모래시계 메커닉** (2026-04-25 리디파인):
+    - 박자 어긋남 디테일 묘사 폐기
+    - 두 가지 극적 용도만: (a) 종말 자각 → 서두르게 함 / (b) 위험 시 자동 발동(주마등) → 시간 가속·재생 완료·판단 보조
+    - 자동 발동은 지호 의지 X
+    - 도구화 절대 금지 — 들여다본다 OK / 흔들기·돌리기 X
+    - 잔량 한 알 감소도 절제 (Arc당 0~1회)
+12. 정령 다중 계약 시 머리색 변화 EP당 1줄 이내 (Arc 7부터 흰머리 1가닥)
+13. 아젤리아 혁신 = 프로그래머 가능 범위만 (canon-quickref §3 비장의 무기 3종 + 행정 DB / 카드 색인)
+14. **영웅적 결의 대사 절대 금지** — 행동만 영웅, 독백은 자조
+15. EP 분량 5,000~7,000자 (공백 포함) — Part 2
+16. ~~한 줄 단락 5~7회 이내~~ → **글로벌 서술체 v2 우선** (단락 1~3줄 기본, 한줄 단락 제한 폐기)
+
+**원칙 17 (2026-04-25 신규)**:
+- **메인 서사 방향**: 주인공 무쌍 + 나라 부강 + 전쟁 승리. 마르코·검은 로브 등 미스터리 라인은 부차. 무쌍·부강·승리 후도 자조 톤 유지.
+
+**기둥 치유 메커닉**: 3단 조건 (물리 접촉 + 디버깅 미니 시퀀스 + 외부 조력자 협력) + 매 지역 새 풀이 + 본인 수명 미세 지불. "손만 대면 해결" X.
+
+---
+
+## 글로벌 서술체 v2 (★ 1차 참조)
+
+`docs/narrative-style.md` — 모든 작품·모든 신규 EP에 적용. 작품별 `tone-and-style.md`보다 **우선**.
+
+핵심:
+1. **단락 1~3줄 기본** — 클러스터 단일 줄바꿈, 빈 줄은 전환에만
+2. **`'독백'` 작은따옴표 생각풍선 폐기** — 평서문 서술자 보이스에 융합. 명시 진입은 "그렇게 생각했다" 짧은 1줄로만 가끔
+3. **묘사 = 감각 단문** (비유 절제)
+4. **대사 핑퐁** 4~5턴 큰따옴표만, 지문 전환점에만
+5. **클리프행어 단문** 클로징
+6. **씬 전환** `---` + 시간 직설
+7. **문장 길이** 호흡 단위 (체감 25~40자)
+8. **미래 시점 예고** ("그때까지만 해도 ~ 거라고 생각했다")
+9. **POV 캐릭터 밀착** — 외부 인물 내면 직접 서술 X
+
+dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
+
+---
+
+## 현재 연재 현황 (dclass-hero)
 
 | 범위 | 아크 | 상태 |
-|------|------|------|
-| ch001~005 | Arc 1 — 아젤리아 | writing (Part 1 초안 완료) |
-| ch006~013 | Arc 2 — 솔라리스 | writing |
-| ch014~020 | Arc 3 — 각성과 귀환 | writing |
-| **ch021~028** | **Arc 4 — 내정의 해** | **writing (8화 폴리시 PASS, 정본 동기화 완료)** |
-| ch029~ | Arc 5~10 | 미착수 (각 아크 진입 시 plan 작성) |
-
-**통합 모드 진행 통계 (Arc 4)**: 챕터당 평균 ~600k tokens, /create 한 번 호출로 창작+폴리시 자동 완료, 폴리시 조기 종료 게이트 도입.
-
-**상세 화별 표**: `projects/dclass-hero/novel-config.md` §10 참조 (자동 갱신).
-
-### 아크 구조 (novel-config.md / story-framework-21-70.md 참조)
-
-**Part 1 (ch001~020, 완결)**
-| 아크 | 범위 | 지역 | 상태 |
-|------|------|------|------|
-| arc1_azelia | ch001~005 | 아젤리아 왕국 | 초안 완료 |
-| arc2_solaris | ch006~013 | 솔라리스 사막 | 초안 완료 |
-| arc3_awakening | ch014~020 | 아젤리아 귀환·심판·결혼 | 초안 완료 |
-
-**Part 2 (ch021~070, 진행 중)**
-| 아크 | 범위 | 테마 | 상태 |
-|------|------|------|------|
-| arc4_internal | ch021~028 | 내정의 해 (부왕 정착 + 마르코 진실 + 카이젤 사절 + 임신 + 솔라리스 동맹) | **8화 완료** |
-| arc5_caravan | ch029~034 | 사막의 캐러밴 (천막 기술·솔라리스 부강·정령석 사치품 본격) | 매크로 비트 / 진입 시 plan 필요 |
-| arc6_kaizer | ch035~042 | 강철의 궁정 (카이젤 외교·내전·기둥 치유) | 매크로 비트 / 진입 시 plan 필요 |
-| arc7_frosthel | ch043~050 | 얼어붙은 경계 (프로스트헬·천인 윤곽 + 첫 흰머리) | 매크로 비트 |
-| arc8_dragon | ch051~058 | 천명 너머 (용화국·빌런 동기 노출) | 매크로 비트 |
-| arc9_liberta | ch059~064 | 파도의 맹세 (리베르타·레온·이계 침공 조짐) | 매크로 비트 |
-| arc10_return | ch065~070 | 돌아온 자 (귀환·아들 출산·Part 3 훅) | 매크로 비트 |
-
-**Part 3 (ch071~, 미설계)**: 셀레스티아·카즈모르·아비살 + 천인 평의회 본진 + 모든 기둥 치유 → 노화·희생 엔딩
-
-### 화 단위 plan 작성 시점
-
-- **매크로 (아크 테마·외부 조력자·비장의 무기 시연 시점)** = ch070까지 정해짐 (story-framework-21-70.md)
-- **마이크로 (화별 4씬 비트)** = Arc 4까지만 정해짐. **각 아크 진입 시 `arcN_plan_chXXX-YYY.md` 작성** (Arc 4 plan = `projects/dclass-hero/_workspace/arc4_plan_ch022-025.md` 형식 참조)
-
-### 한 번에 create할 화수 권장 (ch021~028 경험 기반)
-
-| 시나리오 | 권장 화수 | 이유 |
 |---|---|---|
-| 새 아크 첫 화 (ch029, ch035, ch043 등) | **1화 단독** | 톤·외부 조력자·신규 캐릭터 정착 검증 필요 |
-| 흐름 정착된 중반 | **2~3화 묶음** | 사건 밀도·복선 분배 흐름 유지 |
-| 아크 피날레 / 대형 사건 | **1화 단독** | 시연 임팩트·엔딩 훅 비중 큼 |
+| EP001~005 | Arc 1 — 아젤리아 | published / writing |
+| EP006~013 | Arc 2 — 솔라리스 | writing |
+| EP014~020 | Arc 3 — 각성과 귀환 | writing |
+| EP021~028 | Arc 4 — 내정의 해 | writing (8화 완료) |
+| EP029~034 | Arc 5 — 사막의 캐러밴 | writing (6화 완료) |
+| **EP035~037** | **Arc 6 — 강철의 궁정** | **writing (3화, 진입부)** |
+| EP038~042 | Arc 6 후반 | 미착수 |
+| EP043~070 | Arc 7~10 | 미착수 |
 
-**4~5화 한 번에 비추천** — 컨텍스트 폭발 + 누적 오류 + 사용자 중간 검토 기회 상실. 새 아크는 항상 첫 화 단독 후 사용자 리더 검토 → 진행 결정.
+**Part 3 (EP071~)**: 미설계.
 
----
+상세 EP별 상태: `projects/dclass-hero/novel-config.md` §10.
 
-## 보존 가드레일 (novel-config.md §4 — 16개 규칙)
+### EP 단위 plan 작성 시점
+- **매크로**: EP070까지 정해짐 (story-framework-21-70.md)
+- **마이크로 (4씬 비트)**: 각 아크 진입 시 `arcN_plan_EPNNN-MMM.md` 작성
 
-**원칙 1~10 (전 시기 적용):**
-1. 재생 스킬은 D급 — 1인칭 시점이 아닌 제3자가 언급할 때만 등급 노출
-2. 모래시계 = **세상 모든 기둥의 잔여 시간 카운트다운 지표** (Part 2 RETCON, 지호 도구 X)
-3. 기둥 치유 순서: 빛(ch019) → 태양(ch021) → 강철(Arc 6) → 빙(Arc 7) → ... (설계문서 순서 엄수)
-4. 1인칭 시점 유지 (강지호)
-5. IT/프로그래머 비유는 챕터당 최대 3회
-6. **Part 2 톤 공식 — 코미디 2 : 비장 5 : 반전 3** (Part 1은 3:5:2)
-7. 마르코는 최소 등장 — 떡밥만 뿌리고 사라짐 (안내자, 정체 모호 양면성 유지)
-8. 사망 묘사는 감각 중심 (시각적 고어 금지)
-9. 현대 지식 활용은 canon-quickref §3 부강 에피소드 범위만 (증기·화약·금속야금·전기 자체 발전 금지)
-10. 정령 계약의 수명 대가 — 일반 술사는 머리색 탈색·수명 단축 / 지호는 D급 재생 덕에 미미 (단 기둥 치유는 본인 수명 직접 지불, Part 3 회수)
+### 한 번에 create할 EP수 권장
+| 시나리오 | 권장 EP수 |
+|---|---|
+| 새 아크 첫 화 (EP029, EP035, EP043 등) | 1화 단독 (정착 검증) |
+| 흐름 정착된 중반 | 2~3화 묶음 |
+| 아크 피날레 / 대형 사건 | 1화 단독 |
 
-**원칙 11~16 (Part 2~ 신규):**
-11. **모래시계 도구화 금지** — 들여다본다·관찰 OK / 흔들기·발동·돌리기 절대 금지
-12. **정령 다중 계약 시 머리색 변화 챕터당 1줄 이내** (Arc 7부터 흰머리 1가닥 시작)
-13. **아젤리아 혁신 = 프로그래머 가능 범위만** (canon-quickref §3 비장의 무기 3종)
-14. **영웅적 결의 대사 절대 금지** — 행동만 영웅, 독백은 자조 (ch021~028 8화 모두 0회 일관)
-15. **챕터 분량 5,000~7,000자 (공백 포함)** — Part 2 신규 분량 룰
-16. **한 줄 단락 5~7회 이내**, 1인칭 독백 60% 이하
-
-**기둥 치유 메커닉 (Part 2 보강):** 3단 조건 (물리 접촉 + 디버깅 미니 시퀀스 + 외부 조력자 협력) + 매 지역 새 풀이 + 본인 수명 미세 지불. "손만 대면 해결" 절대 X.
+4~5화 한 번에 비추천.
 
 ---
 
 ## 작업 워크플로
 
-### 챕터 집필 흐름
 ```
-1. 자연어 명령 ("13화 써줘" / "다음 화 집필")
+1. 자연어 명령 ("EP038 써줘" / "다음 화 집필")
 2. novel-config.md에서 프로젝트 설정 로드
-3. /create 파이프라인 실행 (4 에이전트)
-4. 리더앱에서 읽기 → 피드백
-5. /polish 파이프라인 실행 (5 에이전트, 17축 진단)
-6. 만족 시 → /settings-sync로 설정집 동기화
+3. /create 파이프라인 실행 (4 에이전트, REWRITE max 2회)
+4. 리더앱(localhost:5173)에서 읽기 + 인라인 피드백
+5. /polish 파이프라인 실행 (3개 진단 → 조기종료 또는 풀 사이클)
+6. 완성 → /settings-sync 또는 /rewrite로 설정집·후속 EP 정리
 ```
 
 ### 챕터 상태 (4단계)
-```
-writing → complete → published → (coming은 미래 예고용)
-```
+`writing → complete → published → coming` (coming은 미래 예고용)
 
 ### 피드백 시스템
-- **인라인 피드백**: 리더에서 텍스트 드래그 → 코멘트 → `inline-feedback.json`에 축적 → `/apply-feedback`으로 적용
-- **스토리 피드백**: `story-feedback-log.md`에 FB-XXX로 기록
-
-### 설정집 동기화 (`/settings-sync`)
-6개 병렬 에이전트가 챕터 내용을 설정 문서에 반영:
-| 문서 | 체크 포인트 |
-|------|------------|
-| characters.md | 새 캐릭터, 관계 변화, 호칭/말투 |
-| worldbuilding.md + magic-systems.md | 지역, 마법 체계 |
-| foreshadowing.md | 복선 배치/회수 |
-| region-connections.md | 지정학, 교역 |
-| chapter-log.md | 화별 요약, 등장인물 |
-| protagonist-bible.md | 성장, 능력, 사망, 관계 |
-
----
-
-## 설계 문서 현황
-
-### 설정 바이블 (docs/story/) — 핵심 참조
-| 파일 | 내용 |
-|------|------|
-| worldbuilding.md | 9대 지역, 종족, 갈등 구도, 세계수 |
-| characters.md | 20+ NPC 프로필 |
-| protagonist-bible.md | 강지호 성장 추적 (능력, 사망, 관계) |
-| foreshadowing.md | 복선 25+개 (S/A/B/C 등급) |
-| magic-systems.md | 9개 마법 체계 + 상성 |
-| death-and-regression.md | 사망·회귀 메커닉 상세 |
-| voice-guide.md | 캐릭터별 말투/어조 가이드 |
-| tone-and-style.md | 톤, 금지 표현, 문체 규칙 |
-| story-framework-6-30.md | 6~30화 플롯 프레임워크 |
-| chapter-log.md | 화별 요약 로그 |
-| timeline.md | 작중 시간선 |
-| glossary.md | 용어집 |
-| region-connections.md | 지역 간 관계, 교역 |
-
-### GDD (docs/gdd/) — 게임 시절 산출물, 세계관 참고용
-11개 문서 존재. **게임 메커닉(분기, 플래그, 엔딩 등)은 폐기**되었으나 세계관/캐릭터/지역 설정은 여전히 유효.
-
-### Red/Blue Team (docs/story/red/, blue/) — 게임 시절 산출물
-게임 스크립트 형식이나 세계관/캐릭터 배경 설정은 참고 가능.
+- **인라인**: 리더에서 텍스트 드래그 → `inline-feedback.json` → `/apply-feedback`
+- **스토리 피드백**: `docs/story/story-feedback-log.md` (FB-XXX·SYNC-XXX)
 
 ---
 
 ## 핵심 레퍼런스
 
 | 질문 | 읽을 곳 |
-|------|---------|
-| 프로젝트 전체 설정은? | `projects/dclass-hero/novel-config.md` |
-| N화 플롯 비트는? | `docs/story/story-framework-6-30.md` |
-| 캐릭터 X의 말투는? | `docs/story/voice-guide.md` |
-| 복선 X의 배치/회수는? | `docs/story/foreshadowing.md` |
-| 사망·회귀 규칙은? | `docs/story/death-and-regression.md` |
-| 금지 표현 목록은? | `docs/story/tone-and-style.md` |
-| 파이프라인 에이전트 동작은? | `.claude/agents/*.md` |
-| 스킬 실행 절차는? | `.claude/skills/*.md` |
-| 챕터 등록 방법은? | 이 파일의 "웹소설 챕터 등록 방법" 섹션 |
+|---|---|
+| 프로젝트 전체 설정? | `projects/{project}/novel-config.md` |
+| 정본 압축본? | `docs/story/canon-quickref.md` (★ 1차 참조) |
+| 글로벌 서술체? | `docs/narrative-style.md` (★ 1차 참조, tone-style보다 우선) |
+| EP N의 플롯 비트? | `docs/story/story-framework-21-70.md` (Part 2) |
+| 캐릭터 X 말투? | `docs/story/voice-guide.md` |
+| 복선 X 배치/회수? | `docs/story/foreshadowing.md` |
+| 모래시계 메커닉? | `docs/story/death-and-regression.md` + 가드레일 §11 (2026-04-25 리디파인) |
+| 금지 표현? | `docs/story/tone-and-style.md` + canon-quickref |
+| 에이전트 동작? | `.claude/agents/*.md` |
+| 스킬 실행? | `.claude/skills/*/SKILL.md` |
+| EP 등록? | 이 파일 §"EP 등록" |
+
+---
+
+## 최근 캐논 변경 (2026-04-23 ~ 2026-04-26)
+
+| 날짜 | 변경 | 메모 파일 |
+|---|---|---|
+| 2026-04-23 | 모래시계 등장 빈도 3~4화 1회 | `feedback_sandglass_frequency.md` |
+| 2026-04-23 | FS-A11 기후 프로그래밍 복선 신규 (3정령+문신 코딩 = 기후 함수, Arc 후반 대전 결정타) | `project_climate_programming.md` |
+| 2026-04-25 | 글로벌 서술체 v2 — 작은따옴표 생각풍선 폐기, 평서문 융합 | `feedback_global_narrative_style.md` (전체 소급 완료) |
+| 2026-04-25 | 모래시계 메커닉 리디파인 — 박자 묘사 폐기 + 자동 발동(주마등) 신규 | `feedback_sandglass_redefinition.md` |
+| 2026-04-25 | 마르코 비중 축소 (아크당 0~1회) + 메인 서사 방향(무쌍·부강·전쟁) | `feedback_marco_reduction.md` |
+| 2026-04-26 | awesome-novel-studio 마이그레이션 (18 에이전트·10 스킬·EP 단위·target=문피아) | `project_pipeline_upgrade.md` |
