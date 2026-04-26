@@ -29,3 +29,6 @@ Gemini_Generated_Image_*.jpg
 Screenshot*.jpg
 design_handoff_*/
 "내 대영제국에 괴식은 없다*.txt"
+
+# Backup files
+*.bak

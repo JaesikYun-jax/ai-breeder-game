@@ -55,7 +55,7 @@ function detachScroll() {
 }
 
 function renderReader(chapterId: string) {
-  const ch = getChapter(chapterId);
+  const ch = getChapter(chapterId, projectId);
   if (!ch || !ch.raw) {
     navigate(`/p/${projectId}`);
     return;
@@ -153,7 +153,7 @@ function renderReader(chapterId: string) {
   `;
 
   bindReaderEvents();
-  initFeedback(chapterId, ch.num, ch.title);
+  initFeedback(`${projectId}/${chapterId}`, ch.num, ch.title);
 }
 
 function bindReaderEvents() {
@@ -202,7 +202,7 @@ function chapterBodyToPlainText(raw: string): string {
 async function copyChapterBody(btn: HTMLElement) {
   const chapterId = getChapterId();
   if (!chapterId) return;
-  const ch = getChapter(chapterId) as ChapterMeta | undefined;
+  const ch = getChapter(chapterId, projectId) as ChapterMeta | undefined;
   if (!ch || !ch.raw) return;
 
   const text = chapterBodyToPlainText(ch.raw);

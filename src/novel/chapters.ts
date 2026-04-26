@@ -1,82 +1,87 @@
 /**
- * Chapter registry — 소설 챕터 메타데이터 및 raw import
+ * Chapter registry — episode 메타데이터 및 raw import.
+ *
+ * awesome-novel-studio 마이그레이션(2026-04-26): ch/cm/mf/ast prefix → EP{NNN} 통일.
+ * 파일은 projects/{name}/episode/EP{NNN}.md 위치.
+ * id는 프로젝트 내에서만 unique → ALL_CHAPTERS 조회 시 projectId 함께 전달 필요.
  */
 
-import ch001Raw from '../data/novel/arc1_azelia/1_트럭이 오는 건 알고있었다.md?raw';
-import ch002Raw from '../data/novel/arc1_azelia/2_아젤리아 왕궁의 밤은 길다.md?raw';
-import ch003Raw from '../data/novel/arc1_azelia/3_용사라는 직업의 현실.md?raw';
-import ch004Raw from '../data/novel/arc1_azelia/4_이 세계에도 편의점은 없다.md?raw';
-import ch005Raw from '../data/novel/arc1_azelia/5_축복이라 쓰고 제물이라 읽는다.md?raw';
-import ch006Raw from '../data/novel/arc2_solaris/6_모래 위의 사람들.md?raw';
-import ch007Raw from '../data/novel/arc2_solaris/7_불을 빌리는 자들.md?raw';
-import ch008Raw from '../data/novel/arc2_solaris/8_계약.md?raw';
-import ch009Raw from '../data/novel/arc2_solaris/9_모래폭풍.md?raw';
-import ch010Raw from '../data/novel/arc2_solaris/10_꺼지지 않는 불.md?raw';
-import ch011Raw from '../data/novel/arc2_solaris/11_명예로운 노예들.md?raw';
-import ch012Raw from '../data/novel/arc2_solaris/12_최적화.md?raw';
-import ch013Raw from '../data/novel/arc2_solaris/13_열사병은 걸리지 않는다.md?raw';
-import ch014Raw from '../data/novel/arc3_awakening/14_이를 갈다.md?raw';
-import ch015Raw from '../data/novel/arc3_awakening/15_번개를 맞는 자.md?raw';
-import ch016Raw from '../data/novel/arc3_awakening/16_과부하.md?raw';
-import ch017Raw from '../data/novel/arc3_awakening/17_코드를 새기다.md?raw';
-import ch018Raw from '../data/novel/arc3_awakening/18_빛의 왕국으로.md?raw';
-import ch019Raw from '../data/novel/arc3_awakening/19_심판.md?raw';
-import ch020Raw from '../data/novel/arc3_awakening/20_용사의 길.md?raw';
-import ch021Raw from '../data/novel/arc4_internal/21_부왕은 부왕이 아니다.md?raw';
-import ch022Raw from '../data/novel/arc4_internal/22_재회.md?raw';
-import ch023Raw from '../data/novel/arc4_internal/23_약한 세계의 용사.md?raw';
-import ch024Raw from '../data/novel/arc4_internal/24_지하의 말.md?raw';
-import ch025Raw from '../data/novel/arc4_internal/25_두 나라의 그림.md?raw';
-import ch026Raw from '../data/novel/arc4_internal/26_솔라리스 가는 길.md?raw';
-import ch027Raw from '../data/novel/arc4_internal/27_모래의 약속.md?raw';
-import ch028Raw from '../data/novel/arc4_internal/28_비장의 무기.md?raw';
-import ch029Raw from '../data/novel/arc5_caravan/29_사막의 새 호흡.md?raw';
-import ch030Raw from '../data/novel/arc5_caravan/30_일곱 번째 오아시스.md?raw';
-import ch031Raw from '../data/novel/arc5_caravan/31_정령석 작업장.md?raw';
-import ch032Raw from '../data/novel/arc5_caravan/32_두 태양의 길.md?raw';
-import ch033Raw from '../data/novel/arc5_caravan/33_모래 너머.md?raw';
-import ch034Raw from '../data/novel/arc5_caravan/34_북쪽으로.md?raw';
-import ch035Raw from '../data/novel/arc6_kaizer/35_강철의 첫날.md?raw';
-import ch036Raw from '../data/novel/arc6_kaizer/36_강철의 식탁.md?raw';
-import ch037Raw from '../data/novel/arc6_kaizer/37_변경의 침묵.md?raw';
+// ── D급 스킬 이세계 용사 (dclass-hero) ──
+import dh001 from '../../projects/dclass-hero/episode/EP001.md?raw';
+import dh002 from '../../projects/dclass-hero/episode/EP002.md?raw';
+import dh003 from '../../projects/dclass-hero/episode/EP003.md?raw';
+import dh004 from '../../projects/dclass-hero/episode/EP004.md?raw';
+import dh005 from '../../projects/dclass-hero/episode/EP005.md?raw';
+import dh006 from '../../projects/dclass-hero/episode/EP006.md?raw';
+import dh007 from '../../projects/dclass-hero/episode/EP007.md?raw';
+import dh008 from '../../projects/dclass-hero/episode/EP008.md?raw';
+import dh009 from '../../projects/dclass-hero/episode/EP009.md?raw';
+import dh010 from '../../projects/dclass-hero/episode/EP010.md?raw';
+import dh011 from '../../projects/dclass-hero/episode/EP011.md?raw';
+import dh012 from '../../projects/dclass-hero/episode/EP012.md?raw';
+import dh013 from '../../projects/dclass-hero/episode/EP013.md?raw';
+import dh014 from '../../projects/dclass-hero/episode/EP014.md?raw';
+import dh015 from '../../projects/dclass-hero/episode/EP015.md?raw';
+import dh016 from '../../projects/dclass-hero/episode/EP016.md?raw';
+import dh017 from '../../projects/dclass-hero/episode/EP017.md?raw';
+import dh018 from '../../projects/dclass-hero/episode/EP018.md?raw';
+import dh019 from '../../projects/dclass-hero/episode/EP019.md?raw';
+import dh020 from '../../projects/dclass-hero/episode/EP020.md?raw';
+import dh021 from '../../projects/dclass-hero/episode/EP021.md?raw';
+import dh022 from '../../projects/dclass-hero/episode/EP022.md?raw';
+import dh023 from '../../projects/dclass-hero/episode/EP023.md?raw';
+import dh024 from '../../projects/dclass-hero/episode/EP024.md?raw';
+import dh025 from '../../projects/dclass-hero/episode/EP025.md?raw';
+import dh026 from '../../projects/dclass-hero/episode/EP026.md?raw';
+import dh027 from '../../projects/dclass-hero/episode/EP027.md?raw';
+import dh028 from '../../projects/dclass-hero/episode/EP028.md?raw';
+import dh029 from '../../projects/dclass-hero/episode/EP029.md?raw';
+import dh030 from '../../projects/dclass-hero/episode/EP030.md?raw';
+import dh031 from '../../projects/dclass-hero/episode/EP031.md?raw';
+import dh032 from '../../projects/dclass-hero/episode/EP032.md?raw';
+import dh033 from '../../projects/dclass-hero/episode/EP033.md?raw';
+import dh034 from '../../projects/dclass-hero/episode/EP034.md?raw';
+import dh035 from '../../projects/dclass-hero/episode/EP035.md?raw';
+import dh036 from '../../projects/dclass-hero/episode/EP036.md?raw';
+import dh037 from '../../projects/dclass-hero/episode/EP037.md?raw';
 
 // ── 마도 공학 프로그래머의 영생 프로젝트 (magitech-fire) ──
-import mf001Raw from '../data/novel/mf_part1_survival/1_어디지, 이건.md?raw';
-import mf002Raw from '../data/novel/mf_part1_survival/2_위장.md?raw';
-import mf003Raw from '../data/novel/mf_part1_survival/3_폐기동.md?raw';
-import mf004Raw from '../data/novel/mf_part1_survival/4_591호.md?raw';
-import mf005Raw from '../data/novel/mf_part1_survival/5_어떤 남자.md?raw';
+import mf001 from '../../projects/magitech-fire/episode/EP001.md?raw';
+import mf002 from '../../projects/magitech-fire/episode/EP002.md?raw';
+import mf003 from '../../projects/magitech-fire/episode/EP003.md?raw';
+import mf004 from '../../projects/magitech-fire/episode/EP004.md?raw';
+import mf005 from '../../projects/magitech-fire/episode/EP005.md?raw';
 
-// ── 천년묵은 통조림 (canned-master) ──
-import cm001Raw from '../data/novel/cm_arc1_opening/1_야경.md?raw';
-import cm002Raw from '../data/novel/cm_arc1_opening/2_발굴.md?raw';
-import cm003Raw from '../data/novel/cm_arc1_opening/3_물을 가까이 하지 말 것.md?raw';
-import cm004Raw from '../data/novel/cm_arc1_opening/4_천 년의 간극.md?raw';
-import cm005Raw from '../data/novel/cm_arc1_opening/5_봉인은 하나가 아니었다.md?raw';
-import cm006Raw from '../data/novel/cm_arc1_opening/6_남쪽으로.md?raw';
-import cm007Raw from '../data/novel/cm_arc1_opening/7_계곡에서.md?raw';
-import cm008Raw from '../data/novel/cm_arc1_opening/8_응급실.md?raw';
-import cm009Raw from '../data/novel/cm_arc1_opening/9_소문.md?raw';
-import cm010Raw from '../data/novel/cm_arc1_opening/10_왕자님.md?raw';
-import cm011Raw from '../data/novel/cm_arc2_confront/11_입성.md?raw';
-import cm012Raw from '../data/novel/cm_arc2_confront/12_삼파.md?raw';
-import cm013Raw from '../data/novel/cm_arc2_confront/13_미행.md?raw';
-import cm014Raw from '../data/novel/cm_arc2_confront/14_자객.md?raw';
-import cm015Raw from '../data/novel/cm_arc2_confront/15_후원자.md?raw';
-import cm016Raw from '../data/novel/cm_arc2_confront/16_인질.md?raw';
-import cm017Raw from '../data/novel/cm_arc2_confront/17_물의 경로.md?raw';
-import cm018Raw from '../data/novel/cm_arc2_confront/18_심판.md?raw';
-import cm019Raw from '../data/novel/cm_arc2_confront/19_백준하.md?raw';
-import cm020Raw from '../data/novel/cm_arc2_confront/20_습격.md?raw';
+// ── 봉인당한 천마 (canned-master) ──
+import cm001 from '../../projects/canned-master/episode/EP001.md?raw';
+import cm002 from '../../projects/canned-master/episode/EP002.md?raw';
+import cm003 from '../../projects/canned-master/episode/EP003.md?raw';
+import cm004 from '../../projects/canned-master/episode/EP004.md?raw';
+import cm005 from '../../projects/canned-master/episode/EP005.md?raw';
+import cm006 from '../../projects/canned-master/episode/EP006.md?raw';
+import cm007 from '../../projects/canned-master/episode/EP007.md?raw';
+import cm008 from '../../projects/canned-master/episode/EP008.md?raw';
+import cm009 from '../../projects/canned-master/episode/EP009.md?raw';
+import cm010 from '../../projects/canned-master/episode/EP010.md?raw';
+import cm011 from '../../projects/canned-master/episode/EP011.md?raw';
+import cm012 from '../../projects/canned-master/episode/EP012.md?raw';
+import cm013 from '../../projects/canned-master/episode/EP013.md?raw';
+import cm014 from '../../projects/canned-master/episode/EP014.md?raw';
+import cm015 from '../../projects/canned-master/episode/EP015.md?raw';
+import cm016 from '../../projects/canned-master/episode/EP016.md?raw';
+import cm017 from '../../projects/canned-master/episode/EP017.md?raw';
+import cm018 from '../../projects/canned-master/episode/EP018.md?raw';
+import cm019 from '../../projects/canned-master/episode/EP019.md?raw';
+import cm020 from '../../projects/canned-master/episode/EP020.md?raw';
 
 // ── 아스테로포스 (asteropos) ──
-import ast000Raw from '../data/novel/ast_prologue/0_프롤로그.md?raw';
-import ast001Raw from '../data/novel/arc1_village/1_구덩이.md?raw';
-import ast002Raw from '../data/novel/arc1_village/2_신의 은총.md?raw';
-import ast003Raw from '../data/novel/arc1_village/3_현자의 재림.md?raw';
-import ast004Raw from '../data/novel/arc1_village/4_마당의 끝.md?raw';
-import ast005Raw from '../data/novel/arc1_village/5_사라진 마을.md?raw';
-import ast006Raw from '../data/novel/arc1_village/6_마차 위에서.md?raw';
+import ast000 from '../../projects/asteropos/episode/EP000.md?raw';
+import ast001 from '../../projects/asteropos/episode/EP001.md?raw';
+import ast002 from '../../projects/asteropos/episode/EP002.md?raw';
+import ast003 from '../../projects/asteropos/episode/EP003.md?raw';
+import ast004 from '../../projects/asteropos/episode/EP004.md?raw';
+import ast005 from '../../projects/asteropos/episode/EP005.md?raw';
+import ast006 from '../../projects/asteropos/episode/EP006.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -89,710 +94,136 @@ export interface ChapterMeta {
   raw?: string;
 }
 
-export const CHAPTERS: ChapterMeta[] = [
-  {
-    id: 'ch001',
-    num: 1,
-    title: '트럭이 오는 건 알고 있었다',
-    arc: 'arc1_azelia',
-    arcLabel: 'Arc 1 — 아젤리아',
-    projectId: 'dclass-hero',
-    status: 'published',
-    raw: ch001Raw,
-  },
-  {
-    id: 'ch002',
-    num: 2,
-    title: '아젤리아 왕궁의 밤은 길다',
-    arc: 'arc1_azelia',
-    arcLabel: 'Arc 1 — 아젤리아',
-    projectId: 'dclass-hero',
-    status: 'published',
-    raw: ch002Raw,
-  },
-  {
-    id: 'ch003',
-    num: 3,
-    title: '용사라는 직업의 현실',
-    arc: 'arc1_azelia',
-    arcLabel: 'Arc 1 — 아젤리아',
-    projectId: 'dclass-hero',
-    status: 'published',
-    raw: ch003Raw,
-  },
-  {
-    id: 'ch004',
-    num: 4,
-    title: '이 세계에도 편의점은 없다',
-    arc: 'arc1_azelia',
-    arcLabel: 'Arc 1 — 아젤리아',
-    projectId: 'dclass-hero',
-    status: 'published',
-    raw: ch004Raw,
-  },
-  {
-    id: 'ch005',
-    num: 5,
-    title: '축복이라 쓰고 제물이라 읽는다',
-    arc: 'arc1_azelia',
-    arcLabel: 'Arc 1 — 아젤리아',
-    projectId: 'dclass-hero',
-    status: 'published',
-    raw: ch005Raw,
-  },
-  {
-    id: 'ch006',
-    num: 6,
-    title: '모래 위의 사람들',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch006Raw,
-  },
-  {
-    id: 'ch007',
-    num: 7,
-    title: '불을 빌리는 자들',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch007Raw,
-  },
-  {
-    id: 'ch008',
-    num: 8,
-    title: '계약',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch008Raw,
-  },
-  {
-    id: 'ch009',
-    num: 9,
-    title: '모래폭풍',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch009Raw,
-  },
-  {
-    id: 'ch010',
-    num: 10,
-    title: '꺼지지 않는 불',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch010Raw,
-  },
-  {
-    id: 'ch011',
-    num: 11,
-    title: '명예로운 노예들',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch011Raw,
-  },
-  {
-    id: 'ch012',
-    num: 12,
-    title: '최적화',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch012Raw,
-  },
-  {
-    id: 'ch013',
-    num: 13,
-    title: '열사병은 걸리지 않는다',
-    arc: 'arc2_solaris',
-    arcLabel: 'Arc 2 — 솔라리스',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch013Raw,
-  },
-  {
-    id: 'ch014',
-    num: 14,
-    title: '이를 갈다',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch014Raw,
-  },
-  {
-    id: 'ch015',
-    num: 15,
-    title: '번개를 맞는 자',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch015Raw,
-  },
-  {
-    id: 'ch016',
-    num: 16,
-    title: '과부하',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch016Raw,
-  },
-  {
-    id: 'ch017',
-    num: 17,
-    title: '코드를 새기다',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch017Raw,
-  },
-  {
-    id: 'ch018',
-    num: 18,
-    title: '빛의 왕국으로',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch018Raw,
-  },
-  {
-    id: 'ch019',
-    num: 19,
-    title: '심판',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch019Raw,
-  },
-  {
-    id: 'ch020',
-    num: 20,
-    title: '용사의 길',
-    arc: 'arc3_awakening',
-    arcLabel: 'Arc 3 — 각성과 귀환',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch020Raw,
-  },
-  {
-    id: 'ch021',
-    num: 21,
-    title: '부왕은 부왕이 아니다',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch021Raw,
-  },
-  {
-    id: 'ch022',
-    num: 22,
-    title: '재회',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch022Raw,
-  },
-  {
-    id: 'ch023',
-    num: 23,
-    title: '약한 세계의 용사',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch023Raw,
-  },
-  {
-    id: 'ch024',
-    num: 24,
-    title: '지하의 말',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch024Raw,
-  },
-  {
-    id: 'ch025',
-    num: 25,
-    title: '두 나라의 그림',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch025Raw,
-  },
-  {
-    id: 'ch026',
-    num: 26,
-    title: '솔라리스 가는 길',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch026Raw,
-  },
-  {
-    id: 'ch027',
-    num: 27,
-    title: '모래의 약속',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch027Raw,
-  },
-  {
-    id: 'ch028',
-    num: 28,
-    title: '비장의 무기',
-    arc: 'arc4_internal',
-    arcLabel: 'Arc 4 — 내정의 해',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch028Raw,
-  },
-  {
-    id: 'ch029',
-    num: 29,
-    title: '사막의 새 호흡',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch029Raw,
-  },
-  {
-    id: 'ch030',
-    num: 30,
-    title: '일곱 번째 오아시스',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch030Raw,
-  },
-  {
-    id: 'ch031',
-    num: 31,
-    title: '정령석 작업장',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch031Raw,
-  },
-  {
-    id: 'ch032',
-    num: 32,
-    title: '두 태양의 길',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch032Raw,
-  },
-  {
-    id: 'ch033',
-    num: 33,
-    title: '모래 너머',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch033Raw,
-  },
-  {
-    id: 'ch034',
-    num: 34,
-    title: '북쪽으로',
-    arc: 'arc5_caravan',
-    arcLabel: 'Arc 5 — 사막의 캐러밴',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch034Raw,
-  },
-  {
-    id: 'ch035',
-    num: 35,
-    title: '강철의 첫날',
-    arc: 'arc6_kaizer',
-    arcLabel: 'Arc 6 — 강철의 궁정',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch035Raw,
-  },
-  {
-    id: 'ch036',
-    num: 36,
-    title: '강철의 식탁',
-    arc: 'arc6_kaizer',
-    arcLabel: 'Arc 6 — 강철의 궁정',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch036Raw,
-  },
-  {
-    id: 'ch037',
-    num: 37,
-    title: '변경의 침묵',
-    arc: 'arc6_kaizer',
-    arcLabel: 'Arc 6 — 강철의 궁정',
-    projectId: 'dclass-hero',
-    status: 'writing',
-    raw: ch037Raw,
-  },
+const epId = (n: number) => `EP${String(n).padStart(3, '0')}`;
+
+// ── D급 스킬 이세계 용사 ──
+const DCLASS_TITLES: Array<[number, string, string, string]> = [
+  [1, '트럭이 오는 건 알고 있었다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
+  [2, '아젤리아 왕궁의 밤은 길다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
+  [3, '용사라는 직업의 현실', 'arc1_azelia', 'Arc 1 — 아젤리아'],
+  [4, '이 세계에도 편의점은 없다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
+  [5, '축복이라 쓰고 제물이라 읽는다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
+  [6, '모래 위의 사람들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [7, '불을 빌리는 자들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [8, '계약', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [9, '모래폭풍', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [10, '꺼지지 않는 불', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [11, '명예로운 노예들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [12, '최적화', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [13, '열사병은 걸리지 않는다', 'arc2_solaris', 'Arc 2 — 솔라리스'],
+  [14, '이를 갈다', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [15, '번개를 맞는 자', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [16, '과부하', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [17, '코드를 새기다', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [18, '빛의 왕국으로', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [19, '심판', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [20, '용사의 길', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
+  [21, '부왕은 부왕이 아니다', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [22, '재회', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [23, '약한 세계의 용사', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [24, '지하의 말', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [25, '두 나라의 그림', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [26, '솔라리스 가는 길', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [27, '모래의 약속', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [28, '비장의 무기', 'arc4_internal', 'Arc 4 — 내정의 해'],
+  [29, '사막의 새 호흡', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [30, '일곱 번째 오아시스', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [31, '정령석 작업장', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [32, '두 태양의 길', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [33, '모래 너머', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [34, '북쪽으로', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
+  [35, '강철의 첫날', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [36, '강철의 식탁', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [37, '변경의 침묵', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
 ];
+
+const DCLASS_RAWS = [
+  dh001, dh002, dh003, dh004, dh005, dh006, dh007, dh008, dh009, dh010,
+  dh011, dh012, dh013, dh014, dh015, dh016, dh017, dh018, dh019, dh020,
+  dh021, dh022, dh023, dh024, dh025, dh026, dh027, dh028, dh029, dh030,
+  dh031, dh032, dh033, dh034, dh035, dh036, dh037,
+];
+
+export const CHAPTERS: ChapterMeta[] = DCLASS_TITLES.map(([num, title, arc, arcLabel], i) => ({
+  id: epId(num),
+  num,
+  title,
+  arc,
+  arcLabel,
+  projectId: 'dclass-hero',
+  status: num <= 5 ? 'published' : 'writing',
+  raw: DCLASS_RAWS[i],
+}));
 
 // ── Canned Master (천년묵은 통조림) ──
-export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = [
-  {
-    id: 'cm001',
-    num: 1,
-    title: '손님',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm001Raw,
-  },
-  {
-    id: 'cm002',
-    num: 2,
-    title: '석관',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm002Raw,
-  },
-  {
-    id: 'cm003',
-    num: 3,
-    title: '조수석',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm003Raw,
-  },
-  {
-    id: 'cm004',
-    num: 4,
-    title: '아리수',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm004Raw,
-  },
-  {
-    id: 'cm005',
-    num: 5,
-    title: '부교주',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm005Raw,
-  },
-  {
-    id: 'cm006',
-    num: 6,
-    title: '남행',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm006Raw,
-  },
-  {
-    id: 'cm007',
-    num: 7,
-    title: '계곡',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm007Raw,
-  },
-  {
-    id: 'cm008',
-    num: 8,
-    title: '응급실',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm008Raw,
-  },
-  {
-    id: 'cm009',
-    num: 9,
-    title: '기적',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm009Raw,
-  },
-  {
-    id: 'cm010',
-    num: 10,
-    title: '서연',
-    arc: 'cm_arc1_opening',
-    arcLabel: 'Arc 1 — 개봉',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm010Raw,
-  },
-  {
-    id: 'cm011',
-    num: 11,
-    title: '입성',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm011Raw,
-  },
-  {
-    id: 'cm012',
-    num: 12,
-    title: '삼파',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm012Raw,
-  },
-  {
-    id: 'cm013',
-    num: 13,
-    title: '미행',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm013Raw,
-  },
-  {
-    id: 'cm014',
-    num: 14,
-    title: '자객',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm014Raw,
-  },
-  {
-    id: 'cm015',
-    num: 15,
-    title: '후원자',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm015Raw,
-  },
-  {
-    id: 'cm016',
-    num: 16,
-    title: '인질',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm016Raw,
-  },
-  {
-    id: 'cm017',
-    num: 17,
-    title: '물의 경로',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm017Raw,
-  },
-  {
-    id: 'cm018',
-    num: 18,
-    title: '심판',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm018Raw,
-  },
-  {
-    id: 'cm019',
-    num: 19,
-    title: '백준하',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm019Raw,
-  },
-  {
-    id: 'cm020',
-    num: 20,
-    title: '습격',
-    arc: 'cm_arc2_confront',
-    arcLabel: 'Arc 2 — 대면',
-    projectId: 'canned-master',
-    status: 'writing',
-    raw: cm020Raw,
-  },
+const CM_TITLES: Array<[number, string, string, string]> = [
+  [1, '손님', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [2, '석관', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [3, '조수석', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [4, '아리수', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [5, '부교주', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [6, '남행', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [7, '계곡', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [8, '응급실', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [9, '기적', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [10, '서연', 'cm_arc1_opening', 'Arc 1 — 개봉'],
+  [11, '입성', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [12, '삼파', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [13, '미행', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [14, '자객', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [15, '후원자', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [16, '인질', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [17, '물의 경로', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [18, '심판', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [19, '백준하', 'cm_arc2_confront', 'Arc 2 — 대면'],
+  [20, '습격', 'cm_arc2_confront', 'Arc 2 — 대면'],
 ];
-
-// ── Magitech Fire (마도 공학 프로그래머의 영생 프로젝트) ──
-export const MAGITECH_FIRE_CHAPTERS: ChapterMeta[] = [
-  {
-    id: 'mf001',
-    num: 1,
-    title: '어디지, 이건',
-    arc: 'mf_part1_survival',
-    arcLabel: 'Part 1 — 연명',
-    projectId: 'magitech-fire',
-    status: 'writing',
-    raw: mf001Raw,
-  },
-  {
-    id: 'mf002',
-    num: 2,
-    title: '위장',
-    arc: 'mf_part1_survival',
-    arcLabel: 'Part 1 — 연명',
-    projectId: 'magitech-fire',
-    status: 'writing',
-    raw: mf002Raw,
-  },
-  {
-    id: 'mf003',
-    num: 3,
-    title: '폐기동',
-    arc: 'mf_part1_survival',
-    arcLabel: 'Part 1 — 연명',
-    projectId: 'magitech-fire',
-    status: 'writing',
-    raw: mf003Raw,
-  },
-  {
-    id: 'mf004',
-    num: 4,
-    title: '591호',
-    arc: 'mf_part1_survival',
-    arcLabel: 'Part 1 — 연명',
-    projectId: 'magitech-fire',
-    status: 'writing',
-    raw: mf004Raw,
-  },
-  {
-    id: 'mf005',
-    num: 5,
-    title: '어떤 남자',
-    arc: 'mf_part1_survival',
-    arcLabel: 'Part 1 — 연명',
-    projectId: 'magitech-fire',
-    status: 'writing',
-    raw: mf005Raw,
-  },
+const CM_RAWS = [
+  cm001, cm002, cm003, cm004, cm005, cm006, cm007, cm008, cm009, cm010,
+  cm011, cm012, cm013, cm014, cm015, cm016, cm017, cm018, cm019, cm020,
 ];
+export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = CM_TITLES.map(([num, title, arc, arcLabel], i) => ({
+  id: epId(num),
+  num,
+  title,
+  arc,
+  arcLabel,
+  projectId: 'canned-master',
+  status: 'writing',
+  raw: CM_RAWS[i],
+}));
 
+// ── Magitech Fire ──
+const MF_TITLES: Array<[number, string]> = [
+  [1, '어디지, 이건'],
+  [2, '위장'],
+  [3, '폐기동'],
+  [4, '591호'],
+  [5, '어떤 남자'],
+];
+const MF_RAWS = [mf001, mf002, mf003, mf004, mf005];
+export const MAGITECH_FIRE_CHAPTERS: ChapterMeta[] = MF_TITLES.map(([num, title], i) => ({
+  id: epId(num),
+  num,
+  title,
+  arc: 'mf_part1_survival',
+  arcLabel: 'Part 1 — 연명',
+  projectId: 'magitech-fire',
+  status: 'writing',
+  raw: MF_RAWS[i],
+}));
+
+// ── Asteropos ──
 export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
-  {
-    id: 'ast000',
-    num: 0,
-    title: '프롤로그 — 별 떨어진 밤',
-    arc: 'ast_prologue',
-    arcLabel: '프롤로그',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast000Raw,
-  },
-  {
-    id: 'ast001',
-    num: 1,
-    title: '구덩이',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast001Raw,
-  },
-  {
-    id: 'ast002',
-    num: 2,
-    title: '신의 은총',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast002Raw,
-  },
-  {
-    id: 'ast003',
-    num: 3,
-    title: '현자의 재림',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast003Raw,
-  },
-  {
-    id: 'ast004',
-    num: 4,
-    title: '마당의 끝',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast004Raw,
-  },
-  {
-    id: 'ast005',
-    num: 5,
-    title: '사라진 마을',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast005Raw,
-  },
-  {
-    id: 'ast006',
-    num: 6,
-    title: '마차 위에서',
-    arc: 'arc1_village',
-    arcLabel: 'Arc 1 — 양부모 마을',
-    projectId: 'asteropos',
-    status: 'writing',
-    raw: ast006Raw,
-  },
+  { id: 'EP000', num: 0, title: '프롤로그 — 별 떨어진 밤', arc: 'ast_prologue', arcLabel: '프롤로그', projectId: 'asteropos', status: 'writing', raw: ast000 },
+  { id: 'EP001', num: 1, title: '구덩이', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast001 },
+  { id: 'EP002', num: 2, title: '신의 은총', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast002 },
+  { id: 'EP003', num: 3, title: '현자의 재림', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast003 },
+  { id: 'EP004', num: 4, title: '마당의 끝', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast004 },
+  { id: 'EP005', num: 5, title: '사라진 마을', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast005 },
+  { id: 'EP006', num: 6, title: '마차 위에서', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast006 },
   ...Array.from({ length: 12 }, (_, i) => ({
-    id: `ast${String(i + 13).padStart(3, '0')}`,
+    id: epId(i + 13),
     num: i + 13,
     title: `${i + 13}화 (예정)`,
     arc: 'arc2_academy',
@@ -801,7 +232,7 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
     status: 'coming' as const,
   })),
   ...Array.from({ length: 14 }, (_, i) => ({
-    id: `ast${String(i + 25).padStart(3, '0')}`,
+    id: epId(i + 25),
     num: i + 25,
     title: `${i + 25}화 (예정)`,
     arc: 'arc3_freecity',
@@ -811,8 +242,23 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
   })),
 ];
 
-export const ALL_CHAPTERS: ChapterMeta[] = [...CHAPTERS, ...CANNED_MASTER_CHAPTERS, ...MAGITECH_FIRE_CHAPTERS, ...ASTEROPOS_CHAPTERS];
+export const ALL_CHAPTERS: ChapterMeta[] = [
+  ...CHAPTERS,
+  ...CANNED_MASTER_CHAPTERS,
+  ...MAGITECH_FIRE_CHAPTERS,
+  ...ASTEROPOS_CHAPTERS,
+];
 
-export function getChapter(id: string): ChapterMeta | undefined {
+/**
+ * Find a chapter by id.
+ *
+ * Multiple projects share EP{NNN} ids (e.g. dclass-hero EP001 and magitech-fire EP001).
+ * Pass projectId to disambiguate. Without projectId, returns the first match — only safe
+ * for legacy IDs that were globally unique.
+ */
+export function getChapter(id: string, projectId?: string): ChapterMeta | undefined {
+  if (projectId) {
+    return ALL_CHAPTERS.find((c) => c.id === id && c.projectId === projectId);
+  }
   return ALL_CHAPTERS.find((c) => c.id === id);
 }
