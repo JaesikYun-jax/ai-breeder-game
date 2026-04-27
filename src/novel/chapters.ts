@@ -97,6 +97,12 @@ import ast013 from '../../projects/asteropos/episode/EP013.md?raw';
 import ast014 from '../../projects/asteropos/episode/EP014.md?raw';
 import ast015 from '../../projects/asteropos/episode/EP015.md?raw';
 import ast016 from '../../projects/asteropos/episode/EP016.md?raw';
+import ast017 from '../../projects/asteropos/episode/EP017.md?raw';
+import ast018 from '../../projects/asteropos/episode/EP018.md?raw';
+import ast019 from '../../projects/asteropos/episode/EP019.md?raw';
+import ast020 from '../../projects/asteropos/episode/EP020.md?raw';
+import ast021 from '../../projects/asteropos/episode/EP021.md?raw';
+import ast022 from '../../projects/asteropos/episode/EP022.md?raw';
 
 export interface ChapterMeta {
   id: string;
@@ -253,6 +259,12 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
   { id: 'EP014', num: 14, title: '검술 아카데미 지원', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast014 },
   { id: 'EP015', num: 15, title: '입학·귀족 라이벌', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast015 },
   { id: 'EP016', num: 16, title: '첫 합동 훈련', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast016 },
+  { id: 'EP017', num: 17, title: '좋은 인연', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast017 },
+  { id: 'EP018', num: 18, title: '도박수', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast018 },
+  { id: 'EP019', num: 19, title: '정식 결투 1단계 (上)', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast019 },
+  { id: 'EP020', num: 20, title: '정식 결투 1단계 (下)', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast020 },
+  { id: 'EP021', num: 21, title: '결투 2단계 결착 + 자유 도시 호출', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast021 },
+  { id: 'EP022', num: 22, title: '자유 도시 도착', arc: 'arc3_free_city', arcLabel: 'Arc 3 — 자유 도시 + 첫 성석', projectId: 'asteropos', status: 'writing', raw: ast022 },
   ...Array.from({ length: 4 }, (_, i) => ({
     id: epId(i + 17),
     num: i + 17,
