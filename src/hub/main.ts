@@ -9,7 +9,7 @@
 import './styles.css';
 import { PROJECTS, getProject } from './projects';
 import type { StoryProject, PillarProgress } from './projects';
-import { ALL_CHAPTERS as CHAPTERS } from '../novel/chapters';
+import { ALL_CHAPTERS as CHAPTERS, getChapter } from '../novel/chapters';
 import type { ChapterMeta } from '../novel/chapters';
 
 const app = document.getElementById('app')!;
@@ -46,8 +46,8 @@ function chapterBodyToPlainText(raw: string): string {
   return sections.join('\n\n* * *\n\n');
 }
 
-async function copyChapterBody(chapterId: string, btn: HTMLElement) {
-  const ch = CHAPTERS.find((c) => c.id === chapterId);
+async function copyChapterBody(chapterId: string, projectId: string, btn: HTMLElement) {
+  const ch = getChapter(chapterId, projectId);
   if (!ch || !ch.raw) return;
   const text = chapterBodyToPlainText(ch.raw);
   const original = btn.textContent ?? '';
@@ -519,7 +519,7 @@ function bindDashboardEvents(allChapters: ChapterMeta[], project: StoryProject) 
     } else if (action === 'copy-chapter') {
       e.stopPropagation();
       const id = target.dataset.id;
-      if (id) copyChapterBody(id, target);
+      if (id) copyChapterBody(id, project.id, target);
     }
   });
 }
