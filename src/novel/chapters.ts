@@ -49,6 +49,11 @@ import dh039 from '../../projects/dclass-hero/episode/EP039.md?raw';
 import dh040 from '../../projects/dclass-hero/episode/EP040.md?raw';
 import dh041 from '../../projects/dclass-hero/episode/EP041.md?raw';
 import dh042 from '../../projects/dclass-hero/episode/EP042.md?raw';
+import dh043 from '../../projects/dclass-hero/episode/EP043.md?raw';
+import dh044 from '../../projects/dclass-hero/episode/EP044.md?raw';
+import dh045 from '../../projects/dclass-hero/episode/EP045.md?raw';
+import dh046 from '../../projects/dclass-hero/episode/EP046.md?raw';
+import dh047 from '../../projects/dclass-hero/episode/EP047.md?raw';
 
 // ── 마도 공학 프로그래머의 영생 프로젝트 (magitech-fire) ──
 import mf001 from '../../projects/magitech-fire/episode/EP001.md?raw';
@@ -155,6 +160,11 @@ const DCLASS_TITLES: Array<[number, string, string, string]> = [
   [40, '두 결의 충돌', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
   [41, '강철의 안쪽', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
   [42, '강철을 풀다', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
+  [43, '다섯의 자리', 'arc6_5_homecoming', 'Arc 6.5 — 귀환과 다섯 결'],
+  [44, '기후 함수 군단', 'arc6_5_homecoming', 'Arc 6.5 — 귀환과 다섯 결'],
+  [45, '다섯 깃발', 'arc6_5_homecoming', 'Arc 6.5 — 귀환과 다섯 결'],
+  [46, '마지막 호흡', 'arc6_5_homecoming', 'Arc 6.5 — 귀환과 다섯 결'],
+  [47, '폭풍의 자리표', 'arc6_5_homecoming', 'Arc 6.5 — 귀환과 다섯 결'],
 ];
 
 const DCLASS_RAWS = [
@@ -162,7 +172,7 @@ const DCLASS_RAWS = [
   dh011, dh012, dh013, dh014, dh015, dh016, dh017, dh018, dh019, dh020,
   dh021, dh022, dh023, dh024, dh025, dh026, dh027, dh028, dh029, dh030,
   dh031, dh032, dh033, dh034, dh035, dh036, dh037, dh038, dh039, dh040,
-  dh041, dh042,
+  dh041, dh042, dh043, dh044, dh045, dh046, dh047,
 ];
 
 export const CHAPTERS: ChapterMeta[] = DCLASS_TITLES.map(([num, title, arc, arcLabel], i) => ({
