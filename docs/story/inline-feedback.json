@@ -448,5 +448,55 @@
     "chapterTitle": "신의 은총",
     "quotedText": "“이걸 누구한테도 보여 주지 마라.”",
     "comment": "너무나 기뻐해야 할 상황이지만, 지금 네 눈은 오밤중에 숲속에 숨은 벨티거(이쪽 세계의 호랑이 느낌) 빛을 뿜고 있단다. 일단 이 것을 진정시킬 때 까지는 이 방에서 한발짝도 나가지 말자꾸나."
+  },
+  {
+    "id": "fb-1777289202758",
+    "timestamp": "2026-04-27T11:26:42.758Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "십구 점 사 퍼센트",
+    "comment": "19.4%"
+  },
+  {
+    "id": "fb-1777289214979",
+    "timestamp": "2026-04-27T11:26:54.979Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "“......저 아이, 오늘 한 칸 더 단단해지셨습니다.”",
+    "comment": "한칸 -> 한층"
+  },
+  {
+    "id": "fb-1777289274780",
+    "timestamp": "2026-04-27T11:27:54.780Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "아리수 병목이 3분의 2까지 비었다.",
+    "comment": "진짜 유치해보임. 아리수를 너무 강조하는 표현 전체적으로 없애자. 물 마시는것도..."
+  },
+  {
+    "id": "fb-1777289344673",
+    "timestamp": "2026-04-27T11:29:04.673Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "다른 핸드폰이 진동했다. 국제 번호.\n\n“백 가주. 오늘은 백 가주께서 선택하시오. 원리는 가둠의 바깥에 있는 일이지요. 가둠 안쪽의 일은, 오늘은 백 가주의 일이오.”\n\n백준하가 대답하지 않았다. 대답의 자리가 없었다.\n\n“저희는 오늘 움직이지 않소. 백 가주께서 오늘을 정리하시오.”\n\n수화기가 끊겼다. 백준하의 검지가 탁자 가장자리에서 한 번 더 굳었다. 두 문이 동시에 닫힌 자리였다. 다른 핸드폰이 곧장 진동했다.\n\n“백 가주. 인사는 무인의 일이오. 오늘은 가주의 일이오. 오늘은, 내가 움직이지 않소.”\n\n백준하의 오른쪽 검지가 탁자 위에서 천천히 펴졌다. 어제 저녁 굳었던 검지가 풀리면서 탁자 가장자리를 긁었다. 긁은 자리에 작은 흰 자국이 남았다.",
+    "comment": "두 주체가 어디인지 잘 이해가 안가서 중복처럼 보임. 누구에게서 온 연락인지 명확히 할 것."
+  },
+  {
+    "id": "fb-1777289401844",
+    "timestamp": "2026-04-27T11:30:01.844Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "팔로워 카운트가 십팔만 이천을 지나갔다.",
+    "comment": "그렇게 많게 느껴지지 않음. 피크일때 200만정도가 되도록 파급효과의 단위를 끌어올릴 것."
   }
 ]
