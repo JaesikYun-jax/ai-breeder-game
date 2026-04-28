@@ -498,5 +498,137 @@
     "chapterTitle": "심판",
     "quotedText": "팔로워 카운트가 십팔만 이천을 지나갔다.",
     "comment": "그렇게 많게 느껴지지 않음. 피크일때 200만정도가 되도록 파급효과의 단위를 끌어올릴 것."
+  },
+  {
+    "id": "fb-1777352205860",
+    "timestamp": "2026-04-28T04:56:45.860Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "천 년 동안 쌓아 온 신용",
+    "comment": "오랜 시간 쌓아 온 신용",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352228156",
+    "timestamp": "2026-04-28T04:57:08.156Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "셔터가 다시 한 번에 일어났다.",
+    "comment": "눈부시게 쏟아졌다는 취지로 표현 변경",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352299904",
+    "timestamp": "2026-04-28T04:58:19.904Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "가문은 이름을 남기지 않았다. 그러나 그 뒤로 직계 손녀들이 같은 증상으로 떠난 기록은 남았다. 둘째 가주 대에 한 사람. 셋째 대에 한 사람. 넷째 대에 한 사람. 일정한 간격으로 한 사람씩.\n\n지금까지 살아남아 스물세 살에 닿은 손녀는 한 사람도 없었다.",
+    "comment": "여자가 다죽는건 너무 말이 안되고, 그 병이 발현 되면... 이라고 말하는게 나을듯. 그게 아니면 그런 어린 손녀에게 지분을 많이 가지게 했다는 것 자체가 너무 말이 안되기 때문.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352349403",
+    "timestamp": "2026-04-28T04:59:09.403Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“그러하다.”",
+    "comment": "그러하다 가 대답으로 말이 안되는 것 같음. 알겠다 정도?",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352399120",
+    "timestamp": "2026-04-28T04:59:59.120Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“가져가겠다.”",
+    "comment": "'....' 정도로 쓰자. 라벨없는 아리수 너무 허황되고 웃겨서; 자주 쓰지 말길",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352448228",
+    "timestamp": "2026-04-28T05:00:48.228Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "백준하는 책상 뒤로 가지 않았다. 책상 앞쪽에 마주 보는 의자 두 개. 그중 하나에 손을 내밀었다. 진무혈이 앉은 뒤, 백준하가 맞은편에 앉았다.\n\n거리는 두 걸음. 천 년 동안 두 가문이 가져 본 적 없는 거리.\n\n“......천 년 만이오.”",
+    "comment": "백준하가 천년 산거 아니면 천년 만이오가 말이 되냐? 정녕... 천년 전 문헌에 남아있던 모습 그대로구려 이런 느낌이 맞을 듯.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352463269",
+    "timestamp": "2026-04-28T05:01:03.269Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“오늘 아침 손녀의 자리, 그대도 보았소.",
+    "comment": "의문문이 맞음",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352482272",
+    "timestamp": "2026-04-28T05:01:22.272Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“오늘 나는 그대 손녀의 일로 왔소.”",
+    "comment": "\"그 반대요. 누군가를 살리러 왔지.\"",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352525230",
+    "timestamp": "2026-04-28T05:02:05.230Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "천 년 동안 누구도 스물세 살 단상에 닿지 못했소.",
+    "comment": "이런 설정은 바꾸자. '그 병이 발병하고 나서는' 이라는 느낌이고 스물세살일 필요는 없음.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352580275",
+    "timestamp": "2026-04-28T05:03:00.275Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“천 년 전에 한 번 가져갔소. 한 번 더 가져갈 수 있소. 다만, 두 번째에 내가 돌아오지 못할 가능성이 있소.",
+    "comment": "천 년 전에 원래 내것이었지. 어차피 시간이 걸릴 뿐, 과연 나를 막을 수 있을까?",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352637438",
+    "timestamp": "2026-04-28T05:03:57.438Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "어제의 자리에서 한 번, 오늘의 자리에서 한 번. 천 년 전에는 자정이 하나였다. 오늘 밤이 지나면 두 번째 자정이 닫히고, 세 번째 자정이 내일 밤에 온다.",
+    "comment": "무슨말인지 전혀 모르겠음. 인간다운 표현으로 변경",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352687230",
+    "timestamp": "2026-04-28T05:04:47.230Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "진무혈은 라벨 없는 아리수 한 병을 탁자 위에 내려놓았다. 소리가 나지 않도록.",
+    "comment": "멋있어보이려고 노력하지만 이상한 행동임. 그냥 생각을 공유하는 것으로 바꾸자.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
   }
 ]
