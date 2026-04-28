@@ -293,3 +293,15 @@ export function getChapter(id: string, projectId?: string): ChapterMeta | undefi
   }
   return ALL_CHAPTERS.find((c) => c.id === id);
 }
+
+/**
+ * In-memory raw mutation. Used by the editor after a successful PUT /__episode
+ * so the reader reflects the new content without a page reload. The on-disk
+ * file is the source of truth — this only refreshes the runtime cache.
+ */
+export function updateChapterRaw(projectId: string, id: string, raw: string): boolean {
+  const ch = ALL_CHAPTERS.find((c) => c.id === id && c.projectId === projectId);
+  if (!ch) return false;
+  ch.raw = raw;
+  return true;
+}
