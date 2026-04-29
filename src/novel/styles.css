@@ -361,3 +361,114 @@
 .fb-status-wontfix { background: rgba(168, 160, 146, 0.12); color: var(--ink-soft); }
 
 .fb-panel-time { color: var(--ink-soft); opacity: 0.6; }
+
+/* ═══════════════════════════════════════════
+   Episode Editor — full-raw markdown edit mode
+   ═══════════════════════════════════════════ */
+
+/* --- Floating Action Button (bottom-right) --- */
+.ed-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 250;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ed-fab-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--rule);
+  background: var(--bg-2);
+  color: var(--ink);
+  padding: 10px 16px;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ed-fab-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  border-color: var(--parchment);
+}
+
+.ed-fab-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* OFF mode — single pencil button */
+.ed-fab-toggle {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+  background: var(--bg-2);
+  color: var(--ink-soft);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.ed-fab-toggle:hover {
+  color: var(--parchment);
+  border-color: var(--parchment);
+}
+
+/* ON mode — Save / Cancel pair */
+.ed-fab-save {
+  background: var(--bg-2);
+  color: var(--ink-soft);
+}
+
+.ed-fab-save.ed-fab-dirty:not(:disabled) {
+  background: var(--parchment);
+  color: var(--bg);
+  border-color: var(--parchment);
+}
+
+.ed-fab-cancel {
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.ed-fab-cancel:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.ed-fab-active {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Raw Markdown Textarea --- */
+.ed-textarea {
+  display: block;
+  width: 100%;
+  min-height: 70vh;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--parchment);
+  padding: 24px 28px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  resize: vertical;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  tab-size: 2;
+}
+
+.ed-textarea:focus {
+  border-color: var(--parchment);
+  border-left-color: var(--parchment);
+  background: var(--bg-2);
+}

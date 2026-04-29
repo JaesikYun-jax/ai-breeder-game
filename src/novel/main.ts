@@ -5,10 +5,11 @@
  */
 
 import './styles.css';
-import { ALL_CHAPTERS as CHAPTERS, getChapter } from './chapters';
+import { ALL_CHAPTERS as CHAPTERS, getChapter, updateChapterRaw } from './chapters';
 import type { ChapterMeta } from './chapters';
 import { renderChapterHTML } from './renderer';
 import { feedbackToolbarHTML, initFeedback, destroyFeedback } from './feedback';
+import { initEditor, destroyEditor, confirmDiscardIfDirty } from './editor';
 import { getProject } from '../hub/projects';
 import type { StoryProject } from '../hub/projects';
 import { compassRoseSVG, atmosphereHTML } from '../hub/main';
@@ -36,6 +37,7 @@ function navigate(path: string) {
 
 function onRouteChange() {
   destroyFeedback();
+  destroyEditor();
   detachScroll();
   const chapterId = getChapterId();
   if (chapterId) {
@@ -154,6 +156,40 @@ function renderReader(chapterId: string) {
 
   bindReaderEvents();
   initFeedback(`${projectId}/${chapterId}`, ch.num, ch.title);
+
+  const bodyEl = document.querySelector<HTMLElement>('.reader-body');
+  if (bodyEl && ch.raw) {
+    initEditor({
+      projectId,
+      episodeId: chapterId,
+      bodyEl,
+      initialRaw: ch.raw,
+      onSaved: (newRaw) => applyNewRaw(chapterId, newRaw),
+    });
+  }
+}
+
+function applyNewRaw(chapterId: string, newRaw: string) {
+  updateChapterRaw(projectId, chapterId, newRaw);
+
+  const ch = getChapter(chapterId, projectId);
+  if (!ch) return;
+
+  const bodyEl = document.querySelector<HTMLElement>('.reader-body');
+  if (bodyEl) bodyEl.innerHTML = renderChapterHTML(newRaw);
+
+  const titleEl = document.querySelector<HTMLElement>('.reader-chapter-title');
+  if (titleEl) {
+    const titleMatch = newRaw.match(/^# (.+)$/m);
+    const displayTitle = (titleMatch ? titleMatch[1] : ch.title).replace(/^\d+화\.\s*/, '');
+    titleEl.textContent = displayTitle;
+  }
+
+  const metaEl = document.querySelector<HTMLElement>('.reader-chapter-meta');
+  if (metaEl) {
+    const charCount = countChapterChars(newRaw);
+    metaEl.textContent = `${formatThousands(charCount)} 자 · ${ch.arcLabel}`;
+  }
 }
 
 function bindReaderEvents() {
@@ -180,8 +216,10 @@ function bindReaderEvents() {
     if (!target) return;
     const action = target.dataset.action;
     if (action === 'go-dashboard') {
+      if (!confirmDiscardIfDirty()) return;
       navigate(`/p/${projectId}`);
     } else if (action === 'read') {
+      if (!confirmDiscardIfDirty()) return;
       const chId = target.dataset.chapter;
       if (chId) navigate(`/p/${projectId}/read/${chId}`);
     } else if (action === 'copy-body') {
@@ -263,6 +301,7 @@ export function initNovelApp(container: HTMLElement, projId: string): () => void
 
   return () => {
     destroyFeedback();
+    destroyEditor();
     detachScroll();
     if (hashChangeHandler) {
       window.removeEventListener('hashchange', hashChangeHandler);
