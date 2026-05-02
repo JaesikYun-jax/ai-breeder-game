@@ -54,5 +54,5 @@ EP077~EP150 → plot-hook-guide_act3.md
 ## 새 프로젝트 설정 방법
 
 1. 프로젝트 루트에 `novel-config.md` 생성
-2. `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md` 참조하여 섹션 채우기
+2. `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md` 참조하여 섹션 채우기
 3. `/polish {프로젝트명}` 으로 실행

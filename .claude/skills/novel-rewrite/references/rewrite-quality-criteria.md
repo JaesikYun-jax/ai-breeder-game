@@ -114,7 +114,7 @@
 ## 2-5. 대화 DNA 품질 기준
 
 대사의 캐릭터 정합성과 자연스러움을 판단하는 기준.
-상세 DNA 정의는 대화 DNA 문서(novel-config.md의 character_dialogue_dna) 및 `${CLAUDE_PLUGIN_ROOT}/skills/rewrite/references/character-dialogue-dna.md` 참조.
+상세 DNA 정의는 대화 DNA 문서(novel-config.md의 character_dialogue_dna) 및 `${CLAUDE_PLUGIN_ROOT}/skills/novel-rewrite/references/character-dialogue-dna.md` 참조.
 
 ### 2-5-1. 대사 교체 불가성 (핵심 기준)
 

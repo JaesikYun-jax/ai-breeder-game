@@ -303,7 +303,7 @@ episode-rewriter → rewritten episode + execution report → quality-verifier
 
 ### 캐릭터 입체성 채점 기준
 
-캐릭터 입체성 점수는 `${CLAUDE_PLUGIN_ROOT}/skills/rewrite/references/character-embodiment-rubric.md`의 7차원 0-10점 rubric에 따라 산출한다.
+캐릭터 입체성 점수는 `${CLAUDE_PLUGIN_ROOT}/skills/novel-rewrite/references/character-embodiment-rubric.md`의 7차원 0-10점 rubric에 따라 산출한다.
 - 주인공/핵심 캐릭터: 7차원 평균
 - 주요 조연 (5문장+ 등장): VOICE, NONVERBAL, RELATION, DIALOGUE DNA 4차원 평균
 - 단역 (1-4문장): VOICE 단일 점수

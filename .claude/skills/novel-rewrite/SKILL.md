@@ -1,6 +1,6 @@
 ---
-name: rewrite
-description: "에피소드 재작성(rewrite) 스킬. 설정문서(캐릭터시트, 플롯가이드, 부트스트랩) 변경에 따라 기존 에피소드를 분석하고 재작성한다. '/rewrite', '/revise', '/rewrite {프로젝트명}', '/rewrite EP051', '/rewrite {프로젝트명} EP001-EP010' 으로 실행. '에피소드 재작성', '리바이즈', '리라이트', 'rewrite', 'revise' 모두 트리거. 설정문서가 바뀌어서 에피소드를 다시 써야 할 때, 캐릭터 입체성이 부족해서 대폭 수정이 필요할 때 사용."
+name: novel-rewrite
+description: "에피소드 재작성(rewrite) 스킬. 설정문서(캐릭터시트, 플롯가이드, 부트스트랩) 변경에 따라 기존 에피소드를 분석하고 재작성한다. '/novel-rewrite', '/novel-rewrite', '/novel-rewrite {프로젝트명}', '/novel-rewrite EP051', '/novel-rewrite {프로젝트명} EP001-EP010' 으로 실행. '에피소드 재작성', '리바이즈', '리라이트', 'rewrite', 'revise' 모두 트리거. 설정문서가 바뀌어서 에피소드를 다시 써야 할 때, 캐릭터 입체성이 부족해서 대폭 수정이 필요할 때 사용."
 ---
 
 # Rewrite — 에피소드 재작성 팀 오케스트레이터
@@ -155,7 +155,7 @@ LOOP:
    - $ARGUMENTS에서 프로젝트명 추출 (예: "36억평")
    - 프로젝트명 지정 없으면: 프로젝트 디렉토리 탐색하여 novel-config.md가 있는 디렉토리 자동 감지
    - novel-config.md가 여러 개면: 사용자에게 선택 요청
-   - novel-config.md가 없으면: ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md 안내 후 종료
+   - novel-config.md가 없으면: ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md 안내 후 종료
 
 2. novel-config.md 로드 및 **필수 필드 검증 게이트**
    - {PROJECT_DIR}/novel-config.md 읽기
@@ -174,7 +174,7 @@ LOOP:
      ```
      ❌ novel-config.md 필수 필드 누락: {누락 필드 목록}
      rewrite 스킬을 실행하려면 위 필드를 채워주세요.
-     템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md
+     템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md
      ```
    - **target_platform 허용 집합 검증**:
      - `project.target_platform`은 문피아, 네이버시리즈, 카카오페이지, 리디, 조아라, 노벨피아 중 하나여야 한다
@@ -527,7 +527,7 @@ rewrite의 quality-verifier는 6카테고리 QA만 수행하므로, polish의 12
 ## 대화 DNA 원칙 (방법론)
 
 비언어가 **몸**의 팔레트라면, 대화 DNA는 **말**의 팔레트다.
-상세 가이드: `${CLAUDE_PLUGIN_ROOT}/skills/rewrite/references/character-dialogue-dna.md` (방법론)
+상세 가이드: `${CLAUDE_PLUGIN_ROOT}/skills/novel-rewrite/references/character-dialogue-dna.md` (방법론)
 캐릭터별 DNA 프로필: novel-config.md의 `character_dialogue_dna` 경로 (프로젝트 데이터)
 
 ### 대사 작성 3단계

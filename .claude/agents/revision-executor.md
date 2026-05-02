@@ -57,7 +57,7 @@ description: "교정 실행 전문가. 진단 보고서 4건을 통합하여 에
 
 시간·수치를 수정할 때 반드시 다음을 수행한다:
 
-1. **정본 확인**: `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/numeric-source-priority.md`의 우선순위를 따른다:
+1. **정본 확인**: `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/numeric-source-priority.md`의 우선순위를 따른다:
    ① 플롯가이드 EP별 확정값 → ② 부트스트랩 매크로 수치 → ③ 검증 완료 수치 → ④ 직전 에피소드.
    직전 2화를 grep하여 해당 사건/대상의 수치를 찾고, 정본 우선순위와 대조한다.
    캐릭터 나이는 항상 캐릭터 핵심 문서(character_core)의 생년 기준으로 계산한다.

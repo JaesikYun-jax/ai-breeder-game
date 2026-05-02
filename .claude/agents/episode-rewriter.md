@@ -51,7 +51,7 @@ description: "에피소드 재작성 실행 전문가. revision-analyst와 chara
 
 ### 원칙 2: 감정 강도별 변주
 캐릭터 상세 문서의 비언어 태그를 5단계 강도로 변주한다.
-상세 변주 팔레트는 `${CLAUDE_PLUGIN_ROOT}/skills/rewrite/references/rewrite-quality-criteria.md` 참조.
+상세 변주 팔레트는 `${CLAUDE_PLUGIN_ROOT}/skills/novel-rewrite/references/rewrite-quality-criteria.md` 참조.
 
 ### 원칙 3: 반복 방지
 - **화 내**: 같은 캐릭터의 동일 비언어 2회 이하. 동일 감탄사 1회.
