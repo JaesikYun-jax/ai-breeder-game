@@ -462,6 +462,56 @@
     "appliedNote": "L81~93 한스의 벨티거 비유 + 위험 설명 + 방 밖으로 나가지 말라는 경고 모두 반영(반영 완료, status 동기화)"
   },
   {
+    "id": "fb-1777236576412",
+    "timestamp": "2026-04-26T20:49:36.412Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "“오후 두 시 십 분. 발굴 건 이관을 이유로 저를 호출. 권유하신 티백, 제가 거절. 그 직후 뒷목 가격. 어제 저녁 일곱 시. 강화 별장 지하 창고. 권총 겨냥 방향, 제 오른쪽 무릎. 총구 높이 사십이 센티.”\n\n숫자가 나오는 사이 김재원의 입술이 따라 움직이지 않았다. 어쩔 수 없었다, 라는 문장이 입술에서 사라진 자리가 얼굴에 그대로 드러났다.\n\n“고고학도잖아요. 기록하는 게 당연하잖아요.”",
+    "comment": "이렇게 말하는게 별로 도움도 안될 것 같고, 너무 딱딱하게 만드는 상황. 좀더 자연스러운. 모르는척 연기 필요"
+  },
+  {
+    "id": "fb-1777236617246",
+    "timestamp": "2026-04-26T20:50:17.246Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "“네 학부 삼 학년 때, 발굴 현장 노트 여섯 권. 같은 해 대학원 지원서를 받았다. 네 이름 옆에, 기록이라는 단어가 다섯 번 반복됐다. 그때 백씨 쪽 사람이 내 방에 왔다. 기록하는 사람이 필요하다, 옆에 기록하는 걸 알아보지 못하는 사람이 필요하다고 했다.”",
+    "comment": "말투 이상함. 단어 반복 어쩌고는 AI스러운 말투. 기록하길 좋아하며 눈치없는 사람 이런식으로 정성적 표현으로 변경"
+  },
+  {
+    "id": "fb-1777236643852",
+    "timestamp": "2026-04-26T20:50:43.852Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "“......예.”",
+    "comment": "존댓말인가? 말투의 일관성 필요."
+  },
+  {
+    "id": "fb-1777236681756",
+    "timestamp": "2026-04-26T20:51:21.756Z",
+    "status": "pending",
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "김재원이",
+    "comment": "김재원 교수 라고 표현하자. 전체적으로 소급. '김재원 교수가 일어났다' 이런식으로"
+  },
+  {
+    "id": "fb-1777283578583",
+    "timestamp": "2026-04-27T09:52:58.583Z",
+    "status": "pending",
+    "chapterId": "dclass-hero/EP012",
+    "chapterNum": 12,
+    "chapterTitle": "최적화",
+    "quotedText": "2주 동안 정리한 변수 목록이 있었다. 머릿속에.",
+    "comment": "이런 어순을 굳이 도치할 필요는 없다고 느낌."
+  },
+  {
     "id": "fb-1777286158463",
     "timestamp": "2026-04-27T10:35:58.463Z",
     "status": "applied",
@@ -558,53 +608,185 @@
     "appliedNote": "클로징 단순화: 추상 사변 제거 → 카엘이 침대에서 빛 띄웠다 가라앉히기 반복 + 시험해 보고 싶은 호기심 + 한스 한 마디('다 보여 주지 마라')로 호기심 누르며 잠듦."
   },
   {
-    "id": "fb-1777236576412",
-    "timestamp": "2026-04-26T20:49:36.412Z",
+    "id": "fb-1777289202758",
+    "timestamp": "2026-04-27T11:26:42.758Z",
     "status": "pending",
     "chapterId": "canned-master/EP018",
     "chapterNum": 18,
     "chapterTitle": "심판",
-    "quotedText": "“오후 두 시 십 분. 발굴 건 이관을 이유로 저를 호출. 권유하신 티백, 제가 거절. 그 직후 뒷목 가격. 어제 저녁 일곱 시. 강화 별장 지하 창고. 권총 겨냥 방향, 제 오른쪽 무릎. 총구 높이 사십이 센티.”\n\n숫자가 나오는 사이 김재원의 입술이 따라 움직이지 않았다. 어쩔 수 없었다, 라는 문장이 입술에서 사라진 자리가 얼굴에 그대로 드러났다.\n\n“고고학도잖아요. 기록하는 게 당연하잖아요.”",
-    "comment": "이렇게 말하는게 별로 도움도 안될 것 같고, 너무 딱딱하게 만드는 상황. 좀더 자연스러운. 모르는척 연기 필요"
+    "quotedText": "십구 점 사 퍼센트",
+    "comment": "19.4%"
   },
   {
-    "id": "fb-1777236617246",
-    "timestamp": "2026-04-26T20:50:17.246Z",
+    "id": "fb-1777289214979",
+    "timestamp": "2026-04-27T11:26:54.979Z",
     "status": "pending",
     "chapterId": "canned-master/EP018",
     "chapterNum": 18,
     "chapterTitle": "심판",
-    "quotedText": "“네 학부 삼 학년 때, 발굴 현장 노트 여섯 권. 같은 해 대학원 지원서를 받았다. 네 이름 옆에, 기록이라는 단어가 다섯 번 반복됐다. 그때 백씨 쪽 사람이 내 방에 왔다. 기록하는 사람이 필요하다, 옆에 기록하는 걸 알아보지 못하는 사람이 필요하다고 했다.”",
-    "comment": "말투 이상함. 단어 반복 어쩌고는 AI스러운 말투. 기록하길 좋아하며 눈치없는 사람 이런식으로 정성적 표현으로 변경"
+    "quotedText": "“......저 아이, 오늘 한 칸 더 단단해지셨습니다.”",
+    "comment": "한칸 -> 한층"
   },
   {
-    "id": "fb-1777236643852",
-    "timestamp": "2026-04-26T20:50:43.852Z",
+    "id": "fb-1777289274780",
+    "timestamp": "2026-04-27T11:27:54.780Z",
     "status": "pending",
     "chapterId": "canned-master/EP018",
     "chapterNum": 18,
     "chapterTitle": "심판",
-    "quotedText": "“......예.”",
-    "comment": "존댓말인가? 말투의 일관성 필요."
+    "quotedText": "아리수 병목이 3분의 2까지 비었다.",
+    "comment": "진짜 유치해보임. 아리수를 너무 강조하는 표현 전체적으로 없애자. 물 마시는것도..."
   },
   {
-    "id": "fb-1777236681756",
-    "timestamp": "2026-04-26T20:51:21.756Z",
+    "id": "fb-1777289344673",
+    "timestamp": "2026-04-27T11:29:04.673Z",
     "status": "pending",
     "chapterId": "canned-master/EP018",
     "chapterNum": 18,
     "chapterTitle": "심판",
-    "quotedText": "김재원이",
-    "comment": "김재원 교수 라고 표현하자. 전체적으로 소급. '김재원 교수가 일어났다' 이런식으로"
+    "quotedText": "다른 핸드폰이 진동했다. 국제 번호.\n\n“백 가주. 오늘은 백 가주께서 선택하시오. 원리는 가둠의 바깥에 있는 일이지요. 가둠 안쪽의 일은, 오늘은 백 가주의 일이오.”\n\n백준하가 대답하지 않았다. 대답의 자리가 없었다.\n\n“저희는 오늘 움직이지 않소. 백 가주께서 오늘을 정리하시오.”\n\n수화기가 끊겼다. 백준하의 검지가 탁자 가장자리에서 한 번 더 굳었다. 두 문이 동시에 닫힌 자리였다. 다른 핸드폰이 곧장 진동했다.\n\n“백 가주. 인사는 무인의 일이오. 오늘은 가주의 일이오. 오늘은, 내가 움직이지 않소.”\n\n백준하의 오른쪽 검지가 탁자 위에서 천천히 펴졌다. 어제 저녁 굳었던 검지가 풀리면서 탁자 가장자리를 긁었다. 긁은 자리에 작은 흰 자국이 남았다.",
+    "comment": "두 주체가 어디인지 잘 이해가 안가서 중복처럼 보임. 누구에게서 온 연락인지 명확히 할 것."
   },
   {
-    "id": "fb-1777283578583",
-    "timestamp": "2026-04-27T09:52:58.583Z",
+    "id": "fb-1777289401844",
+    "timestamp": "2026-04-27T11:30:01.844Z",
     "status": "pending",
-    "chapterId": "dclass-hero/EP012",
-    "chapterNum": 12,
-    "chapterTitle": "최적화",
-    "quotedText": "2주 동안 정리한 변수 목록이 있었다. 머릿속에.",
-    "comment": "이런 어순을 굳이 도치할 필요는 없다고 느낌."
+    "chapterId": "canned-master/EP018",
+    "chapterNum": 18,
+    "chapterTitle": "심판",
+    "quotedText": "팔로워 카운트가 십팔만 이천을 지나갔다.",
+    "comment": "그렇게 많게 느껴지지 않음. 피크일때 200만정도가 되도록 파급효과의 단위를 끌어올릴 것."
+  },
+  {
+    "id": "fb-1777352205860",
+    "timestamp": "2026-04-28T04:56:45.860Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "천 년 동안 쌓아 온 신용",
+    "comment": "오랜 시간 쌓아 온 신용",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352228156",
+    "timestamp": "2026-04-28T04:57:08.156Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "셔터가 다시 한 번에 일어났다.",
+    "comment": "눈부시게 쏟아졌다는 취지로 표현 변경",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352299904",
+    "timestamp": "2026-04-28T04:58:19.904Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "가문은 이름을 남기지 않았다. 그러나 그 뒤로 직계 손녀들이 같은 증상으로 떠난 기록은 남았다. 둘째 가주 대에 한 사람. 셋째 대에 한 사람. 넷째 대에 한 사람. 일정한 간격으로 한 사람씩.\n\n지금까지 살아남아 스물세 살에 닿은 손녀는 한 사람도 없었다.",
+    "comment": "여자가 다죽는건 너무 말이 안되고, 그 병이 발현 되면... 이라고 말하는게 나을듯. 그게 아니면 그런 어린 손녀에게 지분을 많이 가지게 했다는 것 자체가 너무 말이 안되기 때문.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352349403",
+    "timestamp": "2026-04-28T04:59:09.403Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“그러하다.”",
+    "comment": "그러하다 가 대답으로 말이 안되는 것 같음. 알겠다 정도?",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352399120",
+    "timestamp": "2026-04-28T04:59:59.120Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“가져가겠다.”",
+    "comment": "'....' 정도로 쓰자. 라벨없는 아리수 너무 허황되고 웃겨서; 자주 쓰지 말길",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352448228",
+    "timestamp": "2026-04-28T05:00:48.228Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "백준하는 책상 뒤로 가지 않았다. 책상 앞쪽에 마주 보는 의자 두 개. 그중 하나에 손을 내밀었다. 진무혈이 앉은 뒤, 백준하가 맞은편에 앉았다.\n\n거리는 두 걸음. 천 년 동안 두 가문이 가져 본 적 없는 거리.\n\n“......천 년 만이오.”",
+    "comment": "백준하가 천년 산거 아니면 천년 만이오가 말이 되냐? 정녕... 천년 전 문헌에 남아있던 모습 그대로구려 이런 느낌이 맞을 듯.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352463269",
+    "timestamp": "2026-04-28T05:01:03.269Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“오늘 아침 손녀의 자리, 그대도 보았소.",
+    "comment": "의문문이 맞음",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352482272",
+    "timestamp": "2026-04-28T05:01:22.272Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“오늘 나는 그대 손녀의 일로 왔소.”",
+    "comment": "\"그 반대요. 누군가를 살리러 왔지.\"",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352525230",
+    "timestamp": "2026-04-28T05:02:05.230Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "천 년 동안 누구도 스물세 살 단상에 닿지 못했소.",
+    "comment": "이런 설정은 바꾸자. '그 병이 발병하고 나서는' 이라는 느낌이고 스물세살일 필요는 없음.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352580275",
+    "timestamp": "2026-04-28T05:03:00.275Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "“천 년 전에 한 번 가져갔소. 한 번 더 가져갈 수 있소. 다만, 두 번째에 내가 돌아오지 못할 가능성이 있소.",
+    "comment": "천 년 전에 원래 내것이었지. 어차피 시간이 걸릴 뿐, 과연 나를 막을 수 있을까?",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352637438",
+    "timestamp": "2026-04-28T05:03:57.438Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "어제의 자리에서 한 번, 오늘의 자리에서 한 번. 천 년 전에는 자정이 하나였다. 오늘 밤이 지나면 두 번째 자정이 닫히고, 세 번째 자정이 내일 밤에 온다.",
+    "comment": "무슨말인지 전혀 모르겠음. 인간다운 표현으로 변경",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
+  },
+  {
+    "id": "fb-1777352687230",
+    "timestamp": "2026-04-28T05:04:47.230Z",
+    "status": "applied",
+    "chapterId": "canned-master/EP019",
+    "chapterNum": 19,
+    "chapterTitle": "백준하",
+    "quotedText": "진무혈은 라벨 없는 아리수 한 병을 탁자 위에 내려놓았다. 소리가 나지 않도록.",
+    "comment": "멋있어보이려고 노력하지만 이상한 행동임. 그냥 생각을 공유하는 것으로 바꾸자.",
+    "appliedAt": "2026-04-28T11:10:18.000Z"
   }
 ]
