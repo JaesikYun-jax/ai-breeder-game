@@ -364,8 +364,16 @@ REWRITE 절차:
 - 기존 REWRITE 절차(Step 4 후반부)로 진행한다
 
 교차검증 통과 시:
-1. `create-plan.md`에서 해당 EP를 `[x]`로 갱신하고 요약 추가
-2. 다음 EP로 이동 (Step 1부터)
+1. **리더 등록 자동 단계 (필수)**: `src/novel/chapters.ts`에 신규 EP를 등록한다.
+   - 프로젝트별 import 블록(`// ── {프로젝트명} ──` 섹션)에 `import {prefix}{NNN} from '../../projects/{project}/episode/EP{NNN}.md?raw';` 라인 추가 (마지막 EP 다음 줄).
+   - 프로젝트별 CHAPTERS 배열(`{PROJECT_UPPER}_CHAPTERS`)에 항목 추가:
+     `{ id: 'EP{NNN}', num: {N}, title: '{제목}', arc: '{arc_id}', arcLabel: '{arc 레이블}', projectId: '{project}', status: 'writing', raw: {prefix}{NNN} },`
+   - prefix: dclass-hero=dh / canned-master=cm / magitech-fire=mf / asteropos=ast.
+   - 제목·arc·arcLabel은 기존 인접 EP의 패턴을 따른다(같은 아크면 동일 arcLabel 사용).
+   - 등록 후 `node -e "import('./src/novel/chapters.ts').catch(e=>console.error(e))"` 실행 생략 가능 — Vite HMR이 자동 재로드.
+   - 등록 실패 시(import 경로 충돌 등) 사용자에게 알리고 다음 단계 진행.
+2. `create-plan.md`에서 해당 EP를 `[x]`로 갱신하고 요약 추가
+3. 다음 EP로 이동 (Step 1부터)
 
 **REWRITE:**
 1. 재시도 횟수를 확인한다 (해당 EP의 누적 REWRITE 횟수)

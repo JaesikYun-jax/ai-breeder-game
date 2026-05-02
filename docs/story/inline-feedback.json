@@ -596,5 +596,15 @@
     "chapterTitle": "심판",
     "quotedText": "김재원이",
     "comment": "김재원 교수 라고 표현하자. 전체적으로 소급. '김재원 교수가 일어났다' 이런식으로"
+  },
+  {
+    "id": "fb-1777283578583",
+    "timestamp": "2026-04-27T09:52:58.583Z",
+    "status": "pending",
+    "chapterId": "dclass-hero/EP012",
+    "chapterNum": 12,
+    "chapterTitle": "최적화",
+    "quotedText": "2주 동안 정리한 변수 목록이 있었다. 머릿속에.",
+    "comment": "이런 어순을 굳이 도치할 필요는 없다고 느낌."
   }
 ]
