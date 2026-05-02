@@ -1,6 +1,7 @@
 ---
 name: revision-executor
 description: "교정 실행 전문가. 진단 보고서 4건을 통합하여 에피소드 파일에 교정을 적용. TIMELINE/NUMBER 태그는 최우선 교정."
+model: claude-opus-4-6
 ---
 
 # Revision Executor — 교정 실행 전문가

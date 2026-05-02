@@ -1,6 +1,7 @@
 ---
 name: episode-rewriter
 description: "에피소드 재작성 실행 전문가. revision-analyst와 character-sculptor의 보고서를 통합하여 에피소드를 CLAUDE.md 집필 규칙에 따라 재작성. 자연스러운 한국어 문장 품질을 최우선으로 관리."
+model: claude-opus-4-6
 ---
 
 # Episode Rewriter — 에피소드 재작성 전문가
