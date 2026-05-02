@@ -448,5 +448,55 @@
     "chapterTitle": "신의 은총",
     "quotedText": "“이걸 누구한테도 보여 주지 마라.”",
     "comment": "너무나 기뻐해야 할 상황이지만, 지금 네 눈은 오밤중에 숲속에 숨은 벨티거(이쪽 세계의 호랑이 느낌) 빛을 뿜고 있단다. 일단 이 것을 진정시킬 때 까지는 이 방에서 한발짝도 나가지 말자꾸나."
+  },
+  {
+    "id": "fb-1777185164741",
+    "timestamp": "2026-04-26T06:32:44.741Z",
+    "status": "pending",
+    "chapterId": "asteropos/EP001",
+    "chapterNum": 1,
+    "chapterTitle": "구덩이",
+    "quotedText": "이르마가 부엌에서 그릇을 닦는 소리가 들렸다.",
+    "comment": "이 문장 이전에 카엘은 가족이 아니라 눈이 보이지 않아 버려진 아이를 주워서 키운 내력을 설명할 것. 불행하지만 차별없는 따뜻한 사랑 속에서, 풍족하지 않지만 어둡지 않게 자랐다고 표현.\n카엘이 눈이 보이지 않는다는 것만 빼면 꽤 멋진 외모를 갖고 있다고. 아마 어떤 귀족의 버려진 사생아일 수 있다고 설명하자."
+  },
+  {
+    "id": "fb-1777185256353",
+    "timestamp": "2026-04-26T06:34:16.353Z",
+    "status": "pending",
+    "chapterId": "asteropos/EP001",
+    "chapterNum": 1,
+    "chapterTitle": "구덩이",
+    "quotedText": "돌은 여전히 따뜻했다.",
+    "comment": "신기한 돌을 손가락 끝으로 만지면서 느끼고 돌을 묘사하는 장면 추가. 대체 뭘까? 왜 따뜻할까? 이런저런 생각을 1인칭으로 묘사. 생각 잠겼지만 피곤함이 카엘을 잠으로 이끔."
+  },
+  {
+    "id": "fb-1777185305574",
+    "timestamp": "2026-04-26T06:35:05.574Z",
+    "status": "pending",
+    "chapterId": "asteropos/EP002",
+    "chapterNum": 2,
+    "chapterTitle": "신의 은총",
+    "quotedText": "낯선 통증에 눈을 떴다.",
+    "comment": "눈가에 느껴지는 낯선 통증 속에서 눈을 떴다."
+  },
+  {
+    "id": "fb-1777185338322",
+    "timestamp": "2026-04-26T06:35:38.322Z",
+    "status": "pending",
+    "chapterId": "asteropos/EP002",
+    "chapterNum": 2,
+    "chapterTitle": "신의 은총",
+    "quotedText": "한 박자 늦게 의아함이 따라왔다. 죽은 눈에 통증 신경 같은 게 있을 리 없었다.",
+    "comment": "+ 그리고 눈을 뜨다니... 내가 그런 행동을 할 수 있었던가? 생소함의 연속이었다."
+  },
+  {
+    "id": "fb-1777185381867",
+    "timestamp": "2026-04-26T06:36:21.867Z",
+    "status": "pending",
+    "chapterId": "asteropos/EP003",
+    "chapterNum": 3,
+    "chapterTitle": "현자의 재림",
+    "quotedText": "카엘이 안대에 익숙해지는 데에는 며칠도 걸리지 않았다.",
+    "comment": "지독한 통증이  가끔 찾아오곤 했지만 세상을 볼 수 있다는 것에서 오는 희열에 비하면 아무것도 아니었다."
   }
 ]
