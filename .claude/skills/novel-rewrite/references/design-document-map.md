@@ -3,8 +3,8 @@
 rewrite 에이전트가 참조하는 설정문서는 프로젝트별 `novel-config.md`에 정의한다.
 polish 스킬과 동일한 설정 파일을 공유하며, rewrite 전용 키가 추가된다.
 
-공통 매핑 가이드: `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/design-document-map.md` 참조.
-프로젝트 설정 작성법: `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md` 참조.
+공통 매핑 가이드: `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/design-document-map.md` 참조.
+프로젝트 설정 작성법: `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md` 참조.
 
 ---
 

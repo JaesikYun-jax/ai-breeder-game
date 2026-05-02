@@ -25,7 +25,7 @@ revision-executor가 수정한 에피소드를 읽고 문제가 없는지 확인
 - **부트스트랩 문서** (bootstrap) — 매크로 수치 정본
 - **캐릭터 핵심 문서** (character_core) — 캐릭터 나이 검증 (나이 = 해당 연도 - 생년), 주인공 감정 표현 규칙 위반 확인
 - **캐릭터 상세 문서** (character_detail) — 보이스표·비언어·경악 교차오염 확인
-- **`${CLAUDE_PLUGIN_ROOT}/skills/polish/references/design-document-map.md`** — 수치 빠른 참조·정본 우선순위
+- **`${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/design-document-map.md`** — 수치 빠른 참조·정본 우선순위
 
 ### Step 1: 교정 전·후 비교
 

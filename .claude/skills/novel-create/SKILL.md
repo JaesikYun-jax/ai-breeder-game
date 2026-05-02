@@ -1,6 +1,6 @@
 ---
-name: create
-description: "웹소설 에피소드 창작 오케스트레이터. 설정문서(캐릭터시트·플롯가이드·부트스트랩)에 따라 에피소드를 순차 창작한다. '/create', '/create {프로젝트명}', '/create EP051', '/create {프로젝트명} EP001-EP010', '에피소드 창작', '에피소드 집필', '에피소드 작성', '새 에피소드', '본문 작성', '에피소드 쓰기' 으로 실행. novel-config.md의 설정문서 매핑과 가드레일을 적용하여 캐릭터 입체성, 수치 일관성, 훅 강도, 개연성을 보장한다."
+name: novel-create
+description: "웹소설 에피소드 창작 오케스트레이터. 설정문서(캐릭터시트·플롯가이드·부트스트랩)에 따라 에피소드를 순차 창작한다. '/novel-create', '/novel-create {프로젝트명}', '/novel-create EP051', '/novel-create {프로젝트명} EP001-EP010', '에피소드 창작', '에피소드 집필', '에피소드 작성', '새 에피소드', '본문 작성', '에피소드 쓰기' 으로 실행. novel-config.md의 설정문서 매핑과 가드레일을 적용하여 캐릭터 입체성, 수치 일관성, 훅 강도, 개연성을 보장한다."
 ---
 
 # 에피소드 창작 오케스트레이터
@@ -68,7 +68,7 @@ novel-config.md가 없으면 에러를 출력하고 종료한다.
    - {누락 필드 목록}
 
    create 스킬을 실행하려면 위 필드를 채워주세요.
-   템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md
+   템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md
    ```
 
 0.5 **target_platform 허용 집합 검증 게이트**:

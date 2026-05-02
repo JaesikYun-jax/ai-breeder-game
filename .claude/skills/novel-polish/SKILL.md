@@ -1,6 +1,6 @@
 ---
-name: polish
-description: "웹소설 윤문 스킬. 6명의 전문 에이전트를 병렬/순차 조합으로 운용하여 에피소드를 순차 윤문. '/polish', '/lint', '/polish start', '/polish EP051', '/polish {프로젝트명}', '/polish {프로젝트명} EP051' 으로 실행. 프로젝트별 novel-config.md를 읽어 설정문서·가드레일·커스텀 축을 자동 적용. '윤문', '린트', 'polish', 'lint' 모두 이 스킬을 트리거한다."
+name: novel-polish
+description: "웹소설 윤문 스킬. 6명의 전문 에이전트를 병렬/순차 조합으로 운용하여 에피소드를 순차 윤문. '/novel-polish', '/novel-polish', '/novel-polish start', '/novel-polish EP051', '/novel-polish {프로젝트명}', '/novel-polish {프로젝트명} EP051' 으로 실행. 프로젝트별 novel-config.md를 읽어 설정문서·가드레일·커스텀 축을 자동 적용. '윤문', '린트', 'polish', 'lint' 모두 이 스킬을 트리거한다."
 ---
 
 # Polish — 웹소설 윤문 팀 오케스트레이터
@@ -109,7 +109,7 @@ LOOP:
      ```
      ❌ novel-config.md 필수 필드 누락: {누락 필드 목록}
      polish 스킬을 실행하려면 위 필드를 채워주세요.
-     템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/project-config-template.md
+     템플릿: ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/project-config-template.md
      ```
    - **target_platform 허용 집합 검증**:
      - `project.target_platform`은 문피아, 네이버시리즈, 카카오페이지, 리디, 조아라, 노벨피아 중 하나여야 한다
@@ -243,14 +243,14 @@ Agent("rule-checker"):
            침묵 패턴 예외 캐릭터: {SILENCE_EXCEPT}
 
            에이전트 정의(rule-checker.md)의 축별 체크리스트와 등급 기준을 따라
-           ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/12-axes.md 축1~5 참조하여 진단.
+           ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/12-axes.md 축1~5 참조하여 진단.
            각 축의 grep 패턴으로 기계적 검출 후 정독으로 오탐 제거.
            VOICE는 설정문서 보이스표, TITLE은 호칭 규칙표와 1:1 대조.
            Rule Check Report 형식으로 출력."
 
 Agent("story-analyst"):
   prompt: "EP{NNN} ({EPISODE_DIR}/ep{NNN}.md)에 대해 SCENE + LOGIC + UNIFORM 3축 진단 수행.
-           ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/12-axes.md 축6·7·9 기준 참조.
+           ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/12-axes.md 축6·7·9 기준 참조.
            직전 2화({EPISODE_DIR}/ep{NNN-2}.md, {EPISODE_DIR}/ep{NNN-1}.md)도 전문 정독.
 
            ★ 설정문서 로드 (novel-config.md 기준 — 수치·시간·설정 정본):
@@ -296,7 +296,7 @@ Agent("platform-optimizer"):
            - _workspace/platform-guide-{platform}.md가 있으면 해당 파일의 기준 적용
 
            에이전트 정의(platform-optimizer.md)의 축별 체크리스트를 따라
-           ${CLAUDE_PLUGIN_ROOT}/skills/polish/references/12-axes.md 축8·10·11·12 참조하여 진단.
+           ${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/12-axes.md 축8·10·11·12 참조하여 진단.
            HOOK·OPENING·MOBILE·SUMMARY 각각 정량 측정(훅 강도, 대화 비율 등).
            HOOK 유형은 설정문서의 해당 EP 훅 유형과 대조하여 평가.
            핵심 전환 포인트 해당 시 훅 강도 4+ 필수.

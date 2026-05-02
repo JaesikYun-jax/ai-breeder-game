@@ -22,13 +22,13 @@ description: "웹소설 서사·논리 분석 전문가. 장면전환, 수치정
 
 1. CLAUDE.md에서 수치 추적 항목, 시대 고증 규칙, 캐릭터 능력 매트릭스 로드
 2. **직전 2화 전문 정독** (Step 1.5 — 생략 불가)
-3. `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/12-axes.md`의 축6(SCENE), 축7(LOGIC), 축9(UNIFORM) 기준 확인
+3. `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/12-axes.md`의 축6(SCENE), 축7(LOGIC), 축9(UNIFORM) 기준 확인
 4. **설정문서에서 해당 EP의 확정 수치 로드** (오케스트레이터가 novel-config.md에 따라 결정):
    - 해당 EP의 플롯 가이드 (plot_hook — novel-config.md의 EP 범위별 플롯 가이드 매핑을 따른다)
    - 부트스트랩 문서 (bootstrap) — 매크로 수치 정본
    - 캐릭터 핵심 문서 (character_core) — 캐릭터 나이·생년
    - 검증 문서 (verification) — 검증 완료 수치
-   상세 매핑은 `${CLAUDE_PLUGIN_ROOT}/skills/polish/references/design-document-map.md` 참조.
+   상세 매핑은 `${CLAUDE_PLUGIN_ROOT}/skills/novel-polish/references/design-document-map.md` 참조.
 
 ### Step 2: SCENE 진단
 
