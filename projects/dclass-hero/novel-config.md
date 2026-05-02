@@ -37,7 +37,9 @@ project:
 | EP 범위 | 레이블 | 플롯 가이드 경로 | 세부 플롯 가이드 (선택) | 세부 캐릭터 시트 (선택) |
 |---------|--------|----------------|----------------------|----------------------|
 | EP001~EP020 | Part 1 — 아젤리아·솔라리스·각성 | docs/story/story-framework-6-30.md | | |
-| EP021~EP070 | Part 2 — 부왕·기둥 치유·아들 탄생 | docs/story/story-framework-21-70.md | | |
+| EP021~EP075 | Part 2 — 부왕·기둥 치유·아들 탄생 | docs/story/story-framework-21-70.md | | |
+| EP043~EP047 | **Arc 6.5 — 귀환과 다섯 결** (본국 귀환·기후 군대화·연합 침공·출산·Arc 7 브릿지) | _workspace/arc65_plan_EP043-EP047.md | | |
+| EP048~EP055 | Arc 7 — 얼어붙은 경계 (이전 EP043~050에서 이동, 2026-04-27) | docs/story/story-framework-21-70.md | | |
 
 ### 2-3. 보조 참조
 

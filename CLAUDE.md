@@ -91,16 +91,16 @@ docs/
 
 | 스킬 | 역할 | 하위 호출 / 비고 |
 |---|---|---|
-| **propose** | 컨셉/타겟 입력 → 3개 설계안 제안 | 신규 프로젝트 시작 시 |
-| **design** | 통합 설계 라우터 (큰+작은) | 모호 요청은 여기로 |
-| **design-big** | 큰 설계 (전체 소설) | bootstrap + character + plot-hook |
-| **design-small** | 작은 설계 (25화 단위 세부) | 큰 설계 전제 조건 |
-| **bootstrap** | 부트스트랩(컨셉·세계관·플랫폼) 단독 | |
-| **character** | 캐릭터 시트 단독 | 큰/작은 양쪽 가능 |
-| **plot-hook** | 플롯 구조·훅 가이드 단독 | 큰/작은 양쪽 가능 |
-| **create** | 에피소드 창작 오케스트레이터 (4 에이전트) | `/create EP051` |
-| **polish** | 윤문 (6 에이전트 병렬+순차) | `/polish EP051` |
-| **rewrite** | 설정 변경에 따른 에피소드 재작성 | `/rewrite EP051` |
+| **novel-propose** | 컨셉/타겟 입력 → 3개 설계안 제안 | 신규 프로젝트 시작 시 |
+| **novel-design** | 통합 설계 라우터 (큰+작은) | 모호 요청은 여기로 |
+| **novel-design-big** | 큰 설계 (전체 소설) | novel-bootstrap + novel-character + novel-plot-hook |
+| **novel-design-small** | 작은 설계 (25화 단위 세부) | 큰 설계 전제 조건 |
+| **novel-bootstrap** | 부트스트랩(컨셉·세계관·플랫폼) 단독 | |
+| **novel-character** | 캐릭터 시트 단독 | 큰/작은 양쪽 가능 |
+| **novel-plot-hook** | 플롯 구조·훅 가이드 단독 | 큰/작은 양쪽 가능 |
+| **novel-create** | 에피소드 창작 오케스트레이터 (4 에이전트) | `/novel-create EP051` |
+| **novel-polish** | 윤문 (6 에이전트 병렬+순차) | `/novel-polish EP051` |
+| **novel-rewrite** | 설정 변경에 따른 에피소드 재작성 | `/novel-rewrite EP051` |
 
 ### 에이전트 계층 (18개)
 
@@ -268,10 +268,10 @@ dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
 ```
 1. 자연어 명령 ("EP038 써줘" / "다음 화 집필")
 2. novel-config.md에서 프로젝트 설정 로드
-3. /create 파이프라인 실행 (4 에이전트, REWRITE max 2회)
+3. /novel-create 파이프라인 실행 (4 에이전트, REWRITE max 2회)
 4. 리더앱(localhost:5173)에서 읽기 + 인라인 피드백
-5. /polish 파이프라인 실행 (3개 진단 → 조기종료 또는 풀 사이클)
-6. 완성 → /settings-sync 또는 /rewrite로 설정집·후속 EP 정리
+5. /novel-polish 파이프라인 실행 (3개 진단 → 조기종료 또는 풀 사이클)
+6. 완성 → /settings-sync 또는 /novel-rewrite로 설정집·후속 EP 정리
 ```
 
 ### 챕터 상태 (4단계)
