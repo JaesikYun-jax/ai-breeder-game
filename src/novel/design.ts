@@ -89,24 +89,35 @@ function categorise(docKey: string, fileName: string): DesignCategory {
 
   const base = fileName.replace(/\.md$/, '');
 
-  // World / bootstrap
+  // World / bootstrap (영문 + 한글 매칭)
   if (
     base === 'worldbuilding' ||
     base === 'bootstrap' ||
     base === 'magic-systems' ||
+    base === 'mechanics' ||
     base === 'seal-regression' ||
-    base.startsWith('region-')
+    base.startsWith('region-') ||
+    base.includes('부트스트랩') ||
+    base.includes('세계관')
   ) return 'world';
 
   // Character
   if (
     base === 'characters' ||
     base === 'voice-guide' ||
-    base.startsWith('protagonist-')
+    base.startsWith('protagonist-') ||
+    base.includes('캐릭터시트') ||
+    base.includes('캐릭터_시트')
   ) return 'character';
 
   // Plot
-  if (base.startsWith('plot-hook-') || base.startsWith('story-framework-')) return 'plot';
+  if (
+    base.startsWith('plot-hook-') ||
+    base.startsWith('plot-framework-') ||
+    base.startsWith('story-framework-') ||
+    base.includes('플롯훅') ||
+    base.includes('플롯_훅')
+  ) return 'plot';
 
   // Lore
   if (

@@ -15,7 +15,7 @@ project:
   target_genre: "현대 판타지 / 헌터물 (레이드 + 특능 / 먼치킨 디버거)"
   episode_dir: "projects/skill-compiler/episode/"
   work_dir: "projects/skill-compiler/revision/"
-  design_dir: "docs/skill-compiler/"
+  design_dir: "projects/skill-compiler/design/"
 ```
 
 ---
@@ -26,10 +26,10 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---|---|---|
-| character_core | docs/skill-compiler/스킬컴파일러_캐릭터시트.md | 캐릭터 핵심 정의·관계·성장 아크 |
-| character_detail | docs/skill-compiler/스킬컴파일러_캐릭터시트.md | 보이스표·비언어 태그·Dialogue DNA |
-| dialogue_dna | docs/skill-compiler/스킬컴파일러_캐릭터시트.md#dialogue-dna | Dialogue DNA (대사 고유성) |
-| bootstrap | docs/skill-compiler/스킬컴파일러_부트스트랩.md | 세계관·매크로 수치·역량 모듈·밸런스 |
+| character_core | projects/skill-compiler/design/스킬컴파일러_캐릭터시트.md | 캐릭터 핵심 정의·관계·성장 아크 |
+| character_detail | projects/skill-compiler/design/스킬컴파일러_캐릭터시트.md | 보이스표·비언어 태그·Dialogue DNA |
+| dialogue_dna | projects/skill-compiler/design/스킬컴파일러_캐릭터시트.md#dialogue-dna | Dialogue DNA (대사 고유성) |
+| bootstrap | projects/skill-compiler/design/스킬컴파일러_부트스트랩.md | 세계관·매크로 수치·역량 모듈·밸런스 |
 | writing_rules | CLAUDE.md | 집필 규칙 |
 | narrative_style | docs/narrative-style.md | 글로벌 서술체 v2 (작은따옴표 폐기) |
 
@@ -37,11 +37,11 @@ project:
 
 | EP 범위 | 레이블 | 플롯 가이드 | 세부 플롯 가이드 (작은 설계) | 세부 캐릭터 시트 |
 |---|---|---|---|---|
-| EP001~EP005 | 도입부 — 다섯 줄짜리 파편 | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md | | |
-| EP006~EP020 | 아크1 — 디버거의 눈 | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md | | |
-| EP021~EP050 | 아크2 — 코드 탈취 + 길드 전쟁 | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md | | |
-| EP051~EP070 | 아크3 — 시스템 해부 | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md | | |
-| EP071~EP080 | 아크4 — 1부 결심 | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md | | |
+| EP001~EP005 | 도입부 — 다섯 줄짜리 파편 | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md | | |
+| EP006~EP020 | 아크1 — 디버거의 눈 | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md | | |
+| EP021~EP050 | 아크2 — 코드 탈취 + 길드 전쟁 | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md | | |
+| EP051~EP070 | 아크3 — 시스템 해부 | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md | | |
+| EP071~EP080 | 아크4 — 1부 결심 | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md | | |
 
 > 세부 플롯 가이드·세부 캐릭터 시트 열은 `/design-small` 실행 시 자동 추가.
 
@@ -49,10 +49,10 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---|---|---|
-| mechanics | docs/skill-compiler/스킬컴파일러_부트스트랩.md#역량-모듈 | 코드 시각화·편집·컴파일·버그 (부트스트랩 §3~§5) |
-| foreshadowing | docs/skill-compiler/스킬컴파일러_플롯훅가이드.md#복선-배치-계획 | 복선 매트릭스 S/A/B/C 17개 (플롯훅 §7) |
-| chapter_log | docs/skill-compiler/chapter-log.md | 화별 비트·복선·감정 누적 |
-| tone_and_style | docs/skill-compiler/스킬컴파일러_부트스트랩.md#가드레일 | 작품 전용 톤 (부트스트랩 §11) |
+| mechanics | projects/skill-compiler/design/스킬컴파일러_부트스트랩.md#역량-모듈 | 코드 시각화·편집·컴파일·버그 (부트스트랩 §3~§5) |
+| foreshadowing | projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md#복선-배치-계획 | 복선 매트릭스 S/A/B/C 17개 (플롯훅 §7) |
+| chapter_log | projects/skill-compiler/design/chapter-log.md | 화별 비트·복선·감정 누적 |
+| tone_and_style | projects/skill-compiler/design/스킬컴파일러_부트스트랩.md#가드레일 | 작품 전용 톤 (부트스트랩 §11) |
 
 ---
 
@@ -86,9 +86,9 @@ project:
 ## 4. 현재 진행 현황
 
 - **2026-05-09** — 큰 설계(`/design-big`) 완료. 산출물 3종 확정:
-  - `docs/skill-compiler/스킬컴파일러_부트스트랩.md` (concept-builder)
-  - `docs/skill-compiler/스킬컴파일러_캐릭터시트.md` (character-architect)
-  - `docs/skill-compiler/스킬컴파일러_플롯훅가이드.md` (plot-hook-engineer)
+  - `projects/skill-compiler/design/스킬컴파일러_부트스트랩.md` (concept-builder)
+  - `projects/skill-compiler/design/스킬컴파일러_캐릭터시트.md` (character-architect)
+  - `projects/skill-compiler/design/스킬컴파일러_플롯훅가이드.md` (plot-hook-engineer)
 - 다음 단계: `/design-small EP001~025` → 비축 집필 EP001~010
 
 ---
