@@ -160,6 +160,73 @@ Phase 1 (병렬)              Phase 2 (순차)          Phase 3 (순차)
 
 ---
 
+## Design Atlas (설계 뷰어)
+
+리더 뷰어 안에서 설계 문서(캐릭터 시트·세계관·플롯 가이드 등)를 카테고리별로 보고 인라인 편집까지 할 수 있다.
+**대시보드 → "Design Atlas" 카드** 또는 라우트 `#/p/:projectId/design`.
+
+### 자동 등록 조건 (★ 중요)
+
+`src/novel/design.ts`의 Vite glob 패턴은 다음만 수집한다:
+
+```
+projects/*/design/**/*.md
+```
+
+따라서 **새 프로젝트의 `novel-config.md`에서 `design_dir:`은 반드시 `projects/{name}/design/`로 설정**한다.
+다른 위치(예: `docs/{name}/`)에 두면 design-big/design-small 스킬은 동작하지만 **뷰어에서 안 보인다.**
+
+```yaml
+# ✅ 올바름 — Design Atlas 자동 등록
+project:
+  design_dir: "projects/skill-compiler/design/"
+
+# ❌ 잘못됨 — 뷰어 노출 안 됨 (마이그레이션 필요)
+project:
+  design_dir: "docs/skill-compiler/"
+```
+
+### 카테고리 자동 분류 (파일명 prefix 기반)
+
+| 카테고리 | 매칭 prefix |
+|---|---|
+| world (세계관·부트스트랩) | `worldbuilding`, `bootstrap`, `magic-systems`, `region-*`, `seal-regression`, `*부트스트랩*` |
+| character | `characters`, `voice-guide`, `protagonist-*`, `*캐릭터시트*` |
+| plot | `plot-hook-*`, `plot-framework-*`, `story-framework-*`, `*플롯훅*` |
+| lore (복선·용어·연표) | `foreshadowing`, `glossary`, `timeline`, `region-connections` |
+| style (톤·문체) | `tone-*`, `narrative-*`, `death-and-regression` |
+| meta (정본·로그·피드백) | `canon-quickref`, `chapter-log`, `*-feedback-log` |
+| drafts (작가 팀 작업본) | `blue/*`, `red/*` 하위 |
+| 기타 | `other` |
+
+새 키워드 추가 시 `src/novel/design.ts`의 `categorise()` 함수 수정.
+
+### 본문 렌더링
+
+- 챕터 본문(EP)은 `src/novel/renderer.ts` (간이 파서, 단락 리듬 우선)
+- 설계 문서는 `src/novel/design-renderer.ts` ([marked](https://marked.js.org/) 풀 GFM — 표·헤딩·코드·인용 모두 지원)
+- 두 경로 분리됨 — 본문 리더 회귀 없음
+
+### design-big / design-small 스킬과의 관계
+
+두 스킬은 **이미 `{DESIGN_DIR}`을 따라 산출물을 저장**하도록 명세돼 있다(`design-big/SKILL.md` Phase 4 §4). 따라서 novel-config.md의 `design_dir`만 표준 위치를 가리키면, 큰 설계·작은 설계 산출물이 자동으로 Design Atlas에 노출된다.
+
+### 라우트
+
+| 경로 | 화면 |
+|---|---|
+| `#/p/:projectId/design` | 카테고리 트리 인덱스 |
+| `#/p/:projectId/design/:docKey` | 단일 문서 (편집·복사 가능, slash docKey 지원: `blue/draft_azelia`) |
+
+### 신규 프로젝트 체크리스트
+
+1. `projects/{name}/design/` 디렉토리 생성
+2. `novel-config.md`에 `design_dir: "projects/{name}/design/"` 명시
+3. `design-big` 실행 → 산출물이 자동으로 `projects/{name}/design/`에 저장됨
+4. dev 서버 reload → Design Atlas에 자동 등록
+
+---
+
 ## EP 등록 (신 파이프라인)
 
 ### 1. 마크다운 작성
