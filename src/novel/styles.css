@@ -649,9 +649,15 @@
 }
 .design-md tbody tr:nth-child(even) td { background: rgba(255,255,255,0.012); }
 
-/* Code */
+/* Code — Nanum Gothic Coding 우선: 한글·영문 모두 등폭으로 ASCII art 정렬 보존.
+   JetBrains Mono(영문 전용)는 한글을 가변폭 폴백 글꼴로 그려 코드 블록 안에서
+   다이어그램이 어긋나는 문제가 있어 별도 폰트 스택을 쓴다. */
+.design-md code,
+.design-md pre {
+  font-family: "Nanum Gothic Coding", var(--font-mono);
+  font-feature-settings: "tnum";
+}
 .design-md code {
-  font-family: var(--font-mono);
   font-size: 0.92em;
   background: var(--bg-2);
   border: 1px solid var(--rule);

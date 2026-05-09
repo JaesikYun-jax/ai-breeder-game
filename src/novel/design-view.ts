@@ -36,7 +36,10 @@ let scrollHandler: (() => void) | null = null;
 function getDocKey(): string | null {
   const hash = location.hash.slice(1) || '';
   const m = hash.match(/^\/p\/[^/]+\/design\/(.+)$/);
-  return m ? m[1] : null;
+  if (!m) return null;
+  // Browsers auto-encode non-ASCII hash chars (e.g. Korean filenames). Decode
+  // back so the key matches the registry (which holds raw filename strings).
+  try { return decodeURIComponent(m[1]); } catch { return m[1]; }
 }
 
 function navigate(path: string) {
