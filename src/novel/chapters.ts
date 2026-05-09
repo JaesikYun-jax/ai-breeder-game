@@ -2,6 +2,8 @@
  * Chapter registry — episode 메타데이터 및 raw import.
  *
  * awesome-novel-studio 마이그레이션(2026-04-26): ch/cm/mf/ast prefix → EP{NNN} 통일.
+ * magitech-fire (mf) 아카이브 이동(2026-05-09): archive/magitech-fire/ 보관.
+ * 신규 프로젝트 skill-compiler (sc) 추가(2026-05-09): EP는 큰 설계 후 작성 예정.
  * 파일은 projects/{name}/episode/EP{NNN}.md 위치.
  * id는 프로젝트 내에서만 unique → ALL_CHAPTERS 조회 시 projectId 함께 전달 필요.
  */
@@ -49,13 +51,6 @@ import dh039 from '../../projects/dclass-hero/episode/EP039.md?raw';
 import dh040 from '../../projects/dclass-hero/episode/EP040.md?raw';
 import dh041 from '../../projects/dclass-hero/episode/EP041.md?raw';
 import dh042 from '../../projects/dclass-hero/episode/EP042.md?raw';
-
-// ── 마도 공학 프로그래머의 영생 프로젝트 (magitech-fire) ──
-import mf001 from '../../projects/magitech-fire/episode/EP001.md?raw';
-import mf002 from '../../projects/magitech-fire/episode/EP002.md?raw';
-import mf003 from '../../projects/magitech-fire/episode/EP003.md?raw';
-import mf004 from '../../projects/magitech-fire/episode/EP004.md?raw';
-import mf005 from '../../projects/magitech-fire/episode/EP005.md?raw';
 
 // ── 봉인당한 천마 (canned-master) ──
 import cm001 from '../../projects/canned-master/episode/EP001.md?raw';
@@ -214,25 +209,9 @@ export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = CM_TITLES.map(([num, title,
   raw: CM_RAWS[i],
 }));
 
-// ── Magitech Fire ──
-const MF_TITLES: Array<[number, string]> = [
-  [1, '어디지, 이건'],
-  [2, '위장'],
-  [3, '폐기동'],
-  [4, '591호'],
-  [5, '어떤 남자'],
-];
-const MF_RAWS = [mf001, mf002, mf003, mf004, mf005];
-export const MAGITECH_FIRE_CHAPTERS: ChapterMeta[] = MF_TITLES.map(([num, title], i) => ({
-  id: epId(num),
-  num,
-  title,
-  arc: 'mf_part1_survival',
-  arcLabel: 'Part 1 — 연명',
-  projectId: 'magitech-fire',
-  status: 'writing',
-  raw: MF_RAWS[i],
-}));
+// ── Skill Compiler (나에게만 스킬이 코드로 보인다) ──
+// EP는 큰 설계(`/design-big`) 후 작성. EP001 추가 시 import 및 SC_TITLES/SC_RAWS 추가 필요.
+export const SKILL_COMPILER_CHAPTERS: ChapterMeta[] = [];
 
 // ── Asteropos ──
 export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
@@ -276,14 +255,14 @@ export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
 export const ALL_CHAPTERS: ChapterMeta[] = [
   ...CHAPTERS,
   ...CANNED_MASTER_CHAPTERS,
-  ...MAGITECH_FIRE_CHAPTERS,
   ...ASTEROPOS_CHAPTERS,
+  ...SKILL_COMPILER_CHAPTERS,
 ];
 
 /**
  * Find a chapter by id.
  *
- * Multiple projects share EP{NNN} ids (e.g. dclass-hero EP001 and magitech-fire EP001).
+ * Multiple projects share EP{NNN} ids (e.g. dclass-hero EP001 and asteropos EP001).
  * Pass projectId to disambiguate. Without projectId, returns the first match — only safe
  * for legacy IDs that were globally unique.
  */

@@ -13,9 +13,9 @@ project:
   name: "마도 공학 프로그래머의 영생 프로젝트"
   target_platform: "문피아"
   target_genre: "이세계 마도 공학 × 돈벌이물 × 영생 서사"
-  episode_dir: "projects/magitech-fire/episode/"
-  work_dir: "projects/magitech-fire/revision/"
-  design_dir: "projects/magitech-fire/design/"
+  episode_dir: "archive/magitech-fire/episode/"
+  work_dir: "archive/magitech-fire/revision/"
+  design_dir: "archive/magitech-fire/design/"
 ```
 
 **로그라인**: 가난에 찌들어 췌장암으로 자살한 삼류 프로그래머가, 이세계의 유통기한 1년짜리 실험체 몸에 빙의한다. 그리고 깨닫는다 — 돈만 있으면 안 죽는다는 것을.
@@ -28,30 +28,30 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| character_core | projects/magitech-fire/design/characters.md | 캐릭터 핵심 정의 |
-| character_detail | projects/magitech-fire/design/voice-guide.md | 보이스표·호칭 규칙 |
-| dialogue_dna | projects/magitech-fire/design/voice-guide.md | Dialogue DNA |
-| bootstrap | projects/magitech-fire/design/worldbuilding.md | 세계관·마도 공학 |
+| character_core | archive/magitech-fire/design/characters.md | 캐릭터 핵심 정의 |
+| character_detail | archive/magitech-fire/design/voice-guide.md | 보이스표·호칭 규칙 |
+| dialogue_dna | archive/magitech-fire/design/voice-guide.md | Dialogue DNA |
+| bootstrap | archive/magitech-fire/design/worldbuilding.md | 세계관·마도 공학 |
 | writing_rules | CLAUDE.md | 집필 규칙 |
 
 ### 2-2. EP 범위별 설정문서
 
 | EP 범위 | 레이블 | 플롯 가이드 경로 | 세부 플롯 가이드 (선택) | 세부 캐릭터 시트 (선택) |
 |---------|--------|----------------|----------------------|----------------------|
-| EP001~EP100 | 100화 완결 (4부 × 25화) | projects/magitech-fire/design/story-framework-100ch.md | | |
+| EP001~EP100 | 100화 완결 (4부 × 25화) | archive/magitech-fire/design/story-framework-100ch.md | | |
 
 ### 2-3. 보조 참조
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| protagonist_bible | projects/magitech-fire/design/protagonist-bible.md | 주인공 상세 |
-| magic_systems | projects/magitech-fire/design/magic-systems.md | 마도 공학 체계 |
-| tone_style | projects/magitech-fire/design/tone-and-style.md | 시점·문장 스타일 (3인칭 근접) |
-| foreshadowing | projects/magitech-fire/design/foreshadowing.md | 복선 매트릭스 |
-| timeline | projects/magitech-fire/design/timeline.md | 작중 시간선 |
-| glossary | projects/magitech-fire/design/glossary.md | 용어 사전 |
-| chapter_log | projects/magitech-fire/design/chapter-log.md | 화별 요약 |
-| feedback_log | projects/magitech-fire/design/story-feedback-log.md | 피드백 기록 |
+| protagonist_bible | archive/magitech-fire/design/protagonist-bible.md | 주인공 상세 |
+| magic_systems | archive/magitech-fire/design/magic-systems.md | 마도 공학 체계 |
+| tone_style | archive/magitech-fire/design/tone-and-style.md | 시점·문장 스타일 (3인칭 근접) |
+| foreshadowing | archive/magitech-fire/design/foreshadowing.md | 복선 매트릭스 |
+| timeline | archive/magitech-fire/design/timeline.md | 작중 시간선 |
+| glossary | archive/magitech-fire/design/glossary.md | 용어 사전 |
+| chapter_log | archive/magitech-fire/design/chapter-log.md | 화별 요약 |
+| feedback_log | archive/magitech-fire/design/story-feedback-log.md | 피드백 기록 |
 | narrative_style | docs/narrative-style.md | 글로벌 서술체 v2 |
 
 ---

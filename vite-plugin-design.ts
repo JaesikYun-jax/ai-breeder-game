@@ -21,8 +21,8 @@ import path from 'node:path';
 const ALLOWED_PROJECTS = new Set([
   'dclass-hero',
   'canned-master',
-  'magitech-fire',
   'asteropos',
+  'skill-compiler',
 ]);
 
 // Each path segment: starts with [a-z0-9], then [a-z0-9_-] only.
