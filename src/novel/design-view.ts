@@ -20,7 +20,7 @@ import {
   updateDesignDocRaw,
 } from './design';
 import type { DesignDocMeta } from './design';
-import { renderChapterHTML } from './renderer';
+import { renderDesignHTML } from './design-renderer';
 import { initEditor, destroyEditor, confirmDiscardIfDirty } from './editor';
 import { getProject } from '../hub/projects';
 import type { StoryProject } from '../hub/projects';
@@ -173,7 +173,7 @@ function renderDesignDoc(docKey: string) {
   }
 
   const accent = project.color;
-  const contentHTML = renderChapterHTML(doc.raw);
+  const contentHTML = renderDesignHTML(doc.raw);
   const charCount = countDocChars(doc.raw);
 
   // Same-category sibling navigation
@@ -228,7 +228,7 @@ function renderDesignDoc(docKey: string) {
             <div class="reader-chapter-meta">${formatThousands(charCount)} 자 · ${escapeHtml(doc.docKey)}</div>
           </div>
 
-          <div class="reader-body">${contentHTML}</div>
+          <div class="reader-body design-md">${contentHTML}</div>
 
           <div class="reader-end">
             <div class="reader-end-label">— End of document —</div>
@@ -289,7 +289,7 @@ function applyNewDocRaw(docKey: string, newRaw: string) {
   const doc = getDesignDoc(projectId, docKey);
   if (!doc) return;
   const bodyEl = document.querySelector<HTMLElement>('.reader-body');
-  if (bodyEl) bodyEl.innerHTML = renderChapterHTML(newRaw);
+  if (bodyEl) bodyEl.innerHTML = renderDesignHTML(newRaw);
   const titleEl = document.querySelector<HTMLElement>('.reader-chapter-title');
   if (titleEl) titleEl.textContent = doc.title;
   const metaEl = document.querySelector<HTMLElement>('.reader-chapter-meta');
