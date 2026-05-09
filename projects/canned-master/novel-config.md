@@ -14,7 +14,7 @@ project:
   target_genre: "현대 판타지 — 회귀/환생 × 무협 × 복수극"
   episode_dir: "projects/canned-master/episode/"
   work_dir: "projects/canned-master/revision/"
-  design_dir: "docs/story/canned-master/"
+  design_dir: "projects/canned-master/design/"
 ```
 
 ---
@@ -25,10 +25,10 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| character_core | docs/story/canned-master/characters.md | 캐릭터 핵심 정의 |
-| character_detail | docs/story/canned-master/voice-guide.md | 보이스표·호칭 규칙 |
-| dialogue_dna | docs/story/canned-master/voice-guide.md | Dialogue DNA |
-| bootstrap | docs/story/canned-master/worldbuilding.md | 세계관·천마종 설정 |
+| character_core | projects/canned-master/design/characters.md | 캐릭터 핵심 정의 |
+| character_detail | projects/canned-master/design/voice-guide.md | 보이스표·호칭 규칙 |
+| dialogue_dna | projects/canned-master/design/voice-guide.md | Dialogue DNA |
+| bootstrap | projects/canned-master/design/worldbuilding.md | 세계관·천마종 설정 |
 | writing_rules | CLAUDE.md | 집필 규칙 |
 
 ### 2-2. EP 범위별 설정문서
@@ -42,13 +42,13 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| protagonist_bible | docs/story/canned-master/protagonist-bible.md | 천마 (백준하) 상세 |
-| seal_regression | docs/story/canned-master/seal-regression.md | 봉인·환생 메커닉 |
-| tone_style | docs/story/canned-master/tone-and-style.md | 시점·문장 스타일 |
-| foreshadowing | docs/story/canned-master/foreshadowing.md | 복선 매트릭스 |
-| timeline | docs/story/canned-master/timeline.md | 작중 시간선 |
-| glossary | docs/story/canned-master/glossary.md | 용어 사전 |
-| chapter_log | docs/story/canned-master/chapter-log.md | 화별 요약 |
+| protagonist_bible | projects/canned-master/design/protagonist-bible.md | 천마 (백준하) 상세 |
+| seal_regression | projects/canned-master/design/seal-regression.md | 봉인·환생 메커닉 |
+| tone_style | projects/canned-master/design/tone-and-style.md | 시점·문장 스타일 |
+| foreshadowing | projects/canned-master/design/foreshadowing.md | 복선 매트릭스 |
+| timeline | projects/canned-master/design/timeline.md | 작중 시간선 |
+| glossary | projects/canned-master/design/glossary.md | 용어 사전 |
+| chapter_log | projects/canned-master/design/chapter-log.md | 화별 요약 |
 | narrative_style | docs/narrative-style.md | 글로벌 서술체 v2 |
 
 ---

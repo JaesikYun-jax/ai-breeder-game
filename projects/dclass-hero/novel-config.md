@@ -15,7 +15,7 @@ project:
   target_genre: "이세계 선형 멸망 저지물 (회귀·루프 없음, 9개 기둥 차례로 치유)"
   episode_dir: "projects/dclass-hero/episode/"
   work_dir: "projects/dclass-hero/revision/"
-  design_dir: "docs/story/"
+  design_dir: "projects/dclass-hero/design/"
 ```
 
 ---
@@ -26,32 +26,32 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| character_core | docs/story/characters.md | 20+ NPC 프로필, 관계, 동기, 호칭 |
-| character_detail | docs/story/voice-guide.md | 보이스표(종결어미·말버릇·대사 샘플), 호칭 규칙 |
-| dialogue_dna | docs/story/voice-guide.md | Dialogue DNA (캐릭터 고유 말투 패턴) |
-| bootstrap | docs/story/worldbuilding.md | 9대 지역, 종족, 세계수, 9기둥 메커닉 |
+| character_core | projects/dclass-hero/design/characters.md | 20+ NPC 프로필, 관계, 동기, 호칭 |
+| character_detail | projects/dclass-hero/design/voice-guide.md | 보이스표(종결어미·말버릇·대사 샘플), 호칭 규칙 |
+| dialogue_dna | projects/dclass-hero/design/voice-guide.md | Dialogue DNA (캐릭터 고유 말투 패턴) |
+| bootstrap | projects/dclass-hero/design/worldbuilding.md | 9대 지역, 종족, 세계수, 9기둥 메커닉 |
 | writing_rules | CLAUDE.md | 16개 가드레일·집필 규칙 |
 
 ### 2-2. EP 범위별 설정문서
 
 | EP 범위 | 레이블 | 플롯 가이드 경로 | 세부 플롯 가이드 (선택) | 세부 캐릭터 시트 (선택) |
 |---------|--------|----------------|----------------------|----------------------|
-| EP001~EP020 | Part 1 — 아젤리아·솔라리스·각성 | docs/story/story-framework-6-30.md | | |
-| EP021~EP070 | Part 2 — 부왕·기둥 치유·아들 탄생 | docs/story/story-framework-21-70.md | | |
+| EP001~EP020 | Part 1 — 아젤리아·솔라리스·각성 | projects/dclass-hero/design/story-framework-6-30.md | | |
+| EP021~EP070 | Part 2 — 부왕·기둥 치유·아들 탄생 | projects/dclass-hero/design/story-framework-21-70.md | | |
 
 ### 2-3. 보조 참조
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| protagonist_bible | docs/story/protagonist-bible.md | 강지호 상세 (성격·재생 스킬·사망 기록·성장) |
-| death_regression | docs/story/death-and-regression.md | 기둥 흡수, 모래시계, 수명 대가 |
-| tone_style | docs/story/tone-and-style.md | 시점·문장·코미디↔비장 비율 |
-| foreshadowing | docs/story/foreshadowing.md | 복선 25+개 매트릭스 |
-| timeline | docs/story/timeline.md | 작중 시간선 |
-| glossary | docs/story/glossary.md | 용어 사전 |
-| region_connections | docs/story/region-connections.md | 지정학·교역·마르코 네트워크 |
-| chapter_log | docs/story/chapter-log.md | 화별 요약 (등장인물·설정·감정 아크·훅) |
-| canon_quickref | docs/story/canon-quickref.md | 정본 12개 압축 매뉴얼 |
+| protagonist_bible | projects/dclass-hero/design/protagonist-bible.md | 강지호 상세 (성격·재생 스킬·사망 기록·성장) |
+| death_regression | projects/dclass-hero/design/death-and-regression.md | 기둥 흡수, 모래시계, 수명 대가 |
+| tone_style | projects/dclass-hero/design/tone-and-style.md | 시점·문장·코미디↔비장 비율 |
+| foreshadowing | projects/dclass-hero/design/foreshadowing.md | 복선 25+개 매트릭스 |
+| timeline | projects/dclass-hero/design/timeline.md | 작중 시간선 |
+| glossary | projects/dclass-hero/design/glossary.md | 용어 사전 |
+| region_connections | projects/dclass-hero/design/region-connections.md | 지정학·교역·마르코 네트워크 |
+| chapter_log | projects/dclass-hero/design/chapter-log.md | 화별 요약 (등장인물·설정·감정 아크·훅) |
+| canon_quickref | projects/dclass-hero/design/canon-quickref.md | 정본 12개 압축 매뉴얼 |
 | narrative_style | docs/narrative-style.md | 글로벌 서술체 v2 (1차 참조) |
 
 ---

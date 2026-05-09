@@ -59,23 +59,25 @@ projects/                          # 5개 프로젝트 워크스페이스
 │   ├── novel-config.md            # 중앙 설정 (target_platform·episode_dir·매핑·가드레일)
 │   ├── _legacy_novel-config.md    # 마이그레이션 보존본
 │   ├── episode/                   # EP001.md ~ EP{NNN}.md (신 파이프라인)
+│   ├── design/                    # ★ 설정 바이블 (구 docs/story/) — 표준 위치로 이동 완료
+│   │   ├── canon-quickref.md      # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
+│   │   ├── characters.md  voice-guide.md
+│   │   ├── worldbuilding.md  magic-systems.md
+│   │   ├── foreshadowing.md       # 복선 25+개 (S/A/B/C 등급)
+│   │   ├── protagonist-bible.md   # 강지호 성장 추적
+│   │   ├── death-and-regression.md # 모래시계·재생 메커닉
+│   │   ├── tone-and-style.md      # 톤 / 금지 표현
+│   │   ├── story-framework-6-30.md  story-framework-21-70.md
+│   │   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
+│   │   ├── story-feedback-log.md
+│   │   └── blue/  red/  region-details/   # 작가 팀 작업본·지역 상세
 │   ├── revision/                  # 진행 추적
 │   │   ├── create-plan.md / fix_plan.md / alive-tracker.md
+│   │   └── inline-feedback.json   # 인라인 피드백 (구 docs/story/)
 │   └── _workspace/                # 에이전트 중간 산출물
-├── canned-master/  magitech-fire/  asteropos/  british-food/
+├── canned-master/  magitech-fire/  asteropos/  british-food/   # 각자 design/ 동일 구조
 
 docs/
-├── story/                         # dclass-hero 설정 바이블
-│   ├── canon-quickref.md          # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
-│   ├── characters.md  voice-guide.md
-│   ├── worldbuilding.md  magic-systems.md
-│   ├── foreshadowing.md           # 복선 25+개 (S/A/B/C 등급)
-│   ├── protagonist-bible.md       # 강지호 성장 추적
-│   ├── death-and-regression.md    # 모래시계·재생 메커닉
-│   ├── tone-and-style.md          # 톤 / 금지 표현
-│   ├── story-framework-6-30.md  story-framework-21-70.md
-│   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
-│   └── story-feedback-log.md  inline-feedback.json
 ├── narrative-style.md             # ★ 글로벌 서술체 v2 (모든 작품 적용 — tone-and-style보다 우선)
 
 .claude/
@@ -279,7 +281,7 @@ dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
 
 ### 피드백 시스템
 - **인라인**: 리더에서 텍스트 드래그 → `inline-feedback.json` → `/apply-feedback`
-- **스토리 피드백**: `docs/story/story-feedback-log.md` (FB-XXX·SYNC-XXX)
+- **스토리 피드백**: `projects/dclass-hero/design/story-feedback-log.md` (FB-XXX·SYNC-XXX)
 
 ---
 
@@ -288,13 +290,13 @@ dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
 | 질문 | 읽을 곳 |
 |---|---|
 | 프로젝트 전체 설정? | `projects/{project}/novel-config.md` |
-| 정본 압축본? | `docs/story/canon-quickref.md` (★ 1차 참조) |
+| 정본 압축본? | `projects/dclass-hero/design/canon-quickref.md` (★ 1차 참조) |
 | 글로벌 서술체? | `docs/narrative-style.md` (★ 1차 참조, tone-style보다 우선) |
-| EP N의 플롯 비트? | `docs/story/story-framework-21-70.md` (Part 2) |
-| 캐릭터 X 말투? | `docs/story/voice-guide.md` |
-| 복선 X 배치/회수? | `docs/story/foreshadowing.md` |
-| 모래시계 메커닉? | `docs/story/death-and-regression.md` + 가드레일 §11 (2026-04-25 리디파인) |
-| 금지 표현? | `docs/story/tone-and-style.md` + canon-quickref |
+| EP N의 플롯 비트? | `projects/dclass-hero/design/story-framework-21-70.md` (Part 2) |
+| 캐릭터 X 말투? | `projects/dclass-hero/design/voice-guide.md` |
+| 복선 X 배치/회수? | `projects/dclass-hero/design/foreshadowing.md` |
+| 모래시계 메커닉? | `projects/dclass-hero/design/death-and-regression.md` + 가드레일 §11 (2026-04-25 리디파인) |
+| 금지 표현? | `projects/dclass-hero/design/tone-and-style.md` + canon-quickref |
 | 에이전트 동작? | `.claude/agents/*.md` |
 | 스킬 실행? | `.claude/skills/*/SKILL.md` |
 | EP 등록? | 이 파일 §"EP 등록" |
