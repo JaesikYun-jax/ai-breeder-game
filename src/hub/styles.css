@@ -847,6 +847,57 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   box-shadow: 0 0 8px var(--accent);
 }
 
+/* --- Design Atlas link (dashboard quick-nav) --- */
+.design-link-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 22px 32px;
+  margin: 0 32px 36px;
+  border: 1px solid var(--ink-soft);
+  border-left-width: 3px;
+  background: var(--bg-2);
+  cursor: pointer;
+  transition: background 0.16s, transform 0.16s;
+  font-family: var(--font-mono);
+  color: var(--ink);
+}
+.design-link-card:hover {
+  background: rgba(255,255,255,0.02);
+  transform: translateX(2px);
+}
+.design-link-side { display: flex; flex-direction: column; gap: 4px; }
+.design-link-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.design-link-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.design-link-meta {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+}
+.design-link-summary {
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.design-link-cta {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .voyage-header,
@@ -861,4 +912,11 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   .atlas-preview { display: none; }
   .atlas-index { padding: 32px 16px 48px; }
   .meridian { display: none; }
+  .design-link-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 0 16px 28px;
+    padding: 18px 22px;
+  }
+  .design-link-cta { text-align: right; }
 }

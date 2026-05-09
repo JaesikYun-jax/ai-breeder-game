@@ -160,10 +160,31 @@ function renderReader(chapterId: string) {
   const bodyEl = document.querySelector<HTMLElement>('.reader-body');
   if (bodyEl && ch.raw) {
     initEditor({
-      projectId,
-      episodeId: chapterId,
       bodyEl,
       initialRaw: ch.raw,
+      save: async (newRaw, originalRaw) => {
+        try {
+          const res = await fetch('/__episode', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              project: projectId,
+              episodeId: chapterId,
+              originalRaw,
+              newRaw,
+            }),
+          });
+          if (res.status === 409) return { status: 'conflict' };
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            return { status: 'error', message: data?.error };
+          }
+          const data = (await res.json()) as { raw: string };
+          return { status: 'ok', raw: data.raw };
+        } catch {
+          return { status: 'error' };
+        }
+      },
       onSaved: (newRaw) => applyNewRaw(chapterId, newRaw),
     });
   }

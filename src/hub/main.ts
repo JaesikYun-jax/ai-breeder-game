@@ -11,10 +11,12 @@ import { PROJECTS, getProject } from './projects';
 import type { StoryProject, PillarProgress } from './projects';
 import { ALL_CHAPTERS as CHAPTERS } from '../novel/chapters';
 import type { ChapterMeta } from '../novel/chapters';
+import { getDesignDocs, groupedDesignDocs } from '../novel/design';
 
 const app = document.getElementById('app')!;
 
 let currentApp: string | null = null;
+let currentProjectId: string | null = null;
 let cleanupFn: (() => void) | null = null;
 
 // ─── Atmosphere (vignette + paper grain) ───────────
@@ -91,13 +93,17 @@ function projectChapterStats(projectId: string) {
 
 // ─── Router ────────────────────────────────────────
 interface Route {
-  app: 'hub' | 'dashboard' | 'novel';
+  app: 'hub' | 'dashboard' | 'novel' | 'design';
   projectId?: string;
   param?: string;
 }
 
 function getRoute(): Route {
   const hash = location.hash.slice(1) || '/';
+  const designDocMatch = hash.match(/^\/p\/([^/]+)\/design\/(.+)$/);
+  if (designDocMatch) return { app: 'design', projectId: designDocMatch[1], param: designDocMatch[2] };
+  const designIndexMatch = hash.match(/^\/p\/([^/]+)\/design$/);
+  if (designIndexMatch) return { app: 'design', projectId: designIndexMatch[1] };
   const readMatch = hash.match(/^\/p\/([^/]+)\/read\/(.+)$/);
   if (readMatch) return { app: 'novel', projectId: readMatch[1], param: readMatch[2] };
   const projMatch = hash.match(/^\/p\/([^/]+)$/);
@@ -108,17 +114,29 @@ function getRoute(): Route {
 async function onRouteChange() {
   const route = getRoute();
 
-  if (route.app === 'novel' && route.app === currentApp) return;
+  // Sub-app self-routes: only skip remount when we stay inside the same sub-app
+  // *and* the projectId hasn't changed. Otherwise (e.g. switching to another
+  // project's design view) we need a fresh mount so the sub-app picks up the
+  // new project context.
+  if (
+    (route.app === 'novel' || route.app === 'design') &&
+    route.app === currentApp &&
+    route.projectId === currentProjectId
+  ) return;
 
   if (cleanupFn) {
     cleanupFn();
     cleanupFn = null;
   }
   currentApp = route.app;
+  currentProjectId = route.projectId ?? null;
 
   if (route.app === 'novel' && route.projectId) {
     const { initNovelApp } = await import('../novel/main');
     cleanupFn = initNovelApp(app, route.projectId);
+  } else if (route.app === 'design' && route.projectId) {
+    const { initDesignApp } = await import('../novel/design-view');
+    cleanupFn = initDesignApp(app, route.projectId);
   } else if (route.app === 'dashboard' && route.projectId) {
     renderDashboard(route.projectId);
   } else {
@@ -362,6 +380,8 @@ function renderDashboard(projectId: string) {
         </div>
       </div>
 
+      ${renderDesignAtlasCard(projectId, project.color)}
+
       ${project.pillars ? renderPillarsHTML(project.pillars, project.color) : ''}
 
       ${renderLogbookHTML(allChapters, project)}
@@ -369,6 +389,24 @@ function renderDashboard(projectId: string) {
   `;
 
   bindDashboardEvents(allChapters, project);
+}
+
+function renderDesignAtlasCard(projectId: string, accent: string): string {
+  const docs = getDesignDocs(projectId);
+  if (docs.length === 0) return '';
+  const groups = groupedDesignDocs(projectId);
+  const groupSummary = groups.map((g) => `${escapeHtml(g.label)} (${g.docs.length})`).join(' · ');
+  return `
+    <div class="design-link-card" data-action="go-design" style="border-color:${accent}">
+      <div class="design-link-side">
+        <div class="design-link-eyebrow" style="color:${accent}">📐 SETTINGS BIBLE · 설계 도서</div>
+        <div class="design-link-title">Design Atlas</div>
+        <div class="design-link-meta">${docs.length} 개 문서 · ${groups.length} 분류</div>
+      </div>
+      <div class="design-link-summary">${groupSummary}</div>
+      <div class="design-link-cta" style="color:${accent}">열기 →</div>
+    </div>
+  `;
 }
 
 function renderPillarsHTML(pillars: PillarProgress[], color: string): string {
@@ -513,6 +551,8 @@ function bindDashboardEvents(allChapters: ChapterMeta[], project: StoryProject) 
     const action = target.dataset.action;
     if (action === 'go-hub') {
       location.hash = '/';
+    } else if (action === 'go-design') {
+      location.hash = `/p/${project.id}/design`;
     } else if (action === 'open-chapter') {
       const id = target.dataset.id;
       if (id) location.hash = `/p/${project.id}/read/${id}`;
