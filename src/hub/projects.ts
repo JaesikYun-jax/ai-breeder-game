@@ -96,6 +96,19 @@ export const PROJECTS: StoryProject[] = [
     x: 0.78,
     y: 0.55,
   },
+  {
+    id: 'dual-save',
+    title: '부모님이 도윤마무를 걸어버렸다',
+    short: 'Doyunmamu',
+    description: '부모가 죽기 전 자식한테 시간 신 저주를 걸었다. 짐꾼 한도윤은 23세 신촌 반지하 영구 앵커로 회귀해 차원을 넘는다.',
+    emoji: '⌛',
+    genre: 'Recurrence · Hunter',
+    region: '신촌 / 다중 차원',
+    color: '#6a5b8a',
+    mag: 0.5,
+    x: 0.18,
+    y: 0.78,
+  },
 ];
 
 export function getProject(id: string): StoryProject | undefined {
