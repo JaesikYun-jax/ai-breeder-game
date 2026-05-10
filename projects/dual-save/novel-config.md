@@ -18,7 +18,9 @@ project:
   episode_dir: "projects/dual-save/episode/"
   work_dir: "projects/dual-save/revision/"
   design_dir: "projects/dual-save/design/"
-  episode_format: "5,500자 ± 500자"
+  episode_format: "5,200자 ± 400자 (4,800~5,600자, 뷰어 로직 기준 — 문피아 붙여넣기 정합)"
+  char_count_method: "viewer (헤딩·씬구분자·끝마커·강조 제거 + 개행/탭 제거 + 공백 유지)"
+  char_count_command: "node scripts/count-chars.mjs"
   total_episodes_target: "200~250화 (1년+ 연재)"
 ```
 
