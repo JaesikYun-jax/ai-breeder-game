@@ -158,7 +158,7 @@ export const PROJECTS: ProjectMeta[] = [
   },
   {
     id: 'dual-save',
-    title: '부모님이 도윤마무를 걸어버렸다',
+    title: 'SSS급 저주에 걸린 짐꾼',
     short: 'Doyunmamu',
     description:
       '부모가 죽기 전 자식한테 시간 신 저주를 걸었다. 짐꾼 한도윤은 23세 신촌 반지하 영구 앵커로 회귀해 차원을 넘는다.',
