@@ -1,9 +1,11 @@
 /**
  * Cartographer — Story Atlas
  * Routes:
- *   #/                        → Hub (atlas)
- *   #/p/:projectId            → Dashboard (voyage log)
- *   #/p/:projectId/read/:id   → Reader
+ *   #/                            → Hub (atlas)
+ *   #/p/:projectId                → Dashboard (voyage log)
+ *   #/p/:projectId/read/:id       → Reader
+ *   #/p/:projectId/atlas          → Settings Atlas (design docs index)
+ *   #/p/:projectId/atlas/:docId   → Settings Doc (rendered design doc)
  */
 
 import './styles.css';
@@ -11,6 +13,9 @@ import { PROJECTS, getProject } from './projects';
 import type { StoryProject, PillarProgress } from './projects';
 import { ALL_CHAPTERS as CHAPTERS } from '../novel/chapters';
 import type { ChapterMeta } from '../novel/chapters';
+import { getDesignDocs, getDesignDoc } from './designDocs';
+import type { DesignDoc } from './designDocs';
+import { renderDesignDocHTML } from './markdown';
 
 const app = document.getElementById('app')!;
 
@@ -91,7 +96,7 @@ function projectChapterStats(projectId: string) {
 
 // ─── Router ────────────────────────────────────────
 interface Route {
-  app: 'hub' | 'dashboard' | 'novel';
+  app: 'hub' | 'dashboard' | 'novel' | 'atlas-index' | 'atlas-doc';
   projectId?: string;
   param?: string;
 }
@@ -100,6 +105,10 @@ function getRoute(): Route {
   const hash = location.hash.slice(1) || '/';
   const readMatch = hash.match(/^\/p\/([^/]+)\/read\/(.+)$/);
   if (readMatch) return { app: 'novel', projectId: readMatch[1], param: readMatch[2] };
+  const atlasDocMatch = hash.match(/^\/p\/([^/]+)\/atlas\/(.+)$/);
+  if (atlasDocMatch) return { app: 'atlas-doc', projectId: atlasDocMatch[1], param: atlasDocMatch[2] };
+  const atlasMatch = hash.match(/^\/p\/([^/]+)\/atlas$/);
+  if (atlasMatch) return { app: 'atlas-index', projectId: atlasMatch[1] };
   const projMatch = hash.match(/^\/p\/([^/]+)$/);
   if (projMatch) return { app: 'dashboard', projectId: projMatch[1] };
   return { app: 'hub' };
@@ -121,6 +130,10 @@ async function onRouteChange() {
     cleanupFn = initNovelApp(app, route.projectId);
   } else if (route.app === 'dashboard' && route.projectId) {
     renderDashboard(route.projectId);
+  } else if (route.app === 'atlas-index' && route.projectId) {
+    renderSettingsAtlas(route.projectId);
+  } else if (route.app === 'atlas-doc' && route.projectId && route.param) {
+    renderSettingsDoc(route.projectId, route.param);
   } else {
     renderHub();
   }
@@ -364,11 +377,38 @@ function renderDashboard(projectId: string) {
 
       ${project.pillars ? renderPillarsHTML(project.pillars, project.color) : ''}
 
+      ${renderSettingsLinkHTML(projectId, project.color)}
+
       ${renderLogbookHTML(allChapters, project)}
     </div>
   `;
 
   bindDashboardEvents(allChapters, project);
+}
+
+function renderSettingsLinkHTML(projectId: string, color: string): string {
+  const docs = getDesignDocs(projectId);
+  if (docs.length === 0) return '';
+
+  const counts: Record<string, number> = {};
+  for (const d of docs) counts[d.group] = (counts[d.group] ?? 0) + 1;
+  const summary = Object.entries(counts)
+    .map(([k, v]) => `${escapeHtml(k)} ${v}`)
+    .join(' · ');
+  const totalKB = (docs.reduce((s, d) => s + d.bytes, 0) / 1024).toFixed(1);
+
+  return `
+    <div class="settings-link" data-action="go-atlas" data-project="${escapeAttr(projectId)}" style="--accent:${color}">
+      <div class="settings-link-eyebrow" style="color:${color}">★ Cartographer's Atlas</div>
+      <div class="settings-link-row">
+        <div>
+          <div class="settings-link-title">설계 문서 ${docs.length}편</div>
+          <div class="settings-link-meta">${summary} · 총 ${totalKB} KB</div>
+        </div>
+        <div class="settings-link-cta" style="color:${color}">설정 아틀라스 열기 →</div>
+      </div>
+    </div>
+  `;
 }
 
 function renderPillarsHTML(pillars: PillarProgress[], color: string): string {
@@ -520,8 +560,209 @@ function bindDashboardEvents(allChapters: ChapterMeta[], project: StoryProject) 
       e.stopPropagation();
       const id = target.dataset.id;
       if (id) copyChapterBody(id, target);
+    } else if (action === 'go-atlas') {
+      const id = target.dataset.project;
+      if (id) location.hash = `/p/${id}/atlas`;
     }
   });
+}
+
+// ─── Settings Atlas: design docs index ─────────────
+function renderSettingsAtlas(projectId: string) {
+  const project = getProject(projectId);
+  if (!project) {
+    location.hash = '/';
+    return;
+  }
+  const docs = getDesignDocs(projectId);
+
+  // Group by group label
+  const groups: Record<string, DesignDoc[]> = {};
+  for (const d of docs) {
+    if (!groups[d.group]) groups[d.group] = [];
+    groups[d.group].push(d);
+  }
+  const groupOrder = ['큰 설계', '작은 설계', '기타'];
+
+  const groupHTML = groupOrder
+    .filter((g) => groups[g])
+    .map((g) => {
+      const cards = groups[g]
+        .map((d) => {
+          const kb = (d.bytes / 1024).toFixed(1);
+          return `
+            <div class="atlas-doc-card" data-action="open-doc" data-id="${escapeAttr(d.id)}" style="--accent:${project.color}">
+              <div class="atlas-doc-card-eyebrow" style="color:${project.color}">${escapeHtml(typeIcon(d.type))} ${escapeHtml(typeShort(d.type))}</div>
+              <div class="atlas-doc-card-title">${escapeHtml(d.label)}</div>
+              <div class="atlas-doc-card-meta">${kb} KB · ${escapeHtml(d.filename)}.md</div>
+            </div>
+          `;
+        })
+        .join('');
+      return `
+        <section class="atlas-doc-group">
+          <div class="atlas-doc-group-label">— ${escapeHtml(g)}</div>
+          <div class="atlas-doc-group-grid">${cards}</div>
+        </section>
+      `;
+    })
+    .join('');
+
+  app.innerHTML = `
+    ${atmosphereHTML()}
+    <div class="voyage settings-atlas" style="--accent:${project.color}">
+      <div class="cartouche">
+        <span>
+          <span class="cartouche-action" data-action="go-hub">← ATLAS</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="cartouche-action" data-action="go-project" data-project="${project.id}">${escapeHtml(project.short.toUpperCase())}</span>
+          <span class="breadcrumb-sep">/</span>
+          <span>SETTINGS ATLAS</span>
+        </span>
+        <span class="cartouche-right">${escapeHtml(project.region)}</span>
+      </div>
+
+      <div class="voyage-header">
+        <div>
+          <div class="voyage-header-eyebrow" style="color:${project.color}">★ Cartographer's Atlas · ${docs.length} documents</div>
+          <h1 class="voyage-title">${escapeHtml(project.title)}</h1>
+          <p class="voyage-desc">큰 설계와 작은 설계의 모든 문서. 별을 클릭해 설계 문서를 펼치세요.</p>
+        </div>
+        <div class="voyage-bearing">
+          ${compassRoseSVG(140, 0.6)}
+          <div class="voyage-bearing-label">SETTINGS<br/>ATLAS</div>
+        </div>
+      </div>
+
+      ${
+        docs.length === 0
+          ? `<div class="logbook-empty">이 별의 설계 문서는 아직 정리되지 않았습니다.<br/><span style="opacity:0.7">projects/${escapeHtml(projectId)}/design/ 디렉토리에 .md 파일을 추가하면 자동으로 표시됩니다.</span></div>`
+          : groupHTML
+      }
+    </div>
+  `;
+
+  app.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
+    if (!target) return;
+    const action = target.dataset.action;
+    if (action === 'go-hub') {
+      location.hash = '/';
+    } else if (action === 'go-project') {
+      const id = target.dataset.project;
+      if (id) location.hash = `/p/${id}`;
+    } else if (action === 'open-doc') {
+      const id = target.dataset.id;
+      if (id) location.hash = `/p/${projectId}/atlas/${id}`;
+    }
+  });
+}
+
+// ─── Settings Doc: render single design doc ────────
+function renderSettingsDoc(projectId: string, docId: string) {
+  const project = getProject(projectId);
+  if (!project) {
+    location.hash = '/';
+    return;
+  }
+  const doc = getDesignDoc(projectId, docId);
+  if (!doc) {
+    location.hash = `/p/${projectId}/atlas`;
+    return;
+  }
+
+  const html = renderDesignDocHTML(doc.raw);
+  const kb = (doc.bytes / 1024).toFixed(1);
+
+  // navigation: prev/next within same project
+  const allDocs = getDesignDocs(projectId);
+  const idx = allDocs.findIndex((d) => d.id === docId);
+  const prev = idx > 0 ? allDocs[idx - 1] : null;
+  const next = idx < allDocs.length - 1 ? allDocs[idx + 1] : null;
+
+  app.innerHTML = `
+    ${atmosphereHTML()}
+    <div class="design-doc-page" style="--accent:${project.color}">
+      <div class="cartouche">
+        <span>
+          <span class="cartouche-action" data-action="go-hub">← ATLAS</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="cartouche-action" data-action="go-project" data-project="${project.id}">${escapeHtml(project.short.toUpperCase())}</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="cartouche-action" data-action="go-atlas" data-project="${project.id}">SETTINGS</span>
+          <span class="breadcrumb-sep">/</span>
+          <span>${escapeHtml(doc.label)}</span>
+        </span>
+        <span class="cartouche-right">${kb} KB</span>
+      </div>
+
+      <article class="design-doc">
+        <div class="design-doc-eyebrow" style="color:${project.color}">★ ${escapeHtml(typeIcon(doc.type))} ${escapeHtml(typeShort(doc.type))} · ${escapeHtml(doc.group)}</div>
+        <div class="design-doc-body">${html}</div>
+      </article>
+
+      <div class="design-doc-nav">
+        ${prev ? `<button class="design-doc-nav-btn" data-action="open-doc" data-id="${escapeAttr(prev.id)}">← ${escapeHtml(prev.label)}</button>` : '<span></span>'}
+        <button class="design-doc-nav-btn center" data-action="go-atlas" data-project="${project.id}">⌂ Settings Atlas</button>
+        ${next ? `<button class="design-doc-nav-btn" data-action="open-doc" data-id="${escapeAttr(next.id)}">${escapeHtml(next.label)} →</button>` : '<span></span>'}
+      </div>
+    </div>
+  `;
+
+  app.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>('[data-action]');
+    if (!target) return;
+    const action = target.dataset.action;
+    if (action === 'go-hub') {
+      location.hash = '/';
+    } else if (action === 'go-project') {
+      const id = target.dataset.project;
+      if (id) location.hash = `/p/${id}`;
+    } else if (action === 'go-atlas') {
+      const id = target.dataset.project;
+      if (id) location.hash = `/p/${id}/atlas`;
+    } else if (action === 'open-doc') {
+      const id = target.dataset.id;
+      if (id) location.hash = `/p/${projectId}/atlas/${id}`;
+    }
+  });
+}
+
+function typeIcon(type: string): string {
+  switch (type) {
+    case 'bootstrap':
+      return '🌍';
+    case 'character':
+      return '👤';
+    case 'plot':
+      return '🗺️';
+    case 'character_detail':
+      return '◐';
+    case 'plot_detail':
+      return '◑';
+    case 'detail':
+      return '✦';
+    default:
+      return '◇';
+  }
+}
+function typeShort(type: string): string {
+  switch (type) {
+    case 'bootstrap':
+      return 'Bootstrap';
+    case 'character':
+      return 'Character';
+    case 'plot':
+      return 'Plot & Hook';
+    case 'character_detail':
+      return 'Character Detail';
+    case 'plot_detail':
+      return 'Plot Detail';
+    case 'detail':
+      return 'Episode Detail';
+    default:
+      return 'Other';
+  }
 }
 
 // ─── Helpers ───────────────────────────────────────
