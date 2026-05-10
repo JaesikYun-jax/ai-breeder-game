@@ -7,30 +7,27 @@
  *   PUT /__design                                  → body { project, docKey, originalRaw, newRaw }
  *                                                    → 200 { raw } | 404 | 409 { current } | 4xx
  *
- * Storage: projects/{project}/design/{docKey}.md
+ * 화이트리스트·경로는 src/projects/registry.ts 단일 소스에서 가져온다.
+ * Storage: <projectPaths(project).designDir>/{docKey}.md
  *
- * Safety: project whitelist + docKey regex (path-traversal hardened — no '..',
- * no leading slash, only [a-z0-9_-] segments separated by /) + originalRaw
- * equality check (concurrent-edit guard).
+ * Safety: ACTIVE_PROJECT_IDS 화이트리스트 + docKey regex (path-traversal hardened) +
+ * originalRaw equality check (concurrent-edit guard).
+ *
+ * docKey regex 주의: 한글 파일명(예: '스킬컴파일러_캐릭터시트')도 허용해야 함 →
+ * Unicode letter 허용. 다만 슬래시·점·역슬래시·공백 등은 모두 차단.
  */
 
 import { Plugin } from 'vite';
 import fs from 'node:fs';
 import path from 'node:path';
+import { ACTIVE_PROJECT_IDS, projectPaths } from './src/projects/registry';
 
-const ALLOWED_PROJECTS = new Set([
-  'dclass-hero',
-  'canned-master',
-  'asteropos',
-  'skill-compiler',
-]);
-
-// Each path segment: starts with [a-z0-9], then [a-z0-9_-] only.
-// Multiple segments allowed via '/'. No leading/trailing slash. No '..'.
-const DOC_KEY_RE = /^[a-z0-9][a-z0-9_-]*(?:\/[a-z0-9][a-z0-9_-]*)*$/;
+// 각 세그먼트: 영문/숫자/한글 + 언더스코어/하이픈만 허용. 점·공백·역슬래시·'..' 차단.
+// 슬래시로 다중 세그먼트 가능. 선두/말미 슬래시 X. 첫 글자는 영문/숫자/한글만.
+const DOC_KEY_RE = /^[a-z0-9가-힣][a-z0-9_\-가-힣]*(?:\/[a-z0-9가-힣][a-z0-9_\-가-힣]*)*$/i;
 
 function designPath(root: string, project: string, docKey: string): string {
-  return path.resolve(root, `projects/${project}/design/${docKey}.md`);
+  return path.resolve(root, projectPaths(project).designDir, `${docKey}.md`);
 }
 
 function badRequest(res: import('http').ServerResponse, msg: string) {
@@ -81,7 +78,7 @@ export default function designPlugin(): Plugin {
           const project = params.get('project') ?? '';
           const key = params.get('key') ?? '';
 
-          if (!ALLOWED_PROJECTS.has(project)) return badRequest(res, 'Invalid project');
+          if (!ACTIVE_PROJECT_IDS.has(project)) return badRequest(res, 'Invalid project');
           if (!DOC_KEY_RE.test(key)) return badRequest(res, 'Invalid doc key');
 
           const filePath = designPath(root, project, key);
@@ -109,7 +106,7 @@ export default function designPlugin(): Plugin {
               };
               const { project, docKey, originalRaw, newRaw } = payload;
 
-              if (!project || !ALLOWED_PROJECTS.has(project)) {
+              if (!project || !ACTIVE_PROJECT_IDS.has(project)) {
                 return badRequest(res, 'Invalid project');
               }
               if (!docKey || !DOC_KEY_RE.test(docKey)) {

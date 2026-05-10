@@ -48,50 +48,83 @@
 
 ---
 
-## 프로젝트 구조
+## 프로젝트 구조 — 표준 경로 규약 (★ 단일 진실 공급원)
+
+모든 활성 프로젝트는 다음 표준 위치를 따른다. 한 군데만 위반해도 뷰어/스킬/Vite 플러그인이 누락 처리한다.
 
 ```
-src/
-├── novel/              # 웹소설 리더 앱 (Vite + TS)
-│   ├── chapters.ts     # EP 레지스트리 (raw import + 메타데이터)
-│   ├── renderer.ts     # 마크다운 → HTML 렌더러
-│   └── ...
-├── data/novel/         # 챕터 원본 마크다운 (Vite 번들)
-│   ├── arc1_azelia/   ~ arc6_kaizer/   # dclass-hero
-│   ├── cm_*/                            # canned-master
-│   ├── mf_*/                            # magitech-fire
-│   └── ast_*/                           # asteropos
+projects/{id}/                     # 활성 프로젝트 워크스페이스 (id = 슬러그)
+├── novel-config.md                # 파이프라인 중앙 설정 (target_platform·episode_dir·design_dir·매핑·가드레일)
+├── episode/EP{NNN}.md             # 본문 — Vite glob 자동 수집, 별도 import 불필요
+├── design/**/*.md                 # 설계 문서 — Design Atlas 자동 수집·카테고리 분류
+└── revision/                      # 진행 추적
+    ├── inline-feedback.json       # 인라인 피드백 (feedbackEnabled 프로젝트만)
+    ├── create-plan.md / rewrite-plan.md / alive-tracker.md
+    └── _workspace/                # 에이전트 중간 산출물
 
-projects/                          # 5개 프로젝트 워크스페이스
-├── dclass-hero/
-│   ├── novel-config.md            # 중앙 설정 (target_platform·episode_dir·매핑·가드레일)
-│   ├── _legacy_novel-config.md    # 마이그레이션 보존본
-│   ├── episode/                   # EP001.md ~ EP{NNN}.md (신 파이프라인)
-│   ├── design/                    # ★ 설정 바이블 (구 docs/story/) — 표준 위치로 이동 완료
-│   │   ├── canon-quickref.md      # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
-│   │   ├── characters.md  voice-guide.md
-│   │   ├── worldbuilding.md  magic-systems.md
-│   │   ├── foreshadowing.md       # 복선 25+개 (S/A/B/C 등급)
-│   │   ├── protagonist-bible.md   # 강지호 성장 추적
-│   │   ├── death-and-regression.md # 모래시계·재생 메커닉
-│   │   ├── tone-and-style.md      # 톤 / 금지 표현
-│   │   ├── story-framework-6-30.md  story-framework-21-70.md
-│   │   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
-│   │   ├── story-feedback-log.md
-│   │   └── blue/  red/  region-details/   # 작가 팀 작업본·지역 상세
-│   ├── revision/                  # 진행 추적
-│   │   ├── create-plan.md / fix_plan.md / alive-tracker.md
-│   │   └── inline-feedback.json   # 인라인 피드백 (구 docs/story/)
-│   └── _workspace/                # 에이전트 중간 산출물
-├── canned-master/  magitech-fire/  asteropos/  british-food/   # 각자 design/ 동일 구조
+archive/{id}/                      # 보관 중인 프로젝트 (뷰어/파이프라인 제외)
+└── ...                            # 예: archive/magitech-fire/
+
+src/
+├── projects/                      # ★ SSOT — 모든 하드코딩이 여기로 모임
+│   ├── registry.ts                # ProjectMeta + projectPaths() + ACTIVE_PROJECT_IDS
+│   └── episode-titles.ts          # 프로젝트별 EP 제목·아크 (메타 미정의 시 fallback)
+├── novel/                         # 리더/Design Atlas 앱 (Vite + TS)
+│   ├── chapters.ts                # registry × glob × episode-titles 결합
+│   ├── design.ts                  # registry × glob 자동 수집
+│   ├── design-view.ts / design-renderer.ts
+│   ├── renderer.ts / editor.ts / feedback.ts
+│   └── main.ts
+├── hub/                           # Cartographer Hub
+│   ├── projects.ts                # registry 얇은 re-export (PROJECTS / getProject)
+│   └── main.ts
+└── ...
+
+vite-plugin-episode.ts             # /__episode  (registry의 ACTIVE_PROJECT_IDS + projectPaths)
+vite-plugin-design.ts              # /__design   (한글 파일명 지원)
+vite-plugin-feedback.ts            # /__feedback (멀티프로젝트, ?project=X)
 
 docs/
-├── narrative-style.md             # ★ 글로벌 서술체 v2 (모든 작품 적용 — tone-and-style보다 우선)
+└── narrative-style.md             # ★ 글로벌 서술체 v2 (모든 작품 적용)
 
 .claude/
 ├── agents/                        # 18 에이전트 (awesome-novel-studio)
 └── skills/                        # 10 스킬
 ```
+
+### 표준 경로 위반 = 자동 수집 누락 (★ 중요)
+
+| 표준 경로 | 위반 사례 → 결과 |
+|---|---|
+| `projects/{id}/episode/EP{NNN}.md` | 다른 위치에 저장 → 리더에서 보이지 않음 (chapters.ts glob 누락) |
+| `projects/{id}/design/**/*.md` | `docs/{id}/`처럼 다른 위치 → Design Atlas에 안 보임 |
+| `projects/{id}/revision/inline-feedback.json` | — | 자동 생성됨 (feedbackEnabled 프로젝트만) |
+
+`novel-config.md`의 `episode_dir/design_dir/work_dir`은 반드시 위 표준을 가리켜야 한다. 다른 경로를 쓰면 design-big/design-small 스킬은 동작하지만 뷰어에서 안 보인다.
+
+### 새 프로젝트 추가 체크리스트
+
+1. `projects/{id}/` + `episode/`, `design/`, `revision/` 디렉토리 생성
+2. `projects/{id}/novel-config.md` 작성 (위 표준 경로 따름)
+3. `src/projects/registry.ts`의 `PROJECTS` 배열에 항목 추가
+4. EP 작성 시 `src/projects/episode-titles.ts`의 해당 프로젝트 entries에 제목·아크 추가 (생략 시 `{N}화` / `Misc` fallback)
+5. dev 서버 reload → 허브에 자동 표시, Design Atlas에 자동 등록
+
+### 프로젝트 보관(archive)
+
+1. 디렉토리를 `archive/{id}/`로 이동
+2. `src/projects/registry.ts`의 PROJECTS 배열에서 항목 제거 또는 `archived: true` 플래그
+3. 자동으로 모든 뷰어/플러그인에서 제외됨 (단일 ACTIVE_PROJECT_IDS 참조)
+
+### 정합성 검사
+
+```bash
+npm run check:chapters
+```
+
+- registry ↔ projects/ 디렉토리 매칭
+- episode-titles.ts ↔ 디스크 EP{NNN}.md 매칭 (orphan/fallback 경고)
+- 빈 파일·EP 번호 갭 감지
 
 ---
 
@@ -229,7 +262,7 @@ project:
 
 ---
 
-## EP 등록 (신 파이프라인)
+## EP 등록 (자동 — 2026-05-10 표준화 이후)
 
 ### 1. 마크다운 작성
 `projects/{project}/episode/EP{NNN}.md`
@@ -248,12 +281,22 @@ project:
 *EP{NNN} 끝. 다음: EP{NNN+1} 제목.*
 ```
 
-### 2. 리더 등록 (`src/novel/chapters.ts`)
-- raw import + CHAPTERS 배열 항목 (id: `EPxxx` 또는 프로젝트별 prefix)
-- 마이그레이션 메모: `ch/cm/mf/ast prefix → EP{NNN} 통일`
+### 2. 리더 자동 등록 (수동 import 불필요)
 
-### 3. 메타 (`projects/{project}/episode/_episode_meta.json` 또는 동등 구조)
-프로젝트별 합성키 ID + summary + status
+`src/novel/chapters.ts`가 Vite glob (`projects/*/episode/EP*.md`)으로 자동 수집한다.
+파일을 떨구고 dev 서버를 reload하면 끝.
+
+### 3. 제목·아크 메타 (선택)
+
+`src/projects/episode-titles.ts`의 해당 프로젝트 entries에 추가:
+
+```typescript
+EPISODE_META['skill-compiler'].entries.push(
+  { num: 1, title: '편집 가능한 한 줄', arc: 'arc1_debut', arcLabel: 'Arc 1 — 디버거의 눈' }
+);
+```
+
+생략 시 fallback (`{N}화` / 'Misc') — 리더에 보이긴 하나 그룹핑이 부정확. 정합성은 `npm run check:chapters`로 검증.
 
 ---
 

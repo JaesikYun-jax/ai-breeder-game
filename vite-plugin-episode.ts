@@ -6,26 +6,22 @@
  *   PUT /__episode                       → body { project, episodeId, originalRaw, newRaw }
  *                                          → 200 { raw } | 404 | 409 { current } | 4xx
  *
- * Storage: projects/{project}/episode/{episodeId}.md
+ * 화이트리스트·경로는 src/projects/registry.ts 단일 소스에서 가져온다.
+ * Storage: <projectPaths(project).episodeDir>/{episodeId}.md
  *
- * Safety: project whitelist + episodeId regex (path-traversal hardened) +
+ * Safety: ACTIVE_PROJECT_IDS 화이트리스트 + episodeId regex (path-traversal hardened) +
  * originalRaw equality check (concurrent-edit guard).
  */
 
 import { Plugin } from 'vite';
 import fs from 'node:fs';
 import path from 'node:path';
+import { ACTIVE_PROJECT_IDS, projectPaths } from './src/projects/registry';
 
-const ALLOWED_PROJECTS = new Set([
-  'dclass-hero',
-  'canned-master',
-  'magitech-fire',
-  'asteropos',
-]);
 const EPISODE_ID_RE = /^EP\d{3}$/;
 
 function episodePath(root: string, project: string, episodeId: string): string {
-  return path.resolve(root, `projects/${project}/episode/${episodeId}.md`);
+  return path.resolve(root, projectPaths(project).episodeDir, `${episodeId}.md`);
 }
 
 function badRequest(res: import('http').ServerResponse, msg: string) {
@@ -76,7 +72,7 @@ export default function episodePlugin(): Plugin {
           const project = params.get('project') ?? '';
           const id = params.get('id') ?? '';
 
-          if (!ALLOWED_PROJECTS.has(project)) return badRequest(res, 'Invalid project');
+          if (!ACTIVE_PROJECT_IDS.has(project)) return badRequest(res, 'Invalid project');
           if (!EPISODE_ID_RE.test(id)) return badRequest(res, 'Invalid episode id');
 
           const filePath = episodePath(root, project, id);
@@ -104,7 +100,7 @@ export default function episodePlugin(): Plugin {
               };
               const { project, episodeId, originalRaw, newRaw } = payload;
 
-              if (!project || !ALLOWED_PROJECTS.has(project)) {
+              if (!project || !ACTIVE_PROJECT_IDS.has(project)) {
                 return badRequest(res, 'Invalid project');
               }
               if (!episodeId || !EPISODE_ID_RE.test(episodeId)) {

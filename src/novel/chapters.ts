@@ -1,97 +1,23 @@
 /**
- * Chapter registry — episode 메타데이터 및 raw import.
+ * Chapter registry — 활성 프로젝트의 EP 본문을 Vite glob으로 자동 수집한다.
  *
- * awesome-novel-studio 마이그레이션(2026-04-26): ch/cm/mf/ast prefix → EP{NNN} 통일.
- * magitech-fire (mf) 아카이브 이동(2026-05-09): archive/magitech-fire/ 보관.
- * 신규 프로젝트 skill-compiler (sc) 추가(2026-05-09): EP는 큰 설계 후 작성 예정.
- * 파일은 projects/{name}/episode/EP{NNN}.md 위치.
- * id는 프로젝트 내에서만 unique → ALL_CHAPTERS 조회 시 projectId 함께 전달 필요.
+ * 표준 위치: projects/{id}/episode/EP{NNN}.md
+ *   - id는 src/projects/registry.ts ACTIVE_PROJECT_IDS의 항목만 인식
+ *   - 디스크에 EP 파일을 추가하면 dev-server reload 시 자동 등록 (manual import 불필요)
+ *
+ * 메타데이터(제목·아크 라벨·상태)는 src/projects/episode-titles.ts에서 매핑.
+ *   - 메타 누락 EP는 '{N}화' / 'Misc' fallback (리더에서는 보임, 그룹핑은 'misc')
+ *   - "예정"(coming) placeholder는 episode-titles.ts에서 정의 (디스크 파일 없음, raw 비어있음)
+ *
+ * 합성키: id는 프로젝트 내에서만 unique → ALL_CHAPTERS 조회 시 projectId 함께 전달 필요.
  */
 
-// ── D급 스킬 이세계 용사 (dclass-hero) ──
-import dh001 from '../../projects/dclass-hero/episode/EP001.md?raw';
-import dh002 from '../../projects/dclass-hero/episode/EP002.md?raw';
-import dh003 from '../../projects/dclass-hero/episode/EP003.md?raw';
-import dh004 from '../../projects/dclass-hero/episode/EP004.md?raw';
-import dh005 from '../../projects/dclass-hero/episode/EP005.md?raw';
-import dh006 from '../../projects/dclass-hero/episode/EP006.md?raw';
-import dh007 from '../../projects/dclass-hero/episode/EP007.md?raw';
-import dh008 from '../../projects/dclass-hero/episode/EP008.md?raw';
-import dh009 from '../../projects/dclass-hero/episode/EP009.md?raw';
-import dh010 from '../../projects/dclass-hero/episode/EP010.md?raw';
-import dh011 from '../../projects/dclass-hero/episode/EP011.md?raw';
-import dh012 from '../../projects/dclass-hero/episode/EP012.md?raw';
-import dh013 from '../../projects/dclass-hero/episode/EP013.md?raw';
-import dh014 from '../../projects/dclass-hero/episode/EP014.md?raw';
-import dh015 from '../../projects/dclass-hero/episode/EP015.md?raw';
-import dh016 from '../../projects/dclass-hero/episode/EP016.md?raw';
-import dh017 from '../../projects/dclass-hero/episode/EP017.md?raw';
-import dh018 from '../../projects/dclass-hero/episode/EP018.md?raw';
-import dh019 from '../../projects/dclass-hero/episode/EP019.md?raw';
-import dh020 from '../../projects/dclass-hero/episode/EP020.md?raw';
-import dh021 from '../../projects/dclass-hero/episode/EP021.md?raw';
-import dh022 from '../../projects/dclass-hero/episode/EP022.md?raw';
-import dh023 from '../../projects/dclass-hero/episode/EP023.md?raw';
-import dh024 from '../../projects/dclass-hero/episode/EP024.md?raw';
-import dh025 from '../../projects/dclass-hero/episode/EP025.md?raw';
-import dh026 from '../../projects/dclass-hero/episode/EP026.md?raw';
-import dh027 from '../../projects/dclass-hero/episode/EP027.md?raw';
-import dh028 from '../../projects/dclass-hero/episode/EP028.md?raw';
-import dh029 from '../../projects/dclass-hero/episode/EP029.md?raw';
-import dh030 from '../../projects/dclass-hero/episode/EP030.md?raw';
-import dh031 from '../../projects/dclass-hero/episode/EP031.md?raw';
-import dh032 from '../../projects/dclass-hero/episode/EP032.md?raw';
-import dh033 from '../../projects/dclass-hero/episode/EP033.md?raw';
-import dh034 from '../../projects/dclass-hero/episode/EP034.md?raw';
-import dh035 from '../../projects/dclass-hero/episode/EP035.md?raw';
-import dh036 from '../../projects/dclass-hero/episode/EP036.md?raw';
-import dh037 from '../../projects/dclass-hero/episode/EP037.md?raw';
-import dh038 from '../../projects/dclass-hero/episode/EP038.md?raw';
-import dh039 from '../../projects/dclass-hero/episode/EP039.md?raw';
-import dh040 from '../../projects/dclass-hero/episode/EP040.md?raw';
-import dh041 from '../../projects/dclass-hero/episode/EP041.md?raw';
-import dh042 from '../../projects/dclass-hero/episode/EP042.md?raw';
-
-// ── 봉인당한 천마 (canned-master) ──
-import cm001 from '../../projects/canned-master/episode/EP001.md?raw';
-import cm002 from '../../projects/canned-master/episode/EP002.md?raw';
-import cm003 from '../../projects/canned-master/episode/EP003.md?raw';
-import cm004 from '../../projects/canned-master/episode/EP004.md?raw';
-import cm005 from '../../projects/canned-master/episode/EP005.md?raw';
-import cm006 from '../../projects/canned-master/episode/EP006.md?raw';
-import cm007 from '../../projects/canned-master/episode/EP007.md?raw';
-import cm008 from '../../projects/canned-master/episode/EP008.md?raw';
-import cm009 from '../../projects/canned-master/episode/EP009.md?raw';
-import cm010 from '../../projects/canned-master/episode/EP010.md?raw';
-import cm011 from '../../projects/canned-master/episode/EP011.md?raw';
-import cm012 from '../../projects/canned-master/episode/EP012.md?raw';
-import cm013 from '../../projects/canned-master/episode/EP013.md?raw';
-import cm014 from '../../projects/canned-master/episode/EP014.md?raw';
-import cm015 from '../../projects/canned-master/episode/EP015.md?raw';
-import cm016 from '../../projects/canned-master/episode/EP016.md?raw';
-import cm017 from '../../projects/canned-master/episode/EP017.md?raw';
-import cm018 from '../../projects/canned-master/episode/EP018.md?raw';
-import cm019 from '../../projects/canned-master/episode/EP019.md?raw';
-import cm020 from '../../projects/canned-master/episode/EP020.md?raw';
-
-// ── 아스테로포스 (asteropos) ──
-import ast000 from '../../projects/asteropos/episode/EP000.md?raw';
-import ast001 from '../../projects/asteropos/episode/EP001.md?raw';
-import ast002 from '../../projects/asteropos/episode/EP002.md?raw';
-import ast003 from '../../projects/asteropos/episode/EP003.md?raw';
-import ast004 from '../../projects/asteropos/episode/EP004.md?raw';
-import ast005 from '../../projects/asteropos/episode/EP005.md?raw';
-import ast006 from '../../projects/asteropos/episode/EP006.md?raw';
-import ast007 from '../../projects/asteropos/episode/EP007.md?raw';
-import ast008 from '../../projects/asteropos/episode/EP008.md?raw';
-import ast009 from '../../projects/asteropos/episode/EP009.md?raw';
-import ast010 from '../../projects/asteropos/episode/EP010.md?raw';
-import ast011 from '../../projects/asteropos/episode/EP011.md?raw';
-import ast012 from '../../projects/asteropos/episode/EP012.md?raw';
-import ast013 from '../../projects/asteropos/episode/EP013.md?raw';
-import ast014 from '../../projects/asteropos/episode/EP014.md?raw';
-import ast015 from '../../projects/asteropos/episode/EP015.md?raw';
-import ast016 from '../../projects/asteropos/episode/EP016.md?raw';
+import { ACTIVE_PROJECTS } from '../projects/registry';
+import {
+  EPISODE_META,
+  lookupEpisodeMeta,
+  type ChapterStatus,
+} from '../projects/episode-titles';
 
 export interface ChapterMeta {
   id: string;
@@ -100,164 +26,113 @@ export interface ChapterMeta {
   arc: string;
   arcLabel: string;
   projectId: string;
-  status: 'writing' | 'complete' | 'published' | 'coming';
+  status: ChapterStatus;
   raw?: string;
 }
 
 const epId = (n: number) => `EP${String(n).padStart(3, '0')}`;
 
-// ── D급 스킬 이세계 용사 ──
-const DCLASS_TITLES: Array<[number, string, string, string]> = [
-  [1, '트럭이 오는 건 알고 있었다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
-  [2, '아젤리아 왕궁의 밤은 길다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
-  [3, '용사라는 직업의 현실', 'arc1_azelia', 'Arc 1 — 아젤리아'],
-  [4, '이 세계에도 편의점은 없다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
-  [5, '축복이라 쓰고 제물이라 읽는다', 'arc1_azelia', 'Arc 1 — 아젤리아'],
-  [6, '모래 위의 사람들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [7, '불을 빌리는 자들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [8, '계약', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [9, '모래폭풍', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [10, '꺼지지 않는 불', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [11, '명예로운 노예들', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [12, '최적화', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [13, '열사병은 걸리지 않는다', 'arc2_solaris', 'Arc 2 — 솔라리스'],
-  [14, '이를 갈다', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [15, '번개를 맞는 자', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [16, '과부하', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [17, '코드를 새기다', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [18, '빛의 왕국으로', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [19, '심판', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [20, '용사의 길', 'arc3_awakening', 'Arc 3 — 각성과 귀환'],
-  [21, '부왕은 부왕이 아니다', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [22, '재회', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [23, '약한 세계의 용사', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [24, '지하의 말', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [25, '두 나라의 그림', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [26, '솔라리스 가는 길', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [27, '모래의 약속', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [28, '비장의 무기', 'arc4_internal', 'Arc 4 — 내정의 해'],
-  [29, '사막의 새 호흡', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [30, '일곱 번째 오아시스', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [31, '정령석 작업장', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [32, '두 태양의 길', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [33, '모래 너머', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [34, '북쪽으로', 'arc5_caravan', 'Arc 5 — 사막의 캐러밴'],
-  [35, '강철의 첫날', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [36, '강철의 식탁', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [37, '변경의 침묵', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [38, '같은 결의 사람', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [39, '강철의 정원', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [40, '두 결의 충돌', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [41, '강철의 안쪽', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-  [42, '강철을 풀다', 'arc6_kaizer', 'Arc 6 — 강철의 궁정'],
-];
+// ── Auto-collection via Vite glob import ──
+//
+// `eager: true` inlines every EP file at build time so we get plain strings.
+// Path shape: ../../projects/{projectId}/episode/EP{NNN}.md
+const RAW_MODULES = import.meta.glob('../../projects/*/episode/EP*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
 
-const DCLASS_RAWS = [
-  dh001, dh002, dh003, dh004, dh005, dh006, dh007, dh008, dh009, dh010,
-  dh011, dh012, dh013, dh014, dh015, dh016, dh017, dh018, dh019, dh020,
-  dh021, dh022, dh023, dh024, dh025, dh026, dh027, dh028, dh029, dh030,
-  dh031, dh032, dh033, dh034, dh035, dh036, dh037, dh038, dh039, dh040,
-  dh041, dh042,
-];
+const PATH_RE = /\/projects\/([^/]+)\/episode\/EP(\d{3})\.md$/;
 
-export const CHAPTERS: ChapterMeta[] = DCLASS_TITLES.map(([num, title, arc, arcLabel], i) => ({
-  id: epId(num),
-  num,
-  title,
-  arc,
-  arcLabel,
-  projectId: 'dclass-hero',
-  status: num <= 5 ? 'published' : 'writing',
-  raw: DCLASS_RAWS[i],
-}));
+interface DiskEpisode {
+  projectId: string;
+  num: number;
+  raw: string;
+}
 
-// ── Canned Master (천년묵은 통조림) ──
-const CM_TITLES: Array<[number, string, string, string]> = [
-  [1, '손님', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [2, '석관', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [3, '조수석', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [4, '아리수', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [5, '부교주', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [6, '남행', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [7, '계곡', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [8, '응급실', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [9, '기적', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [10, '서연', 'cm_arc1_opening', 'Arc 1 — 개봉'],
-  [11, '입성', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [12, '삼파', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [13, '미행', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [14, '자객', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [15, '후원자', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [16, '인질', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [17, '물의 경로', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [18, '심판', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [19, '백준하', 'cm_arc2_confront', 'Arc 2 — 대면'],
-  [20, '습격', 'cm_arc2_confront', 'Arc 2 — 대면'],
-];
-const CM_RAWS = [
-  cm001, cm002, cm003, cm004, cm005, cm006, cm007, cm008, cm009, cm010,
-  cm011, cm012, cm013, cm014, cm015, cm016, cm017, cm018, cm019, cm020,
-];
-export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = CM_TITLES.map(([num, title, arc, arcLabel], i) => ({
-  id: epId(num),
-  num,
-  title,
-  arc,
-  arcLabel,
-  projectId: 'canned-master',
-  status: 'writing',
-  raw: CM_RAWS[i],
-}));
+function collectDiskEpisodes(): DiskEpisode[] {
+  const out: DiskEpisode[] = [];
+  for (const [path, raw] of Object.entries(RAW_MODULES)) {
+    const m = path.match(PATH_RE);
+    if (!m) continue;
+    out.push({
+      projectId: m[1],
+      num: parseInt(m[2], 10),
+      raw,
+    });
+  }
+  return out;
+}
 
-// ── Skill Compiler (나에게만 스킬이 코드로 보인다) ──
-// EP는 큰 설계(`/design-big`) 후 작성. EP001 추가 시 import 및 SC_TITLES/SC_RAWS 추가 필요.
-export const SKILL_COMPILER_CHAPTERS: ChapterMeta[] = [];
+const ACTIVE_IDS = new Set(ACTIVE_PROJECTS.map((p) => p.id));
 
-// ── Asteropos ──
-export const ASTEROPOS_CHAPTERS: ChapterMeta[] = [
-  { id: 'EP000', num: 0, title: '프롤로그 — 별 떨어진 밤', arc: 'ast_prologue', arcLabel: '프롤로그', projectId: 'asteropos', status: 'writing', raw: ast000 },
-  { id: 'EP001', num: 1, title: '구덩이', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast001 },
-  { id: 'EP002', num: 2, title: '신의 은총', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast002 },
-  { id: 'EP003', num: 3, title: '현자의 재림', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast003 },
-  { id: 'EP004', num: 4, title: '마당의 끝', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast004 },
-  { id: 'EP005', num: 5, title: '사라진 마을', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast005 },
-  { id: 'EP006', num: 6, title: '마차 위에서', arc: 'arc1_village', arcLabel: 'Arc 1 — 양부모 마을', projectId: 'asteropos', status: 'writing', raw: ast006 },
-  { id: 'EP007', num: 7, title: '라이덴 마법학원 도착', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast007 },
-  { id: 'EP008', num: 8, title: '룬 기초', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast008 },
-  { id: 'EP009', num: 9, title: '도서관 일상', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast009 },
-  { id: 'EP010', num: 10, title: '룬 결투', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast010 },
-  { id: 'EP011', num: 11, title: '자각의 화', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast011 },
-  { id: 'EP012', num: 12, title: '제국 장학생 통보', arc: 'arc2a_leiden', arcLabel: 'Arc 2-a — 라이덴 마법학원', projectId: 'asteropos', status: 'writing', raw: ast012 },
-  { id: 'EP013', num: 13, title: '제국 수도 도착', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast013 },
-  { id: 'EP014', num: 14, title: '검술 아카데미 지원', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast014 },
-  { id: 'EP015', num: 15, title: '입학·귀족 라이벌', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast015 },
-  { id: 'EP016', num: 16, title: '첫 합동 훈련', arc: 'arc2b_imperial', arcLabel: 'Arc 2-b — 제국 검술 아카데미', projectId: 'asteropos', status: 'writing', raw: ast016 },
-  ...Array.from({ length: 4 }, (_, i) => ({
-    id: epId(i + 17),
-    num: i + 17,
-    title: `${i + 17}화 (예정)`,
-    arc: 'arc2b_imperial',
-    arcLabel: 'Arc 2-b — 제국 검술 아카데미',
-    projectId: 'asteropos',
-    status: 'coming' as const,
-  })),
-  ...Array.from({ length: 14 }, (_, i) => ({
-    id: epId(i + 25),
-    num: i + 25,
-    title: `${i + 25}화 (예정)`,
-    arc: 'arc3_freecity',
-    arcLabel: 'Arc 3 — 자유 도시 + 첫 성석',
-    projectId: 'asteropos',
-    status: 'coming' as const,
-  })),
-];
+function buildProjectChapters(projectId: string): ChapterMeta[] {
+  const diskByNum = new Map<number, string>();
+  for (const ep of collectDiskEpisodes()) {
+    if (ep.projectId === projectId) diskByNum.set(ep.num, ep.raw);
+  }
 
-export const ALL_CHAPTERS: ChapterMeta[] = [
-  ...CHAPTERS,
-  ...CANNED_MASTER_CHAPTERS,
-  ...ASTEROPOS_CHAPTERS,
-  ...SKILL_COMPILER_CHAPTERS,
-];
+  const meta = EPISODE_META[projectId];
+  const result: ChapterMeta[] = [];
+
+  // 1. 디스크 파일 기준 — 메타가 있으면 매칭, 없으면 fallback
+  for (const [num, raw] of diskByNum) {
+    const m = lookupEpisodeMeta(projectId, num);
+    result.push({
+      id: epId(num),
+      num,
+      title: m.title,
+      arc: m.arc,
+      arcLabel: m.arcLabel,
+      projectId,
+      status: m.status ?? 'writing',
+      raw,
+    });
+  }
+
+  // 2. 메타에 entries가 있지만 디스크에 파일 없는 항목 — 무시 (혼란 방지).
+  //    필요하면 episode-titles.ts의 coming 배열에 옮길 것.
+
+  // 3. coming placeholder (예정 EP)
+  for (const c of meta?.coming ?? []) {
+    if (diskByNum.has(c.num)) continue; // 디스크 파일이 생기면 자동 승격되므로 중복 방지
+    result.push({
+      id: epId(c.num),
+      num: c.num,
+      title: c.title,
+      arc: c.arc,
+      arcLabel: c.arcLabel,
+      projectId,
+      status: 'coming',
+    });
+  }
+
+  result.sort((a, b) => a.num - b.num);
+  return result;
+}
+
+// ── 활성 프로젝트별 챕터 배열 (이름 호환을 위해 유지된 export) ──
+export const CHAPTERS: ChapterMeta[] = buildProjectChapters('dclass-hero');
+export const CANNED_MASTER_CHAPTERS: ChapterMeta[] = buildProjectChapters('canned-master');
+export const SKILL_COMPILER_CHAPTERS: ChapterMeta[] = buildProjectChapters('skill-compiler');
+export const ASTEROPOS_CHAPTERS: ChapterMeta[] = buildProjectChapters('asteropos');
+
+/** 모든 활성 프로젝트의 챕터를 등록 순서대로 결합 */
+export const ALL_CHAPTERS: ChapterMeta[] = ACTIVE_PROJECTS.flatMap((p) =>
+  buildProjectChapters(p.id),
+);
+
+/** 활성 프로젝트가 아닌 디스크 파일이 있으면 dev 콘솔에 경고 (archive 누락 가드) */
+if (typeof console !== 'undefined') {
+  const stray = collectDiskEpisodes().filter((ep) => !ACTIVE_IDS.has(ep.projectId));
+  if (stray.length > 0) {
+    const ids = Array.from(new Set(stray.map((s) => s.projectId)));
+    console.warn(
+      `[chapters] disk has EPs for inactive projects: ${ids.join(', ')} ` +
+        `— add to src/projects/registry.ts or move to archive/`,
+    );
+  }
+}
 
 /**
  * Find a chapter by id.

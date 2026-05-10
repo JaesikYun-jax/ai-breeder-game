@@ -5,17 +5,26 @@
  *   1. 리더 본문에서 텍스트 드래그
  *   2. "코멘트" 버튼 클릭
  *   3. 코멘트 입력 → 저장
- *   → docs/story/inline-feedback.json에 축적
+ *   → projects/{projectId}/revision/inline-feedback.json에 축적
+ *
+ * 멀티프로젝트 지원: initFeedback에 projectId 전달 → /__feedback?project=X 라우팅.
+ * 서버 측 저장 위치는 vite-plugin-feedback.ts가 src/projects/registry.ts의 projectPaths()로 결정.
  */
 
 // ─── State ────────────────────────────────────────
 
+let currentProjectId = '';
 let currentChapterId = '';
 let currentChapterNum = 0;
 let currentChapterTitle = '';
 let feedbackCount = 0;
 
 // ─── API ──────────────────────────────────────────
+
+function feedbackUrl(suffix = ''): string {
+  const q = currentProjectId ? `?project=${encodeURIComponent(currentProjectId)}` : '';
+  return `/__feedback${suffix}${q}`;
+}
 
 async function postFeedback(data: {
   chapterId: string;
@@ -24,7 +33,7 @@ async function postFeedback(data: {
   quotedText: string;
   comment: string;
 }) {
-  const res = await fetch('/__feedback', {
+  const res = await fetch(feedbackUrl(), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -33,7 +42,7 @@ async function postFeedback(data: {
 }
 
 async function fetchFeedbacks() {
-  const res = await fetch('/__feedback');
+  const res = await fetch(feedbackUrl());
   return res.json() as Promise<
     Array<{
       id: string;
@@ -307,8 +316,10 @@ let mouseDownHandler: ((e: MouseEvent) => void) | null = null;
 export async function initFeedback(
   chapterId: string,
   chapterNum: number,
-  chapterTitle: string
+  chapterTitle: string,
+  projectId = ''
 ) {
+  currentProjectId = projectId;
   currentChapterId = chapterId;
   currentChapterNum = chapterNum;
   currentChapterTitle = chapterTitle;

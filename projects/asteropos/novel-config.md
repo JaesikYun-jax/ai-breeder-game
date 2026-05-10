@@ -18,6 +18,9 @@ project:
   design_dir: "projects/asteropos/design/"
 ```
 
+> 2026-05-10 표준 경로 마이그레이션: `docs/asteropos/` → `projects/asteropos/design/`.
+> 이제 다른 프로젝트와 동일한 표준(`projects/{id}/design/`)을 따른다 → Design Atlas 자동 등록.
+
 ---
 
 ## 2. 설정문서 매핑
