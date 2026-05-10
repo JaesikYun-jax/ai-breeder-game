@@ -1,24 +1,31 @@
 /**
- * Episode Editor — full-raw markdown edit mode for the reader view.
+ * Markdown Editor — full-raw edit mode for any markdown view (reader / design / etc.).
  *
- * Toggle ON  → .reader-body is hidden, a <textarea> with raw markdown is mounted
- *              alongside it inside .reader-page. Floating buttons swap to [✓ 저장][✕ 취소].
+ * Toggle ON  → bodyEl is hidden, a <textarea> with raw markdown is mounted alongside
+ *              it inside the same parent. Floating buttons swap to [✓ 저장][✕ 취소].
  * Toggle OFF → textarea removed, body restored, floating button returns to ✏️.
  *
- * Save  → PUT /__episode with originalRaw equality check.
- *         On success, calls onSaved(newRaw) so the host (main.ts) can mutate the
- *         in-memory cache and re-render the body without a page reload.
+ * Save  → calls opts.save(newRaw, originalRaw). Host implements the network call
+ *         (PUT /__episode, PUT /__design, …) and returns a discriminated result.
+ *         On 'ok', calls onSaved(newRaw) so the host can mutate the in-memory cache
+ *         and re-render the body without a page reload.
  *
  * Comments coexist: while editing, the textarea lives outside .reader-body, so
  * the comment selection handler (which scopes to .reader-body) naturally ignores
  * it — no extra wiring needed here.
  */
 
+export type EditorSaveResult =
+  | { status: 'ok'; raw: string }
+  | { status: 'conflict' }
+  | { status: 'error'; message?: string };
+
 export interface EditorOptions {
-  projectId: string;
-  episodeId: string;
   bodyEl: HTMLElement;
   initialRaw: string;
+  /** Persist new raw. Host owns endpoint + payload shape. */
+  save: (newRaw: string, originalRaw: string) => Promise<EditorSaveResult>;
+  /** Called after a successful save with the persisted raw. */
   onSaved: (newRaw: string) => void;
 }
 
@@ -154,35 +161,24 @@ async function save(): Promise<void> {
     return;
   }
 
-  const { projectId, episodeId, onSaved } = state.opts;
+  const { onSaved } = state.opts;
   state.saving = true;
   renderFabOn();
 
   try {
-    const res = await fetch('/__episode', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        project: projectId,
-        episodeId,
-        originalRaw: state.originalRaw,
-        newRaw,
-      }),
-    });
+    const result = await state.opts.save(newRaw, state.originalRaw);
 
-    if (res.status === 409) {
+    if (result.status === 'conflict') {
       showToast('외부에서 수정됨 — 새로고침 후 다시 시도', true);
       return;
     }
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      showToast(data.error ? `저장 실패 — ${data.error}` : '저장 실패', true);
+    if (result.status === 'error') {
+      showToast(result.message ? `저장 실패 — ${result.message}` : '저장 실패', true);
       return;
     }
 
-    const data = (await res.json()) as { raw: string };
-    state.originalRaw = data.raw;
-    onSaved(data.raw);
+    state.originalRaw = result.raw;
+    onSaved(result.raw);
     showToast('저장됨');
     deactivate(true);
   } catch {

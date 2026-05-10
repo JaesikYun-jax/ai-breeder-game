@@ -6,7 +6,8 @@
  *   POST  /__feedback         → add feedback
  *   PATCH /__feedback/:id     → update status
  *
- * Storage: docs/story/inline-feedback.json
+ * Storage: projects/dclass-hero/revision/inline-feedback.json
+ *   (current: dclass-hero only — multi-project support is a separate task)
  */
 
 import { Plugin } from 'vite';
@@ -24,7 +25,7 @@ export interface InlineFeedback {
   status: 'pending' | 'applied' | 'rejected' | 'wontfix';
 }
 
-const FEEDBACK_FILE = 'docs/story/inline-feedback.json';
+const FEEDBACK_FILE = 'projects/dclass-hero/revision/inline-feedback.json';
 
 function ensureFile(filePath: string): void {
   const dir = path.dirname(filePath);

@@ -847,6 +847,57 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   box-shadow: 0 0 8px var(--accent);
 }
 
+/* --- Design Atlas link (dashboard quick-nav) --- */
+.design-link-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 22px 32px;
+  margin: 0 32px 36px;
+  border: 1px solid var(--ink-soft);
+  border-left-width: 3px;
+  background: var(--bg-2);
+  cursor: pointer;
+  transition: background 0.16s, transform 0.16s;
+  font-family: var(--font-mono);
+  color: var(--ink);
+}
+.design-link-card:hover {
+  background: rgba(255,255,255,0.02);
+  transform: translateX(2px);
+}
+.design-link-side { display: flex; flex-direction: column; gap: 4px; }
+.design-link-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.design-link-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+.design-link-meta {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+}
+.design-link-summary {
+  font-size: 12px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+.design-link-cta {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .voyage-header,
@@ -861,322 +912,11 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   .atlas-preview { display: none; }
   .atlas-index { padding: 32px 16px 48px; }
   .meridian { display: none; }
-}
-
-/* ═══════════════════════════════════════════
-   Settings Atlas — Design Docs
-   ═══════════════════════════════════════════ */
-
-/* Dashboard 내 진입 카드 */
-.settings-link {
-  margin: 0 auto 48px;
-  max-width: var(--max-width);
-  padding: 24px 32px;
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--accent);
-  background: var(--bg-2);
-  cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
-}
-.settings-link:hover {
-  border-color: var(--accent);
-  transform: translateX(2px);
-}
-.settings-link-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.settings-link-row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-}
-.settings-link-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.settings-link-meta {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-soft);
-  letter-spacing: 0.4px;
-}
-.settings-link-cta {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* Settings Atlas 인덱스 페이지 */
-.settings-atlas .atlas-doc-group {
-  max-width: var(--max-width);
-  margin: 0 auto 48px;
-  padding: 0 32px;
-}
-.settings-atlas .atlas-doc-group-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-bottom: 16px;
-}
-.settings-atlas .atlas-doc-group-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-.atlas-doc-card {
-  border: 1px solid var(--rule);
-  background: var(--bg-2);
-  padding: 20px 22px;
-  cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-  position: relative;
-}
-.atlas-doc-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: var(--accent);
-  opacity: 0.5;
-  transition: opacity 0.2s;
-}
-.atlas-doc-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-}
-.atlas-doc-card:hover::before { opacity: 1; }
-.atlas-doc-card-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 1.2px;
-  margin-bottom: 12px;
-}
-.atlas-doc-card-title {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-.atlas-doc-card-meta {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-soft);
-  letter-spacing: 0.3px;
-}
-
-/* Single Design Doc Page */
-.design-doc-page {
-  min-height: 100vh;
-}
-.design-doc {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 40px 32px 24px;
-}
-.design-doc-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.design-doc-body {
-  font-family: var(--font-serif);
-  font-size: 16px;
-  line-height: 1.75;
-  color: var(--ink);
-}
-.design-doc-body .dd-h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin: 36px 0 18px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--rule);
-  letter-spacing: -0.5px;
-}
-.design-doc-body .dd-h1:first-child { margin-top: 0; }
-.design-doc-body .dd-h2 {
-  font-size: 25px;
-  font-weight: 700;
-  margin: 32px 0 14px;
-  color: var(--ink);
-  letter-spacing: -0.3px;
-}
-.design-doc-body .dd-h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 26px 0 12px;
-  color: var(--accent, var(--parchment));
-}
-.design-doc-body .dd-h4 {
-  font-size: 17px;
-  font-weight: 600;
-  margin: 20px 0 10px;
-  color: var(--ink-soft);
-  font-family: var(--font-sans);
-}
-.design-doc-body .dd-h5,
-.design-doc-body .dd-h6 {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 16px 0 8px;
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.design-doc-body p {
-  margin: 0 0 14px;
-}
-.design-doc-body ul,
-.design-doc-body ol {
-  margin: 0 0 14px 24px;
-  padding-left: 4px;
-}
-.design-doc-body li {
-  margin: 6px 0;
-}
-.design-doc-body li > ul,
-.design-doc-body li > ol {
-  margin: 6px 0 6px 20px;
-}
-.design-doc-body blockquote {
-  margin: 16px 0;
-  padding: 12px 18px;
-  border-left: 3px solid var(--accent, var(--parchment));
-  background: rgba(154, 142, 116, 0.06);
-  color: var(--ink-soft);
-  font-style: italic;
-}
-.design-doc-body code {
-  font-family: var(--font-mono);
-  font-size: 0.88em;
-  background: rgba(154, 142, 116, 0.13);
-  color: var(--parchment);
-  padding: 2px 6px;
-  border-radius: 3px;
-}
-.design-doc-body pre {
-  margin: 18px 0;
-  padding: 16px 20px;
-  background: var(--bg-2);
-  border: 1px solid var(--rule);
-  border-left: 3px solid var(--accent, var(--parchment));
-  overflow-x: auto;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.55;
-}
-.design-doc-body pre code {
-  background: none;
-  color: var(--ink);
-  padding: 0;
-  font-size: inherit;
-}
-.design-doc-body strong {
-  color: var(--ink);
-  font-weight: 700;
-}
-.design-doc-body em {
-  color: var(--accent, var(--parchment));
-  font-style: italic;
-}
-.design-doc-body del { opacity: 0.5; }
-.design-doc-body a {
-  color: var(--accent, var(--parchment));
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1px;
-}
-.design-doc-body a:hover { text-decoration-thickness: 2px; }
-.design-doc-body hr {
-  border: none;
-  margin: 32px 0;
-  height: 1px;
-  background: var(--rule);
-}
-.design-doc-body .dd-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 18px 0;
-  font-size: 14px;
-  font-family: var(--font-sans);
-}
-.design-doc-body .dd-table th,
-.design-doc-body .dd-table td {
-  padding: 8px 12px;
-  border: 1px solid var(--rule);
-  text-align: left;
-  vertical-align: top;
-  line-height: 1.5;
-}
-.design-doc-body .dd-table th {
-  background: rgba(154, 142, 116, 0.08);
-  font-weight: 700;
-  color: var(--ink);
-  letter-spacing: 0.2px;
-}
-.design-doc-body .dd-table tr:nth-child(even) td {
-  background: rgba(154, 142, 116, 0.03);
-}
-
-.design-doc-nav {
-  max-width: 880px;
-  margin: 24px auto 64px;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
-  align-items: stretch;
-}
-.design-doc-nav-btn {
-  border: 1px solid var(--rule);
-  background: var(--bg-2);
-  padding: 14px 18px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.6px;
-  color: var(--ink-soft);
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-  text-align: left;
-  line-height: 1.4;
-}
-.design-doc-nav-btn:hover {
-  border-color: var(--accent, var(--parchment));
-  color: var(--ink);
-}
-.design-doc-nav-btn.center {
-  text-align: center;
-}
-.design-doc-nav > span:empty {
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .settings-link { padding: 20px 18px; margin: 0 16px 32px; }
-  .settings-link-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .settings-atlas .atlas-doc-group { padding: 0 16px; }
-  .design-doc { padding: 24px 18px 16px; }
-  .design-doc-body { font-size: 15px; }
-  .design-doc-body .dd-h1 { font-size: 26px; }
-  .design-doc-body .dd-h2 { font-size: 21px; }
-  .design-doc-body .dd-h3 { font-size: 18px; }
-  .design-doc-body .dd-table { font-size: 12px; }
-  .design-doc-body .dd-table th,
-  .design-doc-body .dd-table td { padding: 6px 8px; }
-  .design-doc-nav { padding: 0 16px; grid-template-columns: 1fr; }
-  .design-doc-nav-btn.center { order: -1; }
+  .design-link-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 0 16px 28px;
+    padding: 18px 22px;
+  }
+  .design-link-cta { text-align: right; }
 }

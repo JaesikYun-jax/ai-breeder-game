@@ -1,26 +1,34 @@
-# AI Breeder — D급 스킬 이세계 용사 (외 4 프로젝트)
+# AI Breeder — 나에게만 스킬이 코드로 보인다 (외 3 프로젝트 + 1 완결 + 1 archive)
 
 **스택**: Vite + TypeScript (웹소설 리더 SPA)
 **파이프라인**: [awesome-novel-studio](https://github.com/MJbae/awesome-novel-studio) (2026-04-26 마이그레이션)
-**대표작**: 「D급 스킬 이세계 용사」 (이세계 선형 멸망 저지물 / 9개 기둥 차례 치유 / 회귀·루프 X)
+**현재 집중작 (2026-05-09~)**: 「나에게만 스킬이 코드로 보인다」 (현대 헌터물 / F급 디버거 먼치킨 / 회귀 X / 1인칭 자조)
+**보존 작품**: 「D급 스킬 이세계 용사」 (Part 2 EP037까지) / 「봉인당한 천마」 / 「아스테로포스」
 
 ---
 
 ## 프로젝트 개요
 
-5개 프로젝트가 동시 진행되는 웹소설 스튜디오. 각 프로젝트는 `projects/{name}/novel-config.md`로 독립 운영.
+4 프로젝트 동시 + 1 완결 + 1 archive 보존. 각 프로젝트는 `projects/{name}/novel-config.md`로 독립 운영.
 
 | 프로젝트 | 장르 | 플랫폼 | 상태 |
 |---|---|---|---|
-| **dclass-hero** (D급 스킬 이세계 용사) | 이세계 멸망 저지물 | 문피아 | EP001~EP037 진행 중 |
-| canned-master (천년묵은 통조림) | 천마 빙의 현대물 | 문피아 | EP020 진행 중 |
-| magitech-fire (마도공학 영생) | 이세계 호문클루스 빙의물 | 문피아 | EP005 진행 중 |
-| asteropos (아스테로포스) | (신규) | 문피아 | 1 아크 진행 |
+| **skill-compiler** (나에게만 스킬이 코드로 보인다) | 현대 판타지 / 헌터물 | 문피아 | 큰 설계 대기 (2026-05-09 신규, **메인**) |
+| dclass-hero (D급 스킬 이세계 용사) | 이세계 멸망 저지물 | 문피아 | EP001~EP037 (보존, Part 2 진행 정지) |
+| canned-master (천년묵은 통조림) | 천마 빙의 현대물 | 문피아 | EP020 진행 중 (보존) |
+| asteropos (아스테로포스) | 정통 판타지 성장물 | 문피아 | 1 아크 진행 (보존) |
 | british-food (내 대영제국에 괴식은 없다) | 음식 빙의물 | (별도) | 431화 완결 |
+| ~~magitech-fire (마도공학 영생)~~ | ~~호문클루스 빙의물~~ | — | **archive/magitech-fire/** (2026-05-09 보관) |
 
-**dclass-hero 핵심 컨셉**:
+**skill-compiler 핵심 컨셉** (2026-05-09 신규):
+- 1부 (EP001~EP080, 신규): 대각성 1년 후, F급 비각성자 안강해의 코드 편집 능력 자각 → 솔플 먼치킨 → 길드 전쟁 → 시스템 농장 1차 자각.
+- 2부 (EP081~, 미설계): 시스템 반항 + 베타 테스터 동료 합류 + 0층 적 떡밥.
+- 3부: 미설계 (라스트).
+- 1인칭 자조 + 사이다. 회귀 X / 미래 앎 X. 상태창 v0.1 베타 (오리지널). 5대 길드 + 무능력자 부서. **당분간 메인 집중작**.
+
+**dclass-hero 핵심 컨셉** (보존):
 - Part 1 (EP001~020, 완결): 코미디→고통 낙차. D급 재생 + 무재능 = 다중 체계 흡수. 결혼 마무리.
-- Part 2 (EP021~070, 진행 중): 변두리 부강화 + 멸망 저지 전모 노출 + 첫 아들 탄생.
+- Part 2 (EP021~070, EP037에서 진행 정지): 변두리 부강화 + 멸망 저지 전모 노출 + 첫 아들 탄생.
 - Part 3 (EP071~, 미설계): 아들 성장 + 모든 기둥 치유 + 노화·죽음.
 - 9대 지역, 9기둥 = 이계 차단 배리어. 빌런(천인 평의회) 의도적 약화.
 
@@ -59,23 +67,25 @@ projects/                          # 5개 프로젝트 워크스페이스
 │   ├── novel-config.md            # 중앙 설정 (target_platform·episode_dir·매핑·가드레일)
 │   ├── _legacy_novel-config.md    # 마이그레이션 보존본
 │   ├── episode/                   # EP001.md ~ EP{NNN}.md (신 파이프라인)
+│   ├── design/                    # ★ 설정 바이블 (구 docs/story/) — 표준 위치로 이동 완료
+│   │   ├── canon-quickref.md      # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
+│   │   ├── characters.md  voice-guide.md
+│   │   ├── worldbuilding.md  magic-systems.md
+│   │   ├── foreshadowing.md       # 복선 25+개 (S/A/B/C 등급)
+│   │   ├── protagonist-bible.md   # 강지호 성장 추적
+│   │   ├── death-and-regression.md # 모래시계·재생 메커닉
+│   │   ├── tone-and-style.md      # 톤 / 금지 표현
+│   │   ├── story-framework-6-30.md  story-framework-21-70.md
+│   │   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
+│   │   ├── story-feedback-log.md
+│   │   └── blue/  red/  region-details/   # 작가 팀 작업본·지역 상세
 │   ├── revision/                  # 진행 추적
 │   │   ├── create-plan.md / fix_plan.md / alive-tracker.md
+│   │   └── inline-feedback.json   # 인라인 피드백 (구 docs/story/)
 │   └── _workspace/                # 에이전트 중간 산출물
-├── canned-master/  magitech-fire/  asteropos/  british-food/
+├── canned-master/  magitech-fire/  asteropos/  british-food/   # 각자 design/ 동일 구조
 
 docs/
-├── story/                         # dclass-hero 설정 바이블
-│   ├── canon-quickref.md          # ★ 정본 12개 압축 매뉴얼 (모든 에이전트 1차 참조)
-│   ├── characters.md  voice-guide.md
-│   ├── worldbuilding.md  magic-systems.md
-│   ├── foreshadowing.md           # 복선 25+개 (S/A/B/C 등급)
-│   ├── protagonist-bible.md       # 강지호 성장 추적
-│   ├── death-and-regression.md    # 모래시계·재생 메커닉
-│   ├── tone-and-style.md          # 톤 / 금지 표현
-│   ├── story-framework-6-30.md  story-framework-21-70.md
-│   ├── chapter-log.md  timeline.md  glossary.md  region-connections.md
-│   └── story-feedback-log.md  inline-feedback.json
 ├── narrative-style.md             # ★ 글로벌 서술체 v2 (모든 작품 적용 — tone-and-style보다 우선)
 
 .claude/
@@ -147,6 +157,73 @@ Phase 1 (병렬)              Phase 2 (순차)          Phase 3 (순차)
 ### polish 흐름
 
 조기 종료 게이트: rule-checker / story-analyst / alive-enhancer 3개 진단이 모두 CRITICAL=0 + MAJOR=0 + 분량/금지표현 상한 위반 0이면 → executor·reviewer 스킵 직접 PASS.
+
+---
+
+## Design Atlas (설계 뷰어)
+
+리더 뷰어 안에서 설계 문서(캐릭터 시트·세계관·플롯 가이드 등)를 카테고리별로 보고 인라인 편집까지 할 수 있다.
+**대시보드 → "Design Atlas" 카드** 또는 라우트 `#/p/:projectId/design`.
+
+### 자동 등록 조건 (★ 중요)
+
+`src/novel/design.ts`의 Vite glob 패턴은 다음만 수집한다:
+
+```
+projects/*/design/**/*.md
+```
+
+따라서 **새 프로젝트의 `novel-config.md`에서 `design_dir:`은 반드시 `projects/{name}/design/`로 설정**한다.
+다른 위치(예: `docs/{name}/`)에 두면 design-big/design-small 스킬은 동작하지만 **뷰어에서 안 보인다.**
+
+```yaml
+# ✅ 올바름 — Design Atlas 자동 등록
+project:
+  design_dir: "projects/skill-compiler/design/"
+
+# ❌ 잘못됨 — 뷰어 노출 안 됨 (마이그레이션 필요)
+project:
+  design_dir: "docs/skill-compiler/"
+```
+
+### 카테고리 자동 분류 (파일명 prefix 기반)
+
+| 카테고리 | 매칭 prefix |
+|---|---|
+| world (세계관·부트스트랩) | `worldbuilding`, `bootstrap`, `magic-systems`, `region-*`, `seal-regression`, `*부트스트랩*` |
+| character | `characters`, `voice-guide`, `protagonist-*`, `*캐릭터시트*` |
+| plot | `plot-hook-*`, `plot-framework-*`, `story-framework-*`, `*플롯훅*` |
+| lore (복선·용어·연표) | `foreshadowing`, `glossary`, `timeline`, `region-connections` |
+| style (톤·문체) | `tone-*`, `narrative-*`, `death-and-regression` |
+| meta (정본·로그·피드백) | `canon-quickref`, `chapter-log`, `*-feedback-log` |
+| drafts (작가 팀 작업본) | `blue/*`, `red/*` 하위 |
+| 기타 | `other` |
+
+새 키워드 추가 시 `src/novel/design.ts`의 `categorise()` 함수 수정.
+
+### 본문 렌더링
+
+- 챕터 본문(EP)은 `src/novel/renderer.ts` (간이 파서, 단락 리듬 우선)
+- 설계 문서는 `src/novel/design-renderer.ts` ([marked](https://marked.js.org/) 풀 GFM — 표·헤딩·코드·인용 모두 지원)
+- 두 경로 분리됨 — 본문 리더 회귀 없음
+
+### design-big / design-small 스킬과의 관계
+
+두 스킬은 **이미 `{DESIGN_DIR}`을 따라 산출물을 저장**하도록 명세돼 있다(`design-big/SKILL.md` Phase 4 §4). 따라서 novel-config.md의 `design_dir`만 표준 위치를 가리키면, 큰 설계·작은 설계 산출물이 자동으로 Design Atlas에 노출된다.
+
+### 라우트
+
+| 경로 | 화면 |
+|---|---|
+| `#/p/:projectId/design` | 카테고리 트리 인덱스 |
+| `#/p/:projectId/design/:docKey` | 단일 문서 (편집·복사 가능, slash docKey 지원: `blue/draft_azelia`) |
+
+### 신규 프로젝트 체크리스트
+
+1. `projects/{name}/design/` 디렉토리 생성
+2. `novel-config.md`에 `design_dir: "projects/{name}/design/"` 명시
+3. `design-big` 실행 → 산출물이 자동으로 `projects/{name}/design/`에 저장됨
+4. dev 서버 reload → Design Atlas에 자동 등록
 
 ---
 
@@ -279,7 +356,7 @@ dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
 
 ### 피드백 시스템
 - **인라인**: 리더에서 텍스트 드래그 → `inline-feedback.json` → `/apply-feedback`
-- **스토리 피드백**: `docs/story/story-feedback-log.md` (FB-XXX·SYNC-XXX)
+- **스토리 피드백**: `projects/dclass-hero/design/story-feedback-log.md` (FB-XXX·SYNC-XXX)
 
 ---
 
@@ -288,13 +365,13 @@ dclass-hero EP001~EP037 전체 소급 적용 완료 (2026-04-25).
 | 질문 | 읽을 곳 |
 |---|---|
 | 프로젝트 전체 설정? | `projects/{project}/novel-config.md` |
-| 정본 압축본? | `docs/story/canon-quickref.md` (★ 1차 참조) |
+| 정본 압축본? | `projects/dclass-hero/design/canon-quickref.md` (★ 1차 참조) |
 | 글로벌 서술체? | `docs/narrative-style.md` (★ 1차 참조, tone-style보다 우선) |
-| EP N의 플롯 비트? | `docs/story/story-framework-21-70.md` (Part 2) |
-| 캐릭터 X 말투? | `docs/story/voice-guide.md` |
-| 복선 X 배치/회수? | `docs/story/foreshadowing.md` |
-| 모래시계 메커닉? | `docs/story/death-and-regression.md` + 가드레일 §11 (2026-04-25 리디파인) |
-| 금지 표현? | `docs/story/tone-and-style.md` + canon-quickref |
+| EP N의 플롯 비트? | `projects/dclass-hero/design/story-framework-21-70.md` (Part 2) |
+| 캐릭터 X 말투? | `projects/dclass-hero/design/voice-guide.md` |
+| 복선 X 배치/회수? | `projects/dclass-hero/design/foreshadowing.md` |
+| 모래시계 메커닉? | `projects/dclass-hero/design/death-and-regression.md` + 가드레일 §11 (2026-04-25 리디파인) |
+| 금지 표현? | `projects/dclass-hero/design/tone-and-style.md` + canon-quickref |
 | 에이전트 동작? | `.claude/agents/*.md` |
 | 스킬 실행? | `.claude/skills/*/SKILL.md` |
 | EP 등록? | 이 파일 §"EP 등록" |
