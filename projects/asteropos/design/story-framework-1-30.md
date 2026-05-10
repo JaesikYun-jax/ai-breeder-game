@@ -135,8 +135,8 @@
 ## 4 아크 이후
 
 세부 비트는 아크 진입 시 별도 프레임워크 (D급 용사 패턴):
-- `docs/asteropos/story-framework-41-52.md` — 4 아크 검은숲 + 녹스 + 린덴호프 폐허 (FS-202-A 본격 회수)
-- `docs/asteropos/story-framework-53-66.md` — 5 아크 해상
+- `projects/asteropos/design/story-framework-41-52.md` — 4 아크 검은숲 + 녹스 + 린덴호프 폐허 (FS-202-A 본격 회수)
+- `projects/asteropos/design/story-framework-53-66.md` — 5 아크 해상
 - ...
 
 ### 새 아크 분배 (102화) — 재설계 v3

@@ -42,12 +42,12 @@
 {EPISODE_DIR}        = projects/asteropos/episode/
 {REWRITE_WORK_DIR}   = projects/asteropos/revision/
 {WRITING_RULES}      = CLAUDE.md
-{CHAR_CORE/DETAIL/DNA} = docs/asteropos/characters.md
-{BOOTSTRAP}          = docs/asteropos/worldbuilding.md
-{PLOT_DOC}           = docs/asteropos/story-framework-1-30.md
+{CHAR_CORE/DETAIL/DNA} = projects/asteropos/design/characters.md
+{BOOTSTRAP}          = projects/asteropos/design/worldbuilding.md
+{PLOT_DOC}           = projects/asteropos/design/story-framework-1-30.md
 {NARRATIVE_STYLE}    = docs/narrative-style.md
-{CHAPTER_LOG}        = docs/asteropos/chapter-log.md
-{FORESHADOWING}      = docs/asteropos/foreshadowing.md
+{CHAPTER_LOG}        = projects/asteropos/design/chapter-log.md
+{FORESHADOWING}      = projects/asteropos/design/foreshadowing.md
 ```
 
 ## REWRITE_COMPLETE — 다음 단계: /polish asteropos EP002~EP006

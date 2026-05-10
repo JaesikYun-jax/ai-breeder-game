@@ -155,7 +155,7 @@ function renderReader(chapterId: string) {
   `;
 
   bindReaderEvents();
-  initFeedback(`${projectId}/${chapterId}`, ch.num, ch.title);
+  initFeedback(`${projectId}/${chapterId}`, ch.num, ch.title, projectId);
 
   const bodyEl = document.querySelector<HTMLElement>('.reader-body');
   if (bodyEl && ch.raw) {
