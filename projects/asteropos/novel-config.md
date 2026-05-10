@@ -15,7 +15,7 @@ project:
   target_genre: "정통 판타지 성장물 (검·마법, 에픽 스케일)"
   episode_dir: "projects/asteropos/episode/"
   work_dir: "projects/asteropos/revision/"
-  design_dir: "docs/asteropos/"
+  design_dir: "projects/asteropos/design/"
 ```
 
 ---
@@ -26,25 +26,25 @@ project:
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| character_core | docs/asteropos/characters.md | 캐릭터 핵심 정의·관계 |
-| character_detail | docs/asteropos/characters.md | (별도 voice-guide 미존재 — 동일 파일 사용) |
-| dialogue_dna | docs/asteropos/characters.md | Dialogue DNA (characters.md 내 섹션) |
-| bootstrap | docs/asteropos/worldbuilding.md | 세계관·지역·종족 |
+| character_core | projects/asteropos/design/characters.md | 캐릭터 핵심 정의·관계 |
+| character_detail | projects/asteropos/design/characters.md | (별도 voice-guide 미존재 — 동일 파일 사용) |
+| dialogue_dna | projects/asteropos/design/characters.md | Dialogue DNA (characters.md 내 섹션) |
+| bootstrap | projects/asteropos/design/worldbuilding.md | 세계관·지역·종족 |
 | writing_rules | CLAUDE.md | 집필 규칙 |
 
 ### 2-2. EP 범위별 설정문서
 
 | EP 범위 | 레이블 | 플롯 가이드 경로 | 세부 플롯 가이드 (선택) | 세부 캐릭터 시트 (선택) |
 |---------|--------|----------------|----------------------|----------------------|
-| EP000~EP030 | 1막 — 양부모 마을·학원·자유 도시 | docs/asteropos/story-framework-1-30.md | | |
+| EP000~EP030 | 1막 — 양부모 마을·학원·자유 도시 | projects/asteropos/design/story-framework-1-30.md | | |
 
 ### 2-3. 보조 참조
 
 | 문서 키 | 경로 | 용도 |
 |---------|------|------|
-| mechanics | docs/asteropos/mechanics.md | 마법·검술 메커닉 |
-| foreshadowing | docs/asteropos/foreshadowing.md | 복선 매트릭스 |
-| chapter_log | docs/asteropos/chapter-log.md | 화별 요약 |
+| mechanics | projects/asteropos/design/mechanics.md | 마법·검술 메커닉 |
+| foreshadowing | projects/asteropos/design/foreshadowing.md | 복선 매트릭스 |
+| chapter_log | projects/asteropos/design/chapter-log.md | 화별 요약 |
 | narrative_style | docs/narrative-style.md | 글로벌 서술체 v2 |
 
 ---
@@ -91,7 +91,7 @@ project:
 > 이전 정책(1~3 아크 4,500~5,500자 / 4~6 아크 5,000~6,500자 / 7~8 아크 5,500~7,000자)은 폐기.
 > 재생용사(dclass-hero) 정책과 통일하여 모든 아크 일률 5,000~7,000자.
 
-세부 리듬 가이드(일상·사건 비중, 금안 발현 빈도 등)는 [docs/asteropos/story-framework-1-30.md](../../docs/asteropos/story-framework-1-30.md) 참조.
+세부 리듬 가이드(일상·사건 비중, 금안 발현 빈도 등)는 [projects/asteropos/design/story-framework-1-30.md](../../projects/asteropos/design/story-framework-1-30.md) 참조.
 
 ---
 

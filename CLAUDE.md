@@ -173,8 +173,7 @@ Phase 1 (병렬)              Phase 2 (순차)          Phase 3 (순차)
 projects/*/design/**/*.md
 ```
 
-따라서 **새 프로젝트의 `novel-config.md`에서 `design_dir:`은 반드시 `projects/{name}/design/`로 설정**한다.
-다른 위치(예: `docs/{name}/`)에 두면 design-big/design-small 스킬은 동작하지만 **뷰어에서 안 보인다.**
+**design-big의 Phase 0.5 게이트가 이 표준을 자동 보장**한다. 작가가 직접 `design_dir`을 표준으로 설정할 필요 없다 — design-big 실행 시 비표준이면 자동으로 `projects/{name}/design/`로 보정 + 기존 산출물도 git mv로 이동.
 
 ```yaml
 # ✅ 올바름 — Design Atlas 자동 등록
@@ -218,12 +217,15 @@ project:
 | `#/p/:projectId/design` | 카테고리 트리 인덱스 |
 | `#/p/:projectId/design/:docKey` | 단일 문서 (편집·복사 가능, slash docKey 지원: `blue/draft_azelia`) |
 
-### 신규 프로젝트 체크리스트
+### 신규 프로젝트 체크리스트 — 별도 조처 없이 자동 등록
 
-1. `projects/{name}/design/` 디렉토리 생성
-2. `novel-config.md`에 `design_dir: "projects/{name}/design/"` 명시
-3. `design-big` 실행 → 산출물이 자동으로 `projects/{name}/design/`에 저장됨
-4. dev 서버 reload → Design Atlas에 자동 등록
+1. `design-big` 실행 (필요 시 `design-small`도)
+   - **Phase 0.5 게이트**가 `novel-config.md`의 `design_dir`을 자동 검증 → 비표준이면 표준 위치(`projects/{슬러그}/design/`)로 자동 보정 + 산출물 git mv
+   - 큰 설계 산출물(부트스트랩·캐릭터시트·플롯훅가이드)이 표준 위치에 저장됨
+2. dev 서버 reload → Design Atlas에 자동 등록 (수동 import 불필요)
+
+> **즉, 작가가 별다른 조처를 하지 않아도 design-big 실행만으로 뷰어에 자동 노출된다.**
+> 기존 비표준 위치(예: `docs/{name}/`)에 산출물이 있던 프로젝트도 design-big을 한 번 더 실행하면 표준 위치로 자동 마이그레이션된다.
 
 ---
 
