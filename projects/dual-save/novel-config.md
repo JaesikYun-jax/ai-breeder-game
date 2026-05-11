@@ -47,7 +47,7 @@ project:
 | EP001~EP005 | Arc 1 — 자각 (1차 사이클: 부자→A급→자살) | projects/dual-save/design/dual-save_플롯훅가이드.md | projects/dual-save/design/dual-save_세부설계_1~10화.md | projects/dual-save/design/dual-save_세부설계_1~10화.md |
 | EP006~EP010 | Arc 2 — 준비성 만렙 (차원 이동 준비) | projects/dual-save/design/dual-save_플롯훅가이드.md | projects/dual-save/design/dual-save_세부설계_1~10화.md | projects/dual-save/design/dual-save_세부설계_1~10화.md |
 | EP011~EP025 | Arc 3 — 무협 차원 입문 (정파·25화 유료 클리프) | projects/dual-save/design/dual-save_플롯훅가이드.md | | |
-| EP026~EP050 | Arc 4 — 무협 정점 (마교·검결 통달·1차 자살 회귀) | projects/dual-save/design/dual-save_플롯훅가이드.md | | |
+| EP026~EP050 | Arc 4 — 무협 정점 (마교·검결 통달·1차 자살 회귀) | projects/dual-save/design/dual-save_플롯훅가이드.md | projects/dual-save/design/dual-save_세부플롯훅가이드_26~50화.md | projects/dual-save/design/dual-save_세부캐릭터시트_26~50화.md |
 | EP051~EP100 | Arc 5 — 판타지 차원 (마법탑·1차 빌런 재대결) | projects/dual-save/design/dual-save_플롯훅가이드.md | | |
 | EP101~EP150 | Arc 6 — 선협 차원 (도술·연단·부모 살해범 첫 등장) | projects/dual-save/design/dual-save_플롯훅가이드.md | | |
 | EP151~EP200 | Arc 7 — 검술 정점 (일검만류·메인 빌런 첫 등장) | projects/dual-save/design/dual-save_플롯훅가이드.md | | |
