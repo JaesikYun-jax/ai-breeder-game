@@ -153,9 +153,15 @@ export const EPISODE_META: Record<string, ProjectEpisodeMeta> = {
     ],
   },
 
-  // skill-compiler — EP는 큰 설계(/design-big) 후 작성. 비어 있어도 OK.
+  // skill-compiler — 도입부 5화 + 아크1~4 (EP001~EP080). 메인 집중작 (2026-05-09~).
   'skill-compiler': {
-    entries: [],
+    entries: [
+      { num: 1, title: '다섯 줄짜리 파편', arc: 'intro',     arcLabel: '도입부 — 다섯 줄짜리 파편', status: 'writing' },
+      { num: 2, title: '버그 사례',          arc: 'intro',     arcLabel: '도입부 — 다섯 줄짜리 파편', status: 'writing' },
+      { num: 3, title: '언랭커과',           arc: 'intro',     arcLabel: '도입부 — 다섯 줄짜리 파편', status: 'writing' },
+      { num: 4, title: '첫 번째 커밋',       arc: 'intro',     arcLabel: '도입부 — 다섯 줄짜리 파편', status: 'writing' },
+      { num: 5, title: '런타임',             arc: 'intro',     arcLabel: '도입부 — 다섯 줄짜리 파편', status: 'writing' },
+    ],
   },
 
   // dual-save — 큰 설계 + 1~10화 세부설계 완료. 본문 EP는 미작성.
