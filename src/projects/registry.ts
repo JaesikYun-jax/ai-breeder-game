@@ -169,6 +169,7 @@ export const PROJECTS: ProjectMeta[] = [
     mag: 0.5,
     x: 0.18,
     y: 0.78,
+    feedbackEnabled: true,
   },
 ];
 
